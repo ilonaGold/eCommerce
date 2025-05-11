@@ -2,16 +2,19 @@ import js from "@eslint/js";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 import { defineConfig } from "eslint/config";
-import { prettier } from "eslint-plugin-prettier";
+import prettier from "eslint-plugin-prettier";
 
 export default defineConfig([
   {
     ignores: ["dist/**", "**/*.d.ts", "node_modules/"],
   },
+  js.configs.recommended,
   {
     files: ["**/*.{js,mjs,cjs,ts}"],
-    plugins: { js },
-    extends: ["js/recommended", "plugin:prettier/recommended"],
+    plugins: { prettier },
+    rules: {
+      "prettier/prettier": "error",
+    },
     languageOptions: {
       globals: {
         ...globals.browser,
@@ -28,5 +31,4 @@ export default defineConfig([
       semi: ["error", "always"],
     },
   },
-  tseslint.configs.recommended,
 ]);
