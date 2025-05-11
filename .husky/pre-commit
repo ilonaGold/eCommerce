@@ -1,0 +1,23 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Exit on errors
+set -e
+
+echo "🚀 Running pre-commit checks..."
+
+# Run ESLint to check for errors
+echo "🔍 Linting files with ESLint..."
+npm run lint || {
+  echo "❌ ESLint found errors. Fix them and try committing again.";
+  exit 1;
+}
+
+# Check Prettier formatting (without auto-fixing)
+echo "✨ Checking code formatting with Prettier..."
+npm run format:check || {
+  echo "❌ Prettier found formatting issues. Run 'npm run format' to fix them.";
+  exit 1;
+}
+
+echo "✅ All checks passed! Proceeding with commit..."
