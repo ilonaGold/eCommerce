@@ -1,22 +1,33 @@
 import { createElement } from "../../utils/dom/createElement";
-import { createInputGroup, createSectionTitle } from "./helpers/helpers";
+import { createInputGroup, createSectionTitle } from "./helpers/buildBlocks";
+import { registrationFormInit } from "./helpers/registrationFormInit";
 
 export function createRegistrationForm(): HTMLFormElement {
   const form = createElement("form", { id: "registration-form" }, [
     createElement("div", { id: "userFields" }, [
       createSectionTitle("User Information"),
-      createInputGroup("First Name", "text", "firsName", true),
-      createInputGroup("Last Name", "text", "lastName", true),
-      createInputGroup("Password", "password", "password", true),
-      createInputGroup("RepeatPassword", "password", "repeatPassword", true),
+      createInputGroup("First Name", "text", "firsName"),
+      createInputGroup("Last Name", "text", "lastName"),
+      createInputGroup("Password", "password", "password"),
+      createInputGroup("RepeatPassword", "password", "repeatPassword"),
+      createInputGroup("Date of Birth", "date", "dateOfBirth"),
     ]),
 
     createElement("div", { id: "addressFields" }, [
       createSectionTitle("Address Information"),
-      createInputGroup("Street Address", "text", "address", true),
-      createInputGroup("City", "text", "city", true),
-      createInputGroup("Postal Code", "text", "postalCode", true),
-      createInputGroup("Country", "text", "country", true),
+      createInputGroup("Street Address", "text", "address"),
+      createInputGroup("City", "text", "city"),
+      createInputGroup("Postal Code", "text", "postalCode"),
+      createInputGroup("Country", "text", "country"),
+    ]),
+
+    // Billing address fields
+    createElement("div", { id: "billingFields", style: "display: none" }, [
+      createSectionTitle("Billing Address"),
+      createInputGroup("Billing Street", "text", "billingAddress"),
+      createInputGroup("Billing City", "text", "billingCity"),
+      createInputGroup("Billing Postal Code", "text", "billingPostalCode"),
+      createInputGroup("Billing Country", "text", "billingCountry"),
     ]),
 
     // Default address checkbox
@@ -29,18 +40,10 @@ export function createRegistrationForm(): HTMLFormElement {
       " Use separate billing address",
     ]),
 
-    // Billing address fields
-    createElement("div", { id: "billingFields", style: "display: none" }, [
-      createSectionTitle("Billing Address"),
-      createInputGroup("Billing Street", "text", "billingAddress"),
-      createInputGroup("Billing City", "text", "billingCity"),
-      createInputGroup("Billing Postal Code", "text", "billingPostalCode"),
-      createInputGroup("Billing Country", "text", "billingCountry"),
-    ]),
-
     // Submit Button
     createElement("button", { type: "submit" }, ["Register"]),
   ]);
+  registrationFormInit(form);
 
   return form;
 }

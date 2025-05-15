@@ -26,6 +26,13 @@ Global Styles
   padding: 0;
   box-sizing: border-box;
 }
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
 body {
   font-family: var(--ff-secondary);
 }

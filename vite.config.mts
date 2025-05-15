@@ -4,6 +4,7 @@ import { createHtmlPlugin } from "vite-plugin-html";
 
 export default defineConfig({
   root: "src",
+  envDir: __dirname,
   publicDir: "../public",
   build: {
     outDir: "../dist",

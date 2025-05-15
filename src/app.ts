@@ -1,6 +1,4 @@
 import "./styles/styles.css";
-console.log("asdfasdf");
+import { renderRegistration } from "./views/renderRegistration";
 
-// testing husky
-const a = 5;
-console.log(a);
+renderRegistration();
