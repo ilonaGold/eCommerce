@@ -1,7 +1,7 @@
 import { AppState } from "../interfaces/interfaces";
 
 const state: AppState = {
-  view: "login",
+  view: "/",
   userAuth: false,
   setView(view) {
     this.view = view;
