@@ -38,22 +38,24 @@ export function routeHandler(): void {
 
 function renderView(): void {
   const view = getState("view");
-  const root = document.querySelector("#root");
-  if (root) root.innerHTML = "";
-  switch (view) {
-    case "/":
-    case "login":
-      renderLogIn();
-      break;
-    case "registration":
-      renderRegistration();
-      break;
-    case "main":
-      renderMain();
-      break;
-    default:
-      renderError();
-      break;
+  const root: HTMLElement | null = document.querySelector("#root");
+  if (root) {
+    root.innerHTML = "";
+    switch (view) {
+      case "/":
+      case "login":
+        renderLogIn(root);
+        break;
+      case "registration":
+        renderRegistration(root);
+        break;
+      case "main":
+        renderMain(root);
+        break;
+      default:
+        renderError(root);
+        break;
+    }
   }
 }
 
