@@ -1,3 +1,3 @@
-export function renderRegistration(): void {
-  console.log("Registration page");
+export function renderRegistration(parent: HTMLElement): void {
+  console.log(`Registration page appends to ${parent}`);
 }

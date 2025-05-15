@@ -1,3 +1,3 @@
-export function renderLogIn(): void {
-  console.log("Login page");
+export function renderLogIn(parent: HTMLElement): void {
+  console.log(`Login page appends to ${parent}`);
 }
