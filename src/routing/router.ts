@@ -50,3 +50,16 @@ function renderView(): void {
       break;
   }
 }
+
+export function goToView(view: string): void {
+  const path = location.pathname;
+  const arr = path.split("/").filter(Boolean);
+  if (!arr.length) {
+    arr.push(view);
+  } else {
+    arr[arr.length - 1] = view;
+  }
+  const newPath = `/${arr.join("/")}`;
+  history.pushState({}, "", newPath);
+  routeHandler();
+}
