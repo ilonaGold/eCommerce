@@ -1,3 +1,3 @@
-export function renderLogin(): void {
+export function renderLogIn(): void {
   console.log("Login page");
 }
