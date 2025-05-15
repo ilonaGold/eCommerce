@@ -1,12 +1,12 @@
 import { Routes } from "../interfaces/interfaces";
 import { getState, setView } from "../state/state";
-import { renderLogin } from "../views/login";
+import { renderLogIn } from "../views/login";
 import { renderMain } from "../views/main";
 import { renderRegistration } from "../views/registration";
 import { renderError } from "../views/error";
 
 const routes: Routes = {
-  "": "Log In",
+  "/": "Log In",
   login: "Log In",
   main: "Main",
   registration: "Registration",
@@ -16,7 +16,13 @@ export function routeHandler(): void {
   const path = location.pathname;
   const LAST_INDEX = -1;
   const arr = path.split("/").filter(Boolean);
-  const endpoint = arr.at(LAST_INDEX);
+  let endpoint: string | undefined;
+  if (arr.length) {
+    endpoint = arr.at(LAST_INDEX);
+  } else {
+    endpoint = "/";
+  }
+  console.log(endpoint);
   const isAuth = getState("userAuth");
   if (endpoint && routes[endpoint]) {
     if (!isAuth) {
@@ -35,9 +41,9 @@ function renderView(): void {
   const root = document.querySelector("#root");
   if (root) root.innerHTML = "";
   switch (view) {
-    case "":
+    case "/":
     case "login":
-      renderLogin();
+      renderLogIn();
       break;
     case "registration":
       renderRegistration();
