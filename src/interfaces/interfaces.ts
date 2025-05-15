@@ -7,3 +7,7 @@ export interface AppState {
     property: K
   ) => AppState[K];
 }
+
+export interface Routes {
+  [index: string]: string;
+}
