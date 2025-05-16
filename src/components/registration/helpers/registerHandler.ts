@@ -1,4 +1,5 @@
-import { collectFormData } from "./collectFormData";
+import { registerCustomer } from "../../../services/auth/registerCustomer";
+import { createCustomerDraft } from "./createCustomerDraft";
 
 export function registerHandler(event: Event): void {
   event.preventDefault();
@@ -8,6 +9,6 @@ export function registerHandler(event: Event): void {
     return;
   }
 
-  const data = collectFormData(form);
-  console.log(data);
+  const data = createCustomerDraft(form);
+  registerCustomer(data);
 }

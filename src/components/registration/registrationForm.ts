@@ -1,12 +1,15 @@
 import { createElement } from "../../utils/dom/createElement";
-import { createInputGroup, createSectionTitle } from "./helpers/buildBlocks";
+import { createInputGroup, createSectionTitle } from "./helpers/buildBlocks/createInputGroup";
+import { createSelectGroup } from "./helpers/buildBlocks/createSelectGroup";
 import { registrationFormInit } from "./helpers/registrationFormInit";
+import countryCodes from "../../assets/data/countryCodes.json";
 
 export function createRegistrationForm(): HTMLFormElement {
   const form = createElement("form", { id: "registration-form" }, [
     createElement("div", { id: "userFields" }, [
       createSectionTitle("User Information"),
-      createInputGroup("First Name", "text", "firsName"),
+      createInputGroup("Email", "email", "email"),
+      createInputGroup("First Name", "text", "firstName"),
       createInputGroup("Last Name", "text", "lastName"),
       createInputGroup("Password", "password", "password"),
       createInputGroup("RepeatPassword", "password", "repeatPassword"),
@@ -18,7 +21,16 @@ export function createRegistrationForm(): HTMLFormElement {
       createInputGroup("Street Address", "text", "address"),
       createInputGroup("City", "text", "city"),
       createInputGroup("Postal Code", "text", "postalCode"),
-      createInputGroup("Country", "text", "country"),
+      createSelectGroup("Country", "country", countryCodes),
+      // default shipping address checkbox
+      createElement("label", {}, [
+        createElement("input", {
+          type: "checkbox",
+          name: "defaultShipping",
+          id: "defaultShipping",
+        }),
+        " Use as default shipping address",
+      ]),
     ]),
 
     // Billing address fields
@@ -27,10 +39,19 @@ export function createRegistrationForm(): HTMLFormElement {
       createInputGroup("Billing Street", "text", "billingAddress"),
       createInputGroup("Billing City", "text", "billingCity"),
       createInputGroup("Billing Postal Code", "text", "billingPostalCode"),
-      createInputGroup("Billing Country", "text", "billingCountry"),
+      createSelectGroup("Country", "billingCountry", countryCodes),
+      // default billing address checkbox
+      createElement("label", {}, [
+        createElement("input", {
+          type: "checkbox",
+          name: "defaultBilling",
+          id: "defaultBilling",
+        }),
+        " Use as default billing address",
+      ]),
     ]),
 
-    // Default address checkbox
+    // Separate billing address checkbox
     createElement("label", {}, [
       createElement("input", {
         type: "checkbox",

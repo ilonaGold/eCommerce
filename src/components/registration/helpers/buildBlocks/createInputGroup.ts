@@ -1,4 +1,4 @@
-import { createElement } from "../../../utils/dom/createElement";
+import { createElement } from "../../../../utils/dom/createElement";
 
 export function createInputGroup(
   labelText: string,
