@@ -11,7 +11,7 @@ export const registrationFormInit = (form: HTMLFormElement): HTMLFormElement => 
   }
 
   separateBillingCheckbox?.addEventListener("change", () => {
-    const isSeparateBillingChecked = separateBillingCheckbox?.checked || false;
+    const isSeparateBillingChecked = separateBillingCheckbox.checked;
 
     // continuous check
     if (billingFields) {
