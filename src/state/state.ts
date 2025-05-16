@@ -6,7 +6,7 @@ const state: AppState = {
   setView(view) {
     this.view = view;
   },
-  setAuth(isAuth) {
+  setAuth(isAuth: boolean) {
     this.userAuth = isAuth;
   },
   getState(property) {

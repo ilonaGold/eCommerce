@@ -1,4 +1,6 @@
+import { notificationModal } from "../../components/notificationModal/notificationModal";
 import { Customer } from "../../interfaces/dataInterfaces";
+import { setAuth } from "../../state/state";
 
 export async function registerCustomer(customerDraft: Customer): Promise<void> {
   console.log(customerDraft);
@@ -37,12 +39,15 @@ export async function registerCustomer(customerDraft: Customer): Promise<void> {
       const data = await response.json();
       throw new Error(data.message);
     }
+    notificationModal("Customer created successfully", "success");
     // const data = await response.json();
+    setAuth(true);
   } catch (error) {
     if (error instanceof Error) {
-      console.warn(error.message);
+      console.log(error.message);
+      notificationModal(error.message, "error");
     } else {
-      console.warn(error);
+      console.log(error);
     }
   }
 }
