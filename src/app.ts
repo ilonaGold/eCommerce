@@ -1,4 +1,5 @@
+import { routeHandler } from "./routing/router";
 import "./styles/styles.css";
-import { renderRegistration } from "./views/renderRegistration";
 
-renderRegistration();
+window.addEventListener("load", routeHandler);
+window.addEventListener("popstate", routeHandler);
