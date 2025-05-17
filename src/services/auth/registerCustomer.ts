@@ -1,13 +1,12 @@
 import { notificationModal } from "../../components/notificationModal/notificationModal";
 import { Customer } from "../../interfaces/dataInterfaces";
-import { setAuth } from "../../state/state";
 
 export async function registerCustomer(customerDraft: Customer): Promise<void> {
   console.log(customerDraft);
   const apiUrl = `${import.meta.env.VITE_CTP_API_URL}/${import.meta.env.VITE_CTP_PROJECT_KEY}/customers`;
 
   try {
-    // obtain temp token
+    // obtain auth token
     const authResponse = await fetch(`${import.meta.env.VITE_CTP_AUTH_URL}/oauth/token`, {
       method: "POST",
       headers: {
@@ -41,7 +40,6 @@ export async function registerCustomer(customerDraft: Customer): Promise<void> {
     }
     notificationModal("Customer created successfully", "success");
     // const data = await response.json();
-    setAuth(true);
   } catch (error) {
     if (error instanceof Error) {
       console.log(error.message);

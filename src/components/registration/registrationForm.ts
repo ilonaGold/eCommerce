@@ -1,11 +1,11 @@
 import { createElement } from "../../utils/dom/createElement";
-import { createInputGroup, createSectionTitle } from "./helpers/buildBlocks/createInputGroup";
-import { createSelectGroup } from "./helpers/buildBlocks/createSelectGroup";
 import { registrationFormInit } from "./helpers/registrationFormInit";
 import countryCodes from "../../assets/data/countryCodes.json";
+import { createInputGroup, createSectionTitle } from "../../utils/dom/form/createInputGroup";
+import { createSelectGroup } from "../../utils/dom/form/createSelectGroup";
 
 export function createRegistrationForm(): HTMLFormElement {
-  const form = createElement("form", { id: "registration-form" }, [
+  const form = createElement("form", { id: "registratioForm" }, [
     createElement("div", { id: "userFields" }, [
       createSectionTitle("User Information"),
       createInputGroup("Email", "email", "email"),

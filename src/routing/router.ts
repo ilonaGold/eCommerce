@@ -3,7 +3,7 @@ import { getState, setView } from "../state/state";
 import { renderLogIn } from "../views/login";
 import { renderMain } from "../views/main";
 import { renderError } from "../views/error";
-import { renderRegistration } from "../views/renderRegistration";
+import { renderRegistration } from "../views/renderRegistration/renderRegistration";
 
 const routes: Routes = {
   "/": "Log In",
