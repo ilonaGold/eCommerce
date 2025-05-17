@@ -4,6 +4,7 @@ import { renderLogIn } from "../views/login";
 import { renderMain } from "../views/main";
 import { renderError } from "../views/error";
 import { renderRegistration } from "../views/renderRegistration";
+import { createElement } from "../utils/dom/createElement";
 
 const routes: Routes = {
   "/": "Log In",
@@ -38,24 +39,27 @@ export function routeHandler(): void {
 
 function renderView(): void {
   const view = getState("view");
-  const root: HTMLElement | null = document.querySelector("#root");
+  let root: HTMLElement | null = document.querySelector("#root");
   if (root) {
     root.innerHTML = "";
-    switch (view) {
-      case "/":
-      case "login":
-        renderLogIn(root);
-        break;
-      case "registration":
-        renderRegistration(root);
-        break;
-      case "main":
-        renderMain(root);
-        break;
-      default:
-        renderError(root);
-        break;
-    }
+  } else {
+    root = createElement("div", { id: "root" });
+    document.body.append(root);
+  }
+  switch (view) {
+    case "/":
+    case "login":
+      renderLogIn(root);
+      break;
+    case "registration":
+      renderRegistration(root);
+      break;
+    case "main":
+      renderMain(root);
+      break;
+    default:
+      renderError(root);
+      break;
   }
 }
 
