@@ -2,8 +2,8 @@ import { Routes } from "../interfaces/interfaces";
 import { getState, setView } from "../state/state";
 import { renderLogIn } from "../views/login";
 import { renderMain } from "../views/main";
-import { renderRegistration } from "../views/registration";
 import { renderError } from "../views/error";
+import { renderRegistration } from "../views/renderRegistration";
 
 const routes: Routes = {
   "/": "Log In",
