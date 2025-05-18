@@ -22,8 +22,6 @@ export async function registerCustomer(customerDraft: Customer): Promise<void> {
     const authData = await authResponse.json();
     const accessToken = authData.access_token;
 
-    console.log(accessToken);
-
     // create the customer
     const response = await fetch(apiUrl, {
       method: "POST",

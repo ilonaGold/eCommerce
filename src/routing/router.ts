@@ -1,10 +1,8 @@
 import { Routes } from "../interfaces/interfaces";
 import { getState, setView } from "../state/state";
-import { renderLogIn } from "../views/login";
-import { renderMain } from "../views/main";
-import { renderError } from "../views/error";
-
-import { renderRegistration } from "../view
+import { createElement } from "../utils/dom/createElement";
+import { renderLogin } from "../views/renderLogin/renderLogin";
+import { renderRegistration } from "../views/renderRegistration/renderRegistration";
 
 const routes: Routes = {
   "/": "Log In",
@@ -15,6 +13,7 @@ const routes: Routes = {
 
 export function routeHandler(): void {
   const path = location.pathname;
+
   const LAST_INDEX = -1;
   const arr = path.split("/").filter(Boolean);
   let endpoint: string | undefined;
@@ -49,17 +48,17 @@ function renderView(): void {
   switch (view) {
     case "/":
     case "login":
-      renderLogIn(root);
+      renderLogin(root);
       break;
     case "registration":
       renderRegistration(root);
       break;
-    case "main":
-      renderMain(root);
-      break;
-    default:
-      renderError(root);
-      break;
+    // case "main":
+    //   renderMain(root);
+    //   break;
+    // default:
+    //   renderError(root);
+    //   break;
   }
 }
 
