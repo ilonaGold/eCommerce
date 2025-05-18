@@ -3,6 +3,9 @@ import { getState, setView } from "../state/state";
 import { createElement } from "../utils/dom/createElement";
 import { renderLogin } from "../views/renderLogin/renderLogin";
 import { renderRegistration } from "../views/renderRegistration/renderRegistration";
+// import { renderMain } from "../views/main";
+// import { renderError } from "../views/error";
+// Sorry, those files doesnt exist anymore, so I just brigh imports back, just commented out.
 
 const routes: Routes = {
   "/": "Log In",

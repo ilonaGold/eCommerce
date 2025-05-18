@@ -1,4 +1,3 @@
-import { isTokenValid } from "../../../services/auth/isTokenValid";
 import { loginCustomer } from "../../../services/auth/loginCustomer";
 import { notificationModal } from "../../notificationModal/notificationModal";
 
@@ -18,10 +17,6 @@ export const loginHandler = async (e: Event): Promise<void> => {
     form.reset();
     console.log("Logged In, choose redirect method");
     notificationModal("Logged In successfully", "success");
-
-    // test >>isTokenValid<< function here
-    isTokenValid();
-    // test >>isTokenValid<< function here
   } catch (error) {
     const message = error instanceof Error ? error.message : "An unknown error orrucer.";
     notificationModal(message, "error");

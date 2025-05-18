@@ -5,7 +5,7 @@ import { createInputGroup, createSectionTitle } from "../../utils/dom/form/creat
 import { createSelectGroup } from "../../utils/dom/form/createSelectGroup";
 
 export function createRegistrationForm(): HTMLFormElement {
-  const form = createElement("form", { id: "registratioForm" }, [
+  const form = createElement("form", { id: "registrationForm" }, [
     createElement("div", { id: "userFields" }, [
       createSectionTitle("User Information"),
       createInputGroup("Email", "email", "email"),
