@@ -31,6 +31,14 @@ export function validatePassword(password: HTMLInputElement): string {
       message: "Password must contain at least 1 uppercase letter",
     },
     {
+      test: () => !/\d/.test(password.value),
+      message: "Password must contain at least 1 digit",
+    },
+    {
+      test: () => !/[^a-zA-Z0-9]/.test(password.value),
+      message: "Password must contain at least 1 special character",
+    },
+    {
       test: () => /^(\s+)/.test(password.value) || /(\s+)$/.test(password.value),
       message: "Remove leading or trailing whitespaces",
     },
