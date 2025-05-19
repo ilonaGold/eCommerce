@@ -2,6 +2,7 @@ import { validateEmail, validatePassword } from "../../../utils/dom/form/inputVa
 import type { InputError } from "../../../interfaces/interfaces";
 
 export function validateLoginForm(form: HTMLFormElement): void {
+  form.noValidate = true;
   const email: HTMLInputElement | null = form.querySelector("#email");
   const emailError: HTMLDivElement | null = form.querySelector("#emailError");
   email?.addEventListener("input", () => {
