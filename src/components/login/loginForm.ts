@@ -4,6 +4,8 @@ import { togglePasswordVisibility } from "../../utils/dom/form/togglePasswordVis
 import { loginFormInit } from "./helpers/loginFormInit";
 import { validateLoginForm } from "./helpers/loginFormValidation";
 
+import "./loginForm.css";
+
 export function createLoginForm(): HTMLFormElement {
   const form = createElement("form", { id: "loginForm" }, [
     createSectionTitle("Sign In"),
