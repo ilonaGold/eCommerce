@@ -1,15 +1,21 @@
 import type { Rule } from "../../../interfaces/interfaces";
 
 export function validateEmail(email: HTMLInputElement): string {
-  if (email.validity.valueMissing) {
-    return "Email is missing";
-  } else if (email.validity.typeMismatch) {
-    return "Expected email format: username@example.com";
-  } else if (/^(\s+)/.test(email.value) || /(\s+)$/.test(email.value)) {
-    return "Remove leading or trailing whitespaces";
-  } else {
-    return "";
+  const rules: Rule[] = [
+    { test: () => email.validity.valueMissing, message: "Email is missing" },
+    {
+      test: () => email.validity.typeMismatch,
+      message: "Expected email format: username@example.com",
+    },
+    {
+      test: () => /^(\s+)/.test(email.value) || /(\s+)$/.test(email.value),
+      message: "Remove leading or trailing whitespaces",
+    },
+  ];
+  for (const rule of rules) {
+    if (rule.test()) return rule.message;
   }
+  return "";
 }
 
 export function validatePassword(password: HTMLInputElement): string {
