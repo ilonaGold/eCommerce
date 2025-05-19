@@ -5,8 +5,8 @@ import { loginFormInit } from "./helpers/loginFormInit";
 export function createLoginForm(): HTMLFormElement {
   const form = createElement("form", { id: "loginForm" }, [
     createSectionTitle("Sign In"),
-    createInputGroup("Email", "email", "email"),
-    createInputGroup("Password", "password", "password"),
+    createInputGroup("Email", "email", "email", true),
+    createInputGroup("Password", "password", "password", true),
     createElement("button", { type: "submit" }, ["Sign In"]),
   ]);
 
