@@ -11,3 +11,8 @@ export interface AppState {
 export interface Routes {
   [index: string]: string;
 }
+
+export interface Rule {
+  test: () => boolean;
+  message: string;
+}
