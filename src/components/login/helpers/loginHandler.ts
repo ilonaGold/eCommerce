@@ -8,7 +8,7 @@ export const loginHandler = async (e: Event): Promise<void> => {
     notificationModal("Form not found", "error");
     return;
   }
-  if (form.querySelector(".invalid")) {
+  if (form.querySelector(".invalid") || !form.checkValidity()) {
     notificationModal("Email and password must be filled out correctly to continue", "error");
     return;
   }
