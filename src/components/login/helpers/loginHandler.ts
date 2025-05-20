@@ -8,6 +8,10 @@ export const loginHandler = async (e: Event): Promise<void> => {
     notificationModal("Form not found", "error");
     return;
   }
+  if (form.querySelector(".invalid") || !form.checkValidity()) {
+    notificationModal("Email and password must be filled out correctly to continue", "error");
+    return;
+  }
   const formData = new FormData(form);
   const data = Object.fromEntries(formData) as Record<string, string>;
   const { email, password } = data;

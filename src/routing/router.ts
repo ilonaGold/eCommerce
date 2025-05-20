@@ -3,9 +3,8 @@ import { getState, setView } from "../state/state";
 import { createElement } from "../utils/dom/createElement";
 import { renderLogin } from "../views/renderLogin/renderLogin";
 import { renderRegistration } from "../views/renderRegistration/renderRegistration";
-// import { renderMain } from "../views/main";
-// import { renderError } from "../views/error";
-// Sorry, those files doesnt exist anymore, so I just brigh imports back, just commented out.
+import { renderMain } from "../views/renderMain/renderMain";
+import { renderError } from "../views/renderError/renderError";
 
 const routes: Routes = {
   "/": "Log In",
@@ -56,12 +55,12 @@ function renderView(): void {
     case "registration":
       renderRegistration(root);
       break;
-    // case "main":
-    //   renderMain(root);
-    //   break;
-    // default:
-    //   renderError(root);
-    //   break;
+    case "main":
+      renderMain(root);
+      break;
+    default:
+      renderError(root);
+      break;
   }
 }
 
