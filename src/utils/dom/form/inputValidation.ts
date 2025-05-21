@@ -48,3 +48,24 @@ export function validatePassword(password: HTMLInputElement): string {
   }
   return "";
 }
+
+export function validateString(field: HTMLInputElement, fieldName: string): string {
+  const rules: Rule[] = [
+    {
+      test: () => !/[a-zA-Z]/.test(field.value),
+      message: `${fieldName} must contain at least 1 character`,
+    },
+    {
+      test: () => /\d/.test(field.value),
+      message: `${fieldName} must not contain numbers`,
+    },
+    {
+      test: () => /[^a-zA-Z0-9]/.test(field.value),
+      message: `${fieldName} must not contain special characters`,
+    },
+  ];
+  for (const rule of rules) {
+    if (rule.test()) return rule.message;
+  }
+  return "";
+}
