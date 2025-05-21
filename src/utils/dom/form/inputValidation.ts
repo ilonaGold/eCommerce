@@ -69,3 +69,11 @@ export function validateString(field: HTMLInputElement, fieldName: string): stri
   }
   return "";
 }
+
+export function validateAge(dateString: HTMLInputElement): string {
+  const data = new Date(dateString.value);
+  const now = new Date();
+  const age = now.getFullYear() - data.getFullYear();
+  if (age < 13) return "Min user's age is 13 y.o.";
+  return "";
+}
