@@ -1,3 +1,4 @@
+import { goToView } from "../../../routing/router";
 import { loginCustomer } from "../../../services/auth/loginCustomer";
 import { registerCustomer } from "../../../services/auth/registerCustomer";
 import { createCustomerDraft } from "./createCustomerDraft";
@@ -18,4 +19,5 @@ export async function registerHandler(event: Event): Promise<void> {
   console.log(
     "After registration, log in happens also, but 'silently', because we need toredirect after"
   );
+  goToView("main");
 }
