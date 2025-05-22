@@ -1,4 +1,6 @@
 import type { Rule } from "../../../interfaces/interfaces";
+import countryCodes from "../../../assets/data/countryCodes.json";
+import postcodes from "../../../assets/data/postcodeFormats.json";
 
 export function validateEmail(email: HTMLInputElement): string {
   const rules: Rule[] = [
@@ -75,5 +77,34 @@ export function validateAge(dateString: HTMLInputElement): string {
   const now = new Date();
   const age = now.getFullYear() - data.getFullYear();
   if (age < 13) return "Min user's age is 13 y.o.";
+  return "";
+}
+
+export function validateStreet(street: HTMLInputElement): string {
+  if (!/[a-zA-Z]/.test(street.value)) return "Street must contain at least 1 character";
+  return "";
+}
+
+export function validateCountry(country: HTMLInputElement): string {
+  let isFromList = false;
+  for (const item of countryCodes) {
+    if (item.value === country.value) isFromList = true;
+  }
+  if (!isFromList) return "Country must be chosen from the list";
+  return "";
+}
+
+export function validatePostcode(postcode: HTMLInputElement, country?: HTMLInputElement): string {
+  if (!country || !country.value) return "Choose country first";
+  for (const item of postcodes) {
+    if (item.value === country.value) {
+      const pattern = typeof item.regex === "string" ? new RegExp(item.regex) : item.regex;
+      if (pattern && pattern.test(postcode.value)) {
+        return "";
+      } else {
+        return "Invalid postcode format for the chosen country";
+      }
+    }
+  }
   return "";
 }
