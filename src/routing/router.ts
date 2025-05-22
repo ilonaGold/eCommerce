@@ -1,78 +1,22 @@
-import { Routes } from "../interfaces/interfaces";
-import { getState, setView } from "../state/state";
-import { createElement } from "../utils/dom/createElement";
+import { ensureRoot } from "../utils/dom/ensureRoot";
 import { renderLogin } from "../views/renderLogin/renderLogin";
-import { renderRegistration } from "../views/renderRegistration/renderRegistration";
 import { renderMain } from "../views/renderMain/renderMain";
-import { renderError } from "../views/renderError/renderError";
+import { renderRegistration } from "../views/renderRegistration/renderRegistration";
 
-const routes: Routes = {
-  "/": "Log In",
-  login: "Log In",
-  main: "Main",
-  registration: "Registration",
+const routes: Record<string, (root: HTMLElement) => void> = {
+  "/": renderMain,
+  "/registration": renderRegistration,
+  "/login": renderLogin,
 };
 
 export function routeHandler(): void {
-  const path = location.pathname;
+  const path = window.location.pathname;
 
-  const LAST_INDEX = -1;
-  const arr = path.split("/").filter(Boolean);
-  let endpoint: string | undefined;
-  if (arr.length) {
-    endpoint = arr.at(LAST_INDEX);
-  } else {
-    endpoint = "/";
-  }
-  console.log(endpoint);
-  const isAuth = getState("userAuth");
-  if (endpoint && routes[endpoint]) {
-    if (!isAuth) {
-      setView(endpoint);
-    } else {
-      setView("main");
-    }
-  } else {
-    setView("error");
-  }
-  renderView();
+  const renderPage = routes[path];
+  renderPage(ensureRoot());
 }
 
-function renderView(): void {
-  const view = getState("view");
-  let root: HTMLElement | null = document.querySelector("#root");
-  if (root) {
-    root.innerHTML = "";
-  } else {
-    root = createElement("div", { id: "root" });
-    document.body.append(root);
-  }
-  switch (view) {
-    case "/":
-    case "login":
-      renderLogin(root);
-      break;
-    case "registration":
-      renderRegistration(root);
-      break;
-    case "main":
-      renderMain(root);
-      break;
-    default:
-      renderError(root);
-      break;
-  }
-}
-
-export function goToView(view: string): void {
-  const path = location.pathname;
-  const arr = path.split("/").filter(Boolean);
-  if (!arr.length) {
-    arr.push(view);
-  } else {
-    arr[arr.length - 1] = view;
-  }
-  const newPath = `/${arr.join("/")}`;
-  history.pushState({}, "", newPath);
+export function navigateTo(path: string): void {
+  window.history.pushState({}, "", path);
   routeHandler();
 }

@@ -1,4 +1,8 @@
+import { LoginInfo } from "../../../interfaces/dataInterfaces";
+import { navigateTo } from "../../../routing/router";
 import { loginCustomer } from "../../../services/auth/loginCustomer";
+import { storeLoginData } from "../../../services/localStorage/localStorage";
+import { setState } from "../../../state/state";
 import { notificationModal } from "../../notificationModal/notificationModal";
 
 export const loginHandler = async (e: Event): Promise<void> => {
@@ -17,7 +21,14 @@ export const loginHandler = async (e: Event): Promise<void> => {
   const { email, password } = data;
 
   try {
-    await loginCustomer(email, password);
+    const customerData = (await loginCustomer(email, password)) as LoginInfo;
+    // +++++++++++++++++++++++   Updatind state / Saving in localStorage (needs separate module)  ++++++++++++++++++++++++++++++
+    setState("userAuth", true);
+    setState("customer", customerData.customer);
+    storeLoginData(JSON.stringify(customerData));
+    navigateTo("/");
+    // +++++++++++++++++++++++   Updatind state / Saving in localStorage (needs separate module)   ++++++++++++++++++++++++++++++
+
     form.reset();
     console.log("Logged In, choose redirect method");
     notificationModal("Logged In successfully", "success");

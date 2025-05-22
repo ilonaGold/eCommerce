@@ -1,5 +1,7 @@
+import { footerComponent } from "../../components/footer/footer";
+import { headerComponent } from "../../components/header/header";
 import { createLoginForm } from "../../components/login/loginForm";
-import { goToView } from "../../routing/router";
+import { navigateTo } from "../../routing/router";
 import { createElement } from "../../utils/dom/createElement";
 
 import "./renderLogin.css";
@@ -11,7 +13,7 @@ export const renderLogin = (parent: HTMLElement): void => {
     "button",
     { type: "button", class: "register-redirect-btn" },
     ["Don't have an account? Register"],
-    { events: { click: () => goToView("registration") } }
+    { events: { click: () => navigateTo("registration") } }
   );
 
   const loginContainer = createElement("div", { class: "login-container" }, [
@@ -19,5 +21,11 @@ export const renderLogin = (parent: HTMLElement): void => {
     toRegisterBtn,
   ]);
 
-  parent.append(loginContainer);
+  const viewContainer = createElement("div", { class: "view-container" }, [
+    headerComponent(),
+    loginContainer,
+    footerComponent(),
+  ]);
+
+  parent.append(viewContainer);
 };

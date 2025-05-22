@@ -1,5 +1,9 @@
+import { LoginInfo } from "../../../interfaces/dataInterfaces";
+import { navigateTo } from "../../../routing/router";
 import { loginCustomer } from "../../../services/auth/loginCustomer";
 import { registerCustomer } from "../../../services/auth/registerCustomer";
+import { storeLoginData } from "../../../services/localStorage/localStorage";
+import { setState } from "../../../state/state";
 import { createCustomerDraft } from "./createCustomerDraft";
 
 export async function registerHandler(event: Event): Promise<void> {
@@ -14,8 +18,15 @@ export async function registerHandler(event: Event): Promise<void> {
   const { email, password } = data;
 
   await registerCustomer(data);
-  await loginCustomer(email, password);
+  const customerData = (await loginCustomer(email, password)) as LoginInfo;
   console.log(
     "After registration, log in happens also, but 'silently', because we need toredirect after"
   );
+  // +++++++++++++++++++++++   Updatind state / Saving in localStorage (needs separate module)  ++++++++++++++++++++++++++++++
+  setState("userAuth", true);
+  setState("customer", customerData.customer);
+  storeLoginData(JSON.stringify(customerData));
+  navigateTo("/");
+  // +++++++++++++++++++++++   Updatind state / Saving in localStorage (needs separate module)   ++++++++++++++++++++++++++++++
+  navigateTo("/");
 }
