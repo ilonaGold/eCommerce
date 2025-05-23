@@ -3,13 +3,9 @@ import { getState, setView, setAuth } from "../state/state";
 import { createElement } from "../utils/dom/createElement";
 import { renderLogin } from "../views/renderLogin/renderLogin";
 import { renderRegistration } from "../views/renderRegistration/renderRegistration";
-
-import { createLoginPage } from "../components/login/loginForm";
-
 import { renderMain } from "../views/renderMain/renderMain";
 import { renderError } from "../views/renderError/renderError";
 import { isTokenValid } from "../services/auth/isTokenValid";
-
 
 const routes: Routes = {
   "/": "Log In",
@@ -58,8 +54,7 @@ function renderView(): void {
   switch (view) {
     case "/":
     case "login":
-      // renderLogin(root);
-      root.appendChild(createLoginPage()); // Replaced renderLogin with createLoginPage
+      renderLogin(root);
       break;
     case "registration":
       renderRegistration(root);
