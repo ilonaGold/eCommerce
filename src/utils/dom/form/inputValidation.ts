@@ -1,4 +1,4 @@
-import type { InputError, Rule } from "../../../interfaces/interfaces";
+import type { InputError, Rule, ValidationProps } from "../../../interfaces/interfaces";
 import countryCodes from "../../../assets/data/countryCodes.json";
 import postcodes from "../../../assets/data/postcodeFormats.json";
 
@@ -112,4 +112,16 @@ export function validatePostcode(postcode: HTMLInputElement, country?: HTMLInput
 export function updateError({ fieldInput, fieldError, text }: InputError): void {
   if (fieldError) fieldError.textContent = text;
   fieldInput.classList.toggle("invalid", text != "");
+}
+
+export function addValidation({
+  mainInput,
+  extraInput,
+  validate,
+  divError,
+}: ValidationProps): void {
+  mainInput.addEventListener("input", () => {
+    const text = validate(mainInput, extraInput);
+    updateError({ fieldInput: mainInput, fieldError: divError, text: text });
+  });
 }

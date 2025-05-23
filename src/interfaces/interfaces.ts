@@ -22,3 +22,10 @@ export interface InputError {
   fieldError: HTMLDivElement | null;
   text: string;
 }
+
+export interface ValidationProps {
+  mainInput: HTMLInputElement;
+  extraInput?: HTMLInputElement;
+  validate: (mainInput: HTMLInputElement, extraInput?: HTMLInputElement) => string;
+  divError: HTMLDivElement;
+}
