@@ -1,5 +1,8 @@
-import { validateEmail, validatePassword } from "../../../utils/dom/form/inputValidation";
-import type { InputError } from "../../../interfaces/interfaces";
+import {
+  validateEmail,
+  validatePassword,
+  updateError,
+} from "../../../utils/dom/form/inputValidation";
 
 export function validateLoginForm(form: HTMLFormElement): void {
   form.noValidate = true;
@@ -16,9 +19,4 @@ export function validateLoginForm(form: HTMLFormElement): void {
     const text = validatePassword(password);
     updateError({ fieldInput: password, fieldError: passwordError, text: text });
   });
-}
-
-export function updateError({ fieldInput, fieldError, text }: InputError): void {
-  if (fieldError) fieldError.textContent = text;
-  fieldInput.classList.toggle("invalid", text != "");
 }

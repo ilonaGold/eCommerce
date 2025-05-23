@@ -1,4 +1,4 @@
-import type { Rule } from "../../../interfaces/interfaces";
+import type { InputError, Rule } from "../../../interfaces/interfaces";
 import countryCodes from "../../../assets/data/countryCodes.json";
 import postcodes from "../../../assets/data/postcodeFormats.json";
 
@@ -107,4 +107,9 @@ export function validatePostcode(postcode: HTMLInputElement, country?: HTMLInput
     }
   }
   return "";
+}
+
+export function updateError({ fieldInput, fieldError, text }: InputError): void {
+  if (fieldError) fieldError.textContent = text;
+  fieldInput.classList.toggle("invalid", text != "");
 }
