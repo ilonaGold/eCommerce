@@ -1,14 +1,5 @@
-/* Reset and Base Styles */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
 
-body {
-  font-family: "Arial", sans-serif;
-  background-color: #f0f0f0;
-}
+
 
 /* Container and Layout */
 .login-container {
@@ -365,3 +356,13 @@ body {
     max-width: 300px;
   }
 }
+
+.error-message {
+  color: red;
+}
+
+.invalid {
+  border-color: red;
+  outline: none;
+}
+

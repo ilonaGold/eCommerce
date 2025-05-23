@@ -1,9 +1,13 @@
 import { createElement } from "../../utils/dom/createElement";
 import { createInputGroup, createSectionTitle } from "../../utils/dom/form/createInputGroup";
+import { togglePasswordVisibility } from "../../utils/dom/form/togglePasswordVisibility";
 import { loginFormInit } from "./helpers/loginFormInit";
+
 import { setView } from "../../state/state";
 import { createHeader } from "../header/header";
 import { createFooter } from "../footer/footer";
+import { validateLoginForm } from "./helpers/loginFormValidation";
+
 import "./loginForm.css";
 
 // Login page component
@@ -41,6 +45,7 @@ export function createLoginForm(): HTMLElement {
     createSectionTitle("Sign In"),
     createInputGroup("Email", "email", "email", true),
     createInputGroup("Password", "password", "password", true),
+
     createElement(
       "button",
       {
@@ -72,6 +77,15 @@ export function createLoginForm(): HTMLElement {
     createElement("p", { class: "invite-text" }, ["Don't have an account?"]),
     registerLink,
   ]);
+
+    createInputGroup("Show password", "checkbox", "showPassword"),
+    createElement("button", { type: "submit" }, ["Sign In"]),
+  ]);
+
+  togglePasswordVisibility(form);
+  validateLoginForm(form);
+  loginFormInit(form);
+
 
   // Create form wrapper to include both form and registration invite
   const formWrapper = createElement("div", { class: "form-wrapper" }, [form, registrationInvite]);

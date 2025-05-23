@@ -11,3 +11,24 @@ export interface AppState {
 export interface Routes {
   [index: string]: string;
 }
+
+export interface Fields {
+  [index: string]: (input: HTMLInputElement) => string;
+}
+
+export interface Rule {
+  test: () => boolean;
+  message: string;
+}
+
+export interface InputError {
+  fieldInput: HTMLInputElement;
+  fieldError: HTMLDivElement | null;
+  text: string;
+}
+
+export interface ValidationProps {
+  input: HTMLInputElement;
+  validate: (input: HTMLInputElement) => string;
+  divError: HTMLDivElement;
+}
