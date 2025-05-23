@@ -36,7 +36,7 @@ export function createHeader(): HTMLElement {
           {
             class: "header-btn login-btn",
             type: "button",
-            onclick: "setView('login')",
+            onclick: "goToView('login')",
           },
           ["Sign In"]
         ),
@@ -45,7 +45,7 @@ export function createHeader(): HTMLElement {
           {
             class: "header-btn register-btn",
             type: "button",
-            onclick: "setView('registration')",
+            onclick: "goToView('registration')",
           },
           ["Register"]
         ),
