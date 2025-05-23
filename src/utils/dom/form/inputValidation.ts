@@ -4,9 +4,8 @@ import postcodes from "../../../assets/data/postcodeFormats.json";
 
 export function validateEmail(email: HTMLInputElement): string {
   const rules: Rule[] = [
-    { test: () => email.validity.valueMissing, message: "Email is missing" },
     {
-      test: () => email.validity.typeMismatch,
+      test: () => !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email.value),
       message: "Expected email format: username@example.com",
     },
     {
