@@ -3,6 +3,7 @@ import { getState, setView } from "../state/state";
 import { createElement } from "../utils/dom/createElement";
 import { renderLogin } from "../views/renderLogin/renderLogin";
 import { renderRegistration } from "../views/renderRegistration/renderRegistration";
+import { createLoginPage } from "../components/login/loginForm";
 
 const routes: Routes = {
   "/": "Log In",
@@ -48,7 +49,8 @@ function renderView(): void {
   switch (view) {
     case "/":
     case "login":
-      renderLogin(root);
+      // renderLogin(root);
+      root.appendChild(createLoginPage()); // Replaced renderLogin with createLoginPage
       break;
     case "registration":
       renderRegistration(root);
