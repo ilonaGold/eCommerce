@@ -22,7 +22,7 @@ export function createHeader(): HTMLElement {
             {
               class: "nav-link",
               href: "#",
-              onclick: `setView('${link.view}')`,
+              onclick: `goToView('${link.view}')`,
             },
             [link.text]
           ),
