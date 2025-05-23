@@ -10,7 +10,6 @@ export const loginHandler = async (e: Event): Promise<void> => {
     return;
   }
   if (form.querySelector(".invalid") || !form.checkValidity()) {
-    notificationModal("Email and password must be filled out correctly to continue", "error");
     return;
   }
   const formData = new FormData(form);

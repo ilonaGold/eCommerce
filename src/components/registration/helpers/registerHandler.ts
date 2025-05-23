@@ -12,16 +12,23 @@ export async function registerHandler(event: Event): Promise<void> {
     return;
   }
   if (form.querySelector(".invalid") || !form.checkValidity()) {
-    notificationModal("Form must be filled out correctly to continue", "error");
     return;
   }
   const data = createCustomerDraft(form);
   const { email, password } = data;
-
-  await registerCustomer(data);
-  await loginCustomer(email, password);
-  console.log(
-    "After registration, log in happens also, but 'silently', because we need to redirect after"
-  );
-  goToView("main");
+  try {
+    await registerCustomer(data);
+    await loginCustomer(email, password);
+    console.log(
+      "After registration, log in happens also, but 'silently', because we need to redirect after"
+    );
+    goToView("main");
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.message);
+      notificationModal(error.message, "error");
+    } else {
+      console.log(error);
+    }
+  }
 }

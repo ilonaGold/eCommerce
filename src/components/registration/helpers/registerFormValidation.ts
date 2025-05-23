@@ -9,6 +9,7 @@ import {
   validateStreet,
   validateString,
   addValidation,
+  updateError,
 } from "../../../utils/dom/form/inputValidation";
 
 export function validateRegistrationForm(form: HTMLFormElement): void {
@@ -29,9 +30,22 @@ export function validateRegistrationForm(form: HTMLFormElement): void {
     billingCountry: validateCountry,
     billingPostalCode: validatePostcode,
   };
+
   for (const field in fields) {
     const input: HTMLInputElement | null = form.querySelector(`#${field}`);
     const error: HTMLDivElement | null = form.querySelector(`#${field}Error`);
     if (input && error) addValidation({ input: input, validate: fields[field], divError: error });
   }
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    for (const field in fields) {
+      const input: HTMLInputElement | null = form.querySelector(`#${field}`);
+      const error: HTMLDivElement | null = form.querySelector(`#${field}Error`);
+      if (input && error) {
+        const text = fields[field](input);
+        updateError({ fieldInput: input, fieldError: error, text });
+      }
+    }
+  });
 }
