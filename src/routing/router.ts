@@ -17,6 +17,6 @@ export function routeHandler(): void {
 }
 
 export function navigateTo(path: string): void {
-  window.history.pushState({}, "", path);
+  if (window.location.pathname !== path) window.history.pushState({}, "", path);
   routeHandler();
 }

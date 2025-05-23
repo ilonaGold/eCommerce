@@ -79,5 +79,5 @@ export function notificationModal(message: string, type: ModalType): void {
     if (document.body.contains(modalOverlay)) {
       document.body.removeChild(modalOverlay);
     }
-  }, 3000);
+  }, 1500);
 }
