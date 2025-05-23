@@ -1,0 +1,998 @@
+[
+  {
+    "value": "AF",
+    "regex": "^\\d{4}$"
+  },
+  {
+    "value": "AX",
+    "regex": "^22\\d{3}$"
+  },
+  {
+    "value": "AL",
+    "regex": "^\\d{4}$"
+  },
+  {
+    "value": "DZ",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "AS",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "AD",
+    "regex": "^AD\\d{3}$"
+  },
+  {
+    "value": "AO",
+    "regex": "^$"
+  },
+  {
+    "value": "AI",
+    "regex": "AI-2640"
+  },
+  {
+    "value": "AQ",
+    "regex": "^$"
+  },
+  {
+    "value": "AG",
+    "regex": "^$"
+  },
+  {
+    "value": "AR",
+    "regex": "^(\\d{4}$|[A-Z]\\d{4}[A-Z]{3})$"
+  },
+  {
+    "value": "AM",
+    "regex": "^\\d{4}$"
+  },
+  {
+    "value": "AW",
+    "regex": "^$"
+  },
+  {
+    "value": "AU",
+    "regex": "^\\d{4}$"
+  },
+  {
+    "value": "AT",
+    "regex": "^\\d{4}$"
+  },
+  {
+    "value": "AZ",
+    "regex": "^AZ \\d{4}$"
+  },
+  {
+    "value": "BS",
+    "regex": "^$"
+  },
+  {
+    "value": "BH",
+    "regex": "^\\d{3,4}$"
+  },
+  {
+    "value": "BD",
+    "regex": "^\\d{4}$"
+  },
+  {
+    "value": "BB",
+    "regex": "^BB\\d{5}$"
+  },
+  {
+    "value": "BY",
+    "regex": "^\\d{6}$"
+  },
+  {
+    "value": "BE",
+    "regex": "^\\d{4}$"
+  },
+  {
+    "value": "BZ",
+    "regex": "^$"
+  },
+  {
+    "value": "BJ",
+    "regex": "^$"
+  },
+  {
+    "value": "BM",
+    "regex": "^([A-Z]{2} [0-9]{2}|[A-Z]{2} [A-Z]{2})$"
+  },
+  {
+    "value": "BT",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "BO",
+    "regex": "^$"
+  },
+  {
+    "value": "BQ",
+    "regex": "^$"
+  },
+  {
+    "value": "BA",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "BW",
+    "regex": "^$"
+  },
+  {
+    "value": "BV",
+    "regex": "^$"
+  },
+  {
+    "value": "BR",
+    "regex": "^\\d{5}-\\d{3}$"
+  },
+  {
+    "value": "IO",
+    "regex": "BBND 1ZZ"
+  },
+  {
+    "value": "BN",
+    "regex": "^[A-Z]{2}\\d{4}$"
+  },
+  {
+    "value": "BG",
+    "regex": "^\\d{4}$"
+  },
+  {
+    "value": "BF",
+    "regex": "^$"
+  },
+  {
+    "value": "BI",
+    "regex": "^$"
+  },
+  {
+    "value": "CV",
+    "regex": "^\\d{4}$"
+  },
+  {
+    "value": "KH",
+    "regex": "^\\d{6}$"
+  },
+  {
+    "value": "CM",
+    "regex": "^$"
+  },
+  {
+    "value": "CA",
+    "regex": "^[ABCEGHJKLMNPRSTVXY]\\d[ABCEGHJKLMNPRSTVWXYZ] \\d[ABCEGHJKLMNPRSTVWXYZ]\\d$"
+  },
+  {
+    "value": "KY",
+    "regex": "^KY\\d-\\d{4}$"
+  },
+  {
+    "value": "CF",
+    "regex": "^$"
+  },
+  {
+    "value": "TD",
+    "regex": "^$"
+  },
+  {
+    "value": "CL",
+    "regex": "^(\\d{7}|\\d{3}-\\d{4})?$"
+  },
+  {
+    "value": "CN",
+    "regex": "^\\d{6}$"
+  },
+  {
+    "value": "CX",
+    "regex": "^\\d{4}$"
+  },
+  {
+    "value": "CC",
+    "regex": "^\\d{4}$"
+  },
+  {
+    "value": "CO",
+    "regex": "^\\d{6}$"
+  },
+  {
+    "value": "KM",
+    "regex": "^$"
+  },
+  {
+    "value": "CD",
+    "regex": "^$"
+  },
+  {
+    "value": "CG",
+    "regex": "^$"
+  },
+  {
+    "value": "CK",
+    "regex": "^$"
+  },
+  {
+    "value": "CR",
+    "regex": "^\\d{5}-\\d{4}$"
+  },
+  {
+    "value": "CI",
+    "regex": "^$"
+  },
+  {
+    "value": "HR",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "CU",
+    "regex": "^(\\d{5})?$"
+  },
+  {
+    "value": "CW",
+    "regex": "^$"
+  },
+  {
+    "value": "CY",
+    "regex": "^\\d{4}$"
+  },
+  {
+    "value": "CZ",
+    "regex": "^\\d{3} \\d{2}$"
+  },
+  {
+    "value": "DK",
+    "regex": "^\\d{4}$"
+  },
+  {
+    "value": "DJ",
+    "regex": "^$"
+  },
+  {
+    "value": "DM",
+    "regex": "^$"
+  },
+  {
+    "value": "DO",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "EC",
+    "regex": "^\\d{6}$"
+  },
+  {
+    "value": "EG",
+    "regex": "^\\d{7}$"
+  },
+  {
+    "value": "SV",
+    "regex": "^\\d{4}$"
+  },
+  {
+    "value": "GQ",
+    "regex": "^$"
+  },
+  {
+    "value": "ER",
+    "regex": "^$"
+  },
+  {
+    "value": "EE",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "SZ",
+    "regex": "^[HMSL]\\d{3}$"
+  },
+  {
+    "value": "ET",
+    "regex": "^(\\d{4})?$"
+  },
+  {
+    "value": "FK",
+    "regex": "FIQQ 1ZZ"
+  },
+  {
+    "value": "FO",
+    "regex": "^FO-\\d{3}$"
+  },
+  {
+    "value": "FJ",
+    "regex": "^$"
+  },
+  {
+    "value": "FI",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "FR",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "GF",
+    "regex": "^973\\d{2}$"
+  },
+  {
+    "value": "PF",
+    "regex": "^987\\d{2}$"
+  },
+  {
+    "value": "TF",
+    "regex": "^$"
+  },
+  {
+    "value": "GA",
+    "regex": "^$"
+  },
+  {
+    "value": "GM",
+    "regex": "^$"
+  },
+  {
+    "value": "GE",
+    "regex": "^\\d{4}$"
+  },
+  {
+    "value": "DE",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "GH",
+    "regex": "^[A-Z]{2}\\d{3,4}$"
+  },
+  {
+    "value": "GI",
+    "regex": "GX11 1AA"
+  },
+  {
+    "value": "GR",
+    "regex": "^\\d{3} \\d{2}$"
+  },
+  {
+    "value": "GL",
+    "regex": "^\\d{4}$"
+  },
+  {
+    "value": "GD",
+    "regex": "^$"
+  },
+  {
+    "value": "GP",
+    "regex": "^971\\d{2}$"
+  },
+  {
+    "value": "GU",
+    "regex": "^969(1[0-9]|2[0-9]|3[01])(-\\d{4})?$"
+  },
+  {
+    "value": "GT",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "GG",
+    "regex": "^(GY\\d \\d[A-Z]{2}|GY\\d{2} \\d[A-Z]{2})$"
+  },
+  {
+    "value": "GN",
+    "regex": "^\\d{3}$"
+  },
+  {
+    "value": "GW",
+    "regex": "^\\d{4}$"
+  },
+  {
+    "value": "GY",
+    "regex": "^$"
+  },
+  {
+    "value": "HT",
+    "regex": "^\\d{4}$"
+  },
+  {
+    "value": "HM",
+    "regex": "^$"
+  },
+  {
+    "value": "VA",
+    "regex": "^$"
+  },
+  {
+    "value": "HN",
+    "v": "^\\d{5}$"
+  },
+  {
+    "value": "HK",
+    "regex": "^$"
+  },
+  {
+    "value": "HU",
+    "regex": "^\\d{4}$"
+  },
+  {
+    "value": "IS",
+    "regex": "^\\d{3}$"
+  },
+  {
+    "value": "IN",
+    "regex": "^(\\d{6}|\\d{3} \\d{3})$"
+  },
+  {
+    "value": "ID",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "IR",
+    "regex": "^\\d{5}-\\d{5}$"
+  },
+  {
+    "value": "IQ",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "IE",
+    "regex": "^[ACDEFHKNPRTVWXY]\\d{2} [0-9ACDEFHKNPRTVWXY]{4}$"
+  },
+  {
+    "value": "IM",
+    "regex": "^(IM\\d \\d[A-Z]{2}|IM\\d{2} \\d[A-Z]{2})$"
+  },
+  {
+    "value": "IL",
+    "regex": "^(\\d{5}|\\d{7})$"
+  },
+  {
+    "value": "IT",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "JM",
+    "regex": "^\\d{2}$"
+  },
+  {
+    "value": "JP",
+    "regex": "^\\d{3}-\\d{4}$"
+  },
+  {
+    "value": "JE",
+    "regex": "^(JE\\d \\d[A-Z]{2}|JE\\d{2} \\d[A-Z]{2})$"
+  },
+  {
+    "value": "JO",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "KZ",
+    "regex": "^\\d{6}$"
+  },
+  {
+    "value": "KE",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "KI",
+    "regex": "^$"
+  },
+  {
+    "value": "KP",
+    "regex": "^$"
+  },
+  {
+    "value": "KR",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "KW",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "KG",
+    "regex": "^\\d{6}$"
+  },
+  {
+    "value": "LA",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "LV",
+    "regex": "^LV-\\d{4}$"
+  },
+  {
+    "value": "LB",
+    "regex": "^(\\d{4}|\\d{4} \\d{4})$"
+  },
+  {
+    "value": "LS",
+    "regex": "^\\d{3}$"
+  },
+  {
+    "value": "LR",
+    "regex": "^\\d{4}$"
+  },
+  {
+    "value": "LY",
+    "regex": "^$"
+  },
+  {
+    "value": "LI",
+    "regex": "^\\d{4}$"
+  },
+  {
+    "value": "LT",
+    "regex": "^LT-\\d{5}$"
+  },
+  {
+    "value": "LU",
+    "regex": "^\\d{4}$"
+  },
+  {
+    "value": "MO",
+    "regex": "^$"
+  },
+  {
+    "value": "MG",
+    "regex": "^\\d{3}$"
+  },
+  {
+    "value": "MW",
+    "regex": "^\\d{6}$"
+  },
+  {
+    "value": "MY",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "MV",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "ML",
+    "regex": "^$"
+  },
+  {
+    "value": "MT",
+    "regex": "^[A-Z]{3} \\d{4}$"
+  },
+  {
+    "value": "MH",
+    "regex": "^969(6[0-9]|70)(-\\d{4})?$"
+  },
+  {
+    "value": "MQ",
+    "regex": "^972\\d{2}$"
+  },
+  {
+    "value": "MR",
+    "regex": "^$"
+  },
+  {
+    "value": "MU",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "YT",
+    "regex": "^976\\d{2}$"
+  },
+  {
+    "value": "MX",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "FM",
+    "regex": "^969(4[1-4])(-\\d{4})?$"
+  },
+  {
+    "value": "MD",
+    "regex": "^(MD(-)?\\d{4})$"
+  },
+  {
+    "value": "MC",
+    "regex": "^980\\d{2}$"
+  },
+  {
+    "value": "MN",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "ME",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "MS",
+    "regex": "^MSR \\d{4}$"
+  },
+  {
+    "value": "MA",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "MZ",
+    "regex": "^\\d{4}$"
+  },
+  {
+    "value": "MM",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "NA",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "NR",
+    "regex": "^$"
+  },
+  {
+    "value": "NP",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "NL",
+    "regex": "^\\d{4} [A-Z]{2}$"
+  },
+  {
+    "value": "NC",
+    "regex": "^988\\d{2}$"
+  },
+  {
+    "value": "NZ",
+    "regex": "^\\d{4}$"
+  },
+  {
+    "value": "NI",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "NE",
+    "regex": "^\\d{4}$"
+  },
+  {
+    "value": "NG",
+    "regex": "^\\d{6}$"
+  },
+  {
+    "value": "NU",
+    "regex": "^$"
+  },
+  {
+    "value": "NF",
+    "regex": "^\\d{4}$"
+  },
+  {
+    "value": "MP",
+    "regex": "^969(5[0-2])(-\\d{4})?$"
+  },
+  {
+    "value": "NO",
+    "regex": "^(NO-)?\\d{4}$"
+  },
+  {
+    "value": "OM",
+    "regex": "^\\d{3}$"
+  },
+  {
+    "value": "PK",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "PW",
+    "regex": "^969(39|40)(-\\d{4})?$"
+  },
+  {
+    "value": "PS",
+    "regex": "^(\\d{3})?$"
+  },
+  {
+    "value": "PA",
+    "regex": "^\\d{4}$"
+  },
+  {
+    "value": "PG",
+    "regex": "^\\d{3}$"
+  },
+  {
+    "value": "PY",
+    "regex": "^\\d{4}$"
+  },
+  {
+    "value": "PE",
+    "regex": "^(\\d{5}|PE \\d{4})$"
+  },
+  {
+    "value": "PH",
+    "regex": "^\\d{4}$"
+  },
+  {
+    "value": "PN",
+    "regex": "PCRN 1ZZ"
+  },
+  {
+    "value": "PL",
+    "regex": "^\\d{2}-\\d{3}$"
+  },
+  {
+    "value": "PT",
+    "regex": "^\\d{4}-\\d{3}$"
+  },
+  {
+    "value": "PR",
+    "regex": "^\\d{5}(-\\d{4})?$"
+  },
+  {
+    "value": "QA",
+    "regex": "^$"
+  },
+  {
+    "value": "MK",
+    "regex": "^\\d{4}$"
+  },
+  {
+    "value": "RO",
+    "regex": "^\\d{6}$"
+  },
+  {
+    "value": "RU",
+    "regex": "^\\d{6}$"
+  },
+  {
+    "value": "RW",
+    "regex": "^$"
+  },
+  {
+    "value": "RE",
+    "regex": "^974\\d{2}$"
+  },
+  {
+    "value": "BL",
+    "regex": "97133"
+  },
+  {
+    "value": "SH",
+    "regex": "^[A-Z]{4} 1ZZ$"
+  },
+  {
+    "value": "KN",
+    "regex": "^KN\\d{4}$"
+  },
+  {
+    "value": "LC",
+    "regex": "^LC\\d{2} {1,2}\\d{3}$"
+  },
+  {
+    "value": "MF",
+    "regex": "97150"
+  },
+  {
+    "value": "PM",
+    "regex": "97500"
+  },
+  {
+    "value": "VC",
+    "regex": "^VC\\d{4}$"
+  },
+  {
+    "value": "WS",
+    "regex": "^WS\\d{4}$"
+  },
+  {
+    "value": "SM",
+    "regex": "^4789\\d$"
+  },
+  {
+    "value": "ST",
+    "regex": "^$"
+  },
+  {
+    "value": "SA",
+    "regex": "^\\d{5}(-\\d{4}(-\\d{4})?)?$"
+  },
+  {
+    "value": "SN",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "RS",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "SC",
+    "regex": "^$"
+  },
+  {
+    "value": "SL",
+    "regex": "^$"
+  },
+  {
+    "value": "SG",
+    "regex": "^\\d{6}$"
+  },
+  {
+    "value": "SX",
+    "regex": "^$"
+  },
+  {
+    "value": "SK",
+    "regex": "^[0|8|9]\\d{2} \\d{2}$"
+  },
+  {
+    "value": "SI",
+    "regex": "^(SI-)?\\d{4}$"
+  },
+  {
+    "value": "SB",
+    "regex": "^$"
+  },
+  {
+    "value": "SO",
+    "regex": "^[A-Z]{2} \\d{5}$"
+  },
+  {
+    "value": "ZA",
+    "regex": "^\\d{4}$"
+  },
+  {
+    "value": "GS",
+    "regex": "SIQQ 1ZZ"
+  },
+  {
+    "value": "SS",
+    "regex": "^$"
+  },
+  {
+    "value": "ES",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "LK",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "SD",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "SR",
+    "regex": "^$"
+  },
+  {
+    "value": "SJ",
+    "regex": "^\\d{4}$"
+  },
+  {
+    "value": "SE",
+    "regex": "^\\d{3} \\d{2}$"
+  },
+  {
+    "value": "CH",
+    "regex": "^\\d{4}$"
+  },
+  {
+    "value": "SY",
+    "regex": "^$"
+  },
+  {
+    "value": "TW",
+    "regex": "^\\d{3}(-\\d{2,3})?$"
+  },
+  {
+    "value": "TJ",
+    "regex": "^\\d{6}$"
+  },
+  {
+    "value": "TZ",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "TH",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "TL",
+    "regex": "^$"
+  },
+  {
+    "value": "TG",
+    "regex": "^$"
+  },
+  {
+    "value": "TK",
+    "regex": "^$"
+  },
+  {
+    "value": "TO",
+    "regex": "^$"
+  },
+  {
+    "value": "TT",
+    "regex": "^\\d{6}$"
+  },
+  {
+    "value": "TN",
+    "regex": "^\\d{4}$"
+  },
+  {
+    "value": "TR",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "TM",
+    "regex": "^\\d{6}$"
+  },
+  {
+    "value": "TC",
+    "regex": "TKCA 1ZZ"
+  },
+  {
+    "value": "TV",
+    "regex": "^$"
+  },
+  {
+    "value": "UG",
+    "regex": "^$"
+  },
+  {
+    "value": "UA",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "AE",
+    "regex": "^$"
+  },
+  {
+    "value": "GB",
+    "regex": "^([Gg][Ii][Rr] 0[Aa]{2}|(?![QVX])[A-Z]{1,2}\\d{1,2}[A-Z]?\\s\\d[A-Z]{2})$"
+  },
+  {
+    "value": "UM",
+    "regex": "96898"
+  },
+  {
+    "value": "US",
+    "regex": "^\\d{5}(-\\d{4})?$"
+  },
+  {
+    "value": "UY",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "UZ",
+    "regex": "^\\d{6}$"
+  },
+  {
+    "value": "VU",
+    "regex": "^$"
+  },
+  {
+    "value": "VE",
+    "regex": "^\\d{4}(-[A-Z])?$"
+  },
+  {
+    "value": "VN",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "VG",
+    "regex": "^VG\\d{4}$"
+  },
+  {
+    "value": "VI",
+    "regex": "^\\d{4}(-[A-Z])?$"
+  },
+  {
+    "value": "WF",
+    "regex": "^986\\d{2}$"
+  },
+  {
+    "value": "EH",
+    "regex": "^$"
+  },
+  {
+    "value": "YE",
+    "regex": "^$"
+  },
+  {
+    "value": "ZM",
+    "regex": "^\\d{5}$"
+  },
+  {
+    "value": "ZW",
+    "regex": "^$"
+  }
+]

@@ -1,3 +1,4 @@
+import { goToView } from "../../../routing/router";
 import { loginCustomer } from "../../../services/auth/loginCustomer";
 import { notificationModal } from "../../notificationModal/notificationModal";
 
@@ -21,6 +22,7 @@ export const loginHandler = async (e: Event): Promise<void> => {
     form.reset();
     console.log("Logged In, choose redirect method");
     notificationModal("Logged In successfully", "success");
+    goToView("main");
   } catch (error) {
     const message = error instanceof Error ? error.message : "An unknown error orrucer.";
     notificationModal(message, "error");

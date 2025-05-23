@@ -11,11 +11,11 @@ export const isTokenValid = (): boolean => {
   const userString = localStorage.getItem("redpandaUser");
   const storedUser: StoredUser = userString ? JSON.parse(userString) : null;
 
-  if (storedUser.accessToken && storedUser.expiresAt > Date.now()) {
+  if (storedUser?.accessToken && storedUser?.expiresAt > Date.now()) {
     console.log("token been test checked by 'isTokenValid' and its ok");
     // setAuth(true);
     return true;
-  } else if (storedUser.refreshToken) {
+  } else if (storedUser?.refreshToken) {
     console.log("token expired but we got refresh token to reactivate access one");
     // try {
     //   const response = await fetch(...);
