@@ -12,6 +12,10 @@ export interface Routes {
   [index: string]: string;
 }
 
+export interface Fields {
+  [index: string]: (input: HTMLInputElement) => string;
+}
+
 export interface Rule {
   test: () => boolean;
   message: string;
@@ -24,8 +28,7 @@ export interface InputError {
 }
 
 export interface ValidationProps {
-  mainInput: HTMLInputElement;
-  extraInput?: HTMLInputElement;
-  validate: (mainInput: HTMLInputElement, extraInput?: HTMLInputElement) => string;
+  input: HTMLInputElement;
+  validate: (input: HTMLInputElement) => string;
   divError: HTMLDivElement;
 }

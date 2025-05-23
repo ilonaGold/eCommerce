@@ -51,6 +51,15 @@ export function validatePassword(password: HTMLInputElement): string {
   return "";
 }
 
+export function validateRepeatPssw(
+  repeatPassword: HTMLInputElement,
+  password?: HTMLInputElement
+): string {
+  if (!password || !password.value) return "Password is missing";
+  if (repeatPassword.value !== password.value) return "Password doesn't match";
+  return "";
+}
+
 export function validateString(field: HTMLInputElement, fieldName: string): string {
   const rules: Rule[] = [
     {
