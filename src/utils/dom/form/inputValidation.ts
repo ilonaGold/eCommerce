@@ -51,16 +51,15 @@ export function validatePassword(password: HTMLInputElement): string {
   return "";
 }
 
-export function validateRepeatPssw(
-  repeatPassword: HTMLInputElement,
-  password?: HTMLInputElement
-): string {
+export function validateRepeatPssw(repeatPassword: HTMLInputElement): string {
+  const password: HTMLInputElement | null = document.querySelector("#password");
   if (!password || !password.value) return "Password is missing";
   if (repeatPassword.value !== password.value) return "Password doesn't match";
   return "";
 }
 
-export function validateString(field: HTMLInputElement, fieldName: string): string {
+export function validateString(field: HTMLInputElement): string {
+  const fieldName = field.name;
   const rules: Rule[] = [
     {
       test: () => !/[a-zA-Z]/.test(field.value),
@@ -103,7 +102,8 @@ export function validateCountry(country: HTMLInputElement): string {
   return "";
 }
 
-export function validatePostcode(postcode: HTMLInputElement, country?: HTMLInputElement): string {
+export function validatePostcode(postcode: HTMLInputElement): string {
+  const country: HTMLInputElement | null = document.querySelector("#country");
   if (!country || !country.value) return "Choose country first";
   for (const item of postcodes) {
     if (item.value === country.value) {
@@ -123,14 +123,9 @@ export function updateError({ fieldInput, fieldError, text }: InputError): void 
   fieldInput.classList.toggle("invalid", text != "");
 }
 
-export function addValidation({
-  mainInput,
-  extraInput,
-  validate,
-  divError,
-}: ValidationProps): void {
-  mainInput.addEventListener("input", () => {
-    const text = validate(mainInput, extraInput);
-    updateError({ fieldInput: mainInput, fieldError: divError, text: text });
+export function addValidation({ input, validate, divError }: ValidationProps): void {
+  input.addEventListener("input", () => {
+    const text = validate(input);
+    updateError({ fieldInput: input, fieldError: divError, text: text });
   });
 }
