@@ -146,6 +146,18 @@
   box-shadow: 0 0 0 4px rgba(139, 0, 0, 0.1);
 }
 
+/* Password visibility toggle */
+.toggle-password {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
 /* Error Messages */
 .error-message {
   color: #dc3545;

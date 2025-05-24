@@ -1,6 +1,6 @@
 import { createElement } from "../../utils/dom/createElement";
-import { setView } from "../../state/state";
 import "./header.css";
+import { goToView } from "../../routing/router";
 
 export function createHeader(): HTMLElement {
   const navLinks = [
@@ -21,10 +21,10 @@ export function createHeader(): HTMLElement {
             "a",
             {
               class: "nav-link",
-              href: "#",
-              onclick: `goToView('${link.view}')`,
+              href: "",
             },
-            [link.text]
+            [link.text],
+            { events: { click: () => goToView(`${link.view}`) } }
           ),
         ])
       )
@@ -36,18 +36,18 @@ export function createHeader(): HTMLElement {
           {
             class: "header-btn login-btn",
             type: "button",
-            onclick: "goToView('login')",
           },
-          ["Sign In"]
+          ["Sign In"],
+          { events: { click: () => goToView("login") } }
         ),
         createElement(
           "button",
           {
             class: "header-btn register-btn",
             type: "button",
-            onclick: "goToView('registration')",
           },
-          ["Register"]
+          ["Register"],
+          { events: { click: () => goToView("registration") } }
         ),
       ]),
       createElement("div", { class: "hamburger-menu" }, [
