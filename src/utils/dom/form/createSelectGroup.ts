@@ -12,6 +12,8 @@ export function createSelectGroup(
     ...(required ? { required: "true" } : {}),
   });
 
+  select.append(createElement("option", { value: "" }, ["-- Please select --"]));
+
   options.forEach(({ value, text }) => {
     select.append(createElement("option", { value }, [text]));
   });

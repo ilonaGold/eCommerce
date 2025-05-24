@@ -80,10 +80,17 @@ export function validateString(field: HTMLInputElement): string {
 }
 
 export function validateAge(dateString: HTMLInputElement): string {
+  const AGE = 13;
   const data = new Date(dateString.value);
   const now = new Date();
   const age = now.getFullYear() - data.getFullYear();
-  if (age < 13) return "Min user's age is 13 y.o.";
+  const rules: Rule[] = [
+    { test: () => dateString.validity.valueMissing, message: "Date is missing" },
+    { test: () => age < AGE, message: `Min user's age is ${AGE} y.o.` },
+  ];
+  for (const rule of rules) {
+    if (rule.test()) return rule.message;
+  }
   return "";
 }
 
