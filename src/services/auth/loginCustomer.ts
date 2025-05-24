@@ -51,7 +51,7 @@ export async function loginCustomer(email: string, password: string): Promise<un
   const loginInfo = {
     accessToken: authData.access_token,
     refreshToken: authData.refresh_token,
-    expiresAt: Date.now() + authData.expires_in,
+    expiresAt: Date.now() + authData.expires_in * 1000,
     customer: customerData.customer,
   };
   storeLoginData(JSON.stringify(loginInfo));
