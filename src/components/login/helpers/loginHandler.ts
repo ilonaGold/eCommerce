@@ -25,7 +25,7 @@ export const loginHandler = async (e: Event): Promise<void> => {
     // +++++++++++++++++++++++   Updatind state / Saving in localStorage (needs separate module)  ++++++++++++++++++++++++++++++
     setState("userAuth", true);
     setState("customer", customerData.customer);
-    storeLoginData(JSON.stringify(customerData));
+    storeLoginData(customerData);
     navigateTo("/");
     // +++++++++++++++++++++++   Updatind state / Saving in localStorage (needs separate module)   ++++++++++++++++++++++++++++++
 
