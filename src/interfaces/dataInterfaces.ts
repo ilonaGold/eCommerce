@@ -17,3 +17,11 @@ export interface Customer {
   defaultShippingAddress?: number;
   defaultBillingAddress?: number;
 }
+
+// Custom data model, we modeled inside "loginCustomer.ts"
+export interface LoginInfo {
+  accessToken: string;
+  refreshToken: string;
+  expiresAt: number;
+  customer: Customer;
+}

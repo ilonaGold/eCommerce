@@ -54,7 +54,7 @@ export async function loginCustomer(email: string, password: string): Promise<un
     expiresAt: Date.now() + authData.expires_in * 1000,
     customer: customerData.customer,
   };
-  storeLoginData(JSON.stringify(loginInfo));
+  storeLoginData(loginInfo);
   console.log(loginInfo);
   return loginInfo;
 }
