@@ -1,8 +1,11 @@
 import { routeHandler } from "./routing/router";
-import { isCustomerLoggedIn } from "./services/auth/isCustomerLoggedIn";
+import { initAuth } from "./services/auth/initAuth";
 import "./styles/styles.css";
 
-await isCustomerLoggedIn();
+const startApp = async () => {
+  await initAuth();
+  routeHandler();
+};
 
-window.addEventListener("load", routeHandler);
+window.addEventListener("load", startApp);
 window.addEventListener("popstate", routeHandler);
