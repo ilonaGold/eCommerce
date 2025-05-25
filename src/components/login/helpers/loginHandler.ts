@@ -12,7 +12,7 @@ export const loginHandler = async (e: Event): Promise<void> => {
     notificationModal("Form not found", "error");
     return;
   }
-  if (form.querySelector(".invalid") || !form.checkValidity()) {
+  if (!form.checkValidity()) {
     return;
   }
   const formData = new FormData(form);
@@ -26,11 +26,11 @@ export const loginHandler = async (e: Event): Promise<void> => {
     setAuth(true);
     setCustomer(loginInfo.customer);
     // ----Handle customer data
-
-    form.reset();
     console.log("Logged In, choose redirect method");
     notificationModal("Logged In successfully", "success");
     goToView("main");
+
+    form.reset();
   } catch (error) {
     const message = error instanceof Error ? error.message : "An unknown error orrucer.";
     notificationModal(message, "error");

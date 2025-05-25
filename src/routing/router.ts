@@ -5,7 +5,6 @@ import { renderLogin } from "../views/renderLogin/renderLogin";
 import { renderRegistration } from "../views/renderRegistration/renderRegistration";
 import { renderMain } from "../views/renderMain/renderMain";
 import { renderError } from "../views/renderError/renderError";
-import { isTokenValid } from "../services/auth/isTokenValid";
 
 const routes: Routes = {
   "/": "Log In",
@@ -24,7 +23,9 @@ export function routeHandler(): void {
   } else {
     endpoint = "/";
   }
-  const isAuth = isTokenValid();
+  const isAuth = getState("userAuth");
+  console.log(isAuth);
+
   setAuth(isAuth);
   if (endpoint && routes[endpoint]) {
     if (!isAuth) {
