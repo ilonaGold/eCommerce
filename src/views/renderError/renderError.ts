@@ -2,6 +2,7 @@ import { createFooter } from "../../components/footer/footer";
 import { goToView } from "../../routing/router";
 import { createElement } from "../../utils/dom/createElement";
 
+import hangingPanda from "../../assets/images/hanging-panda.png";
 import "./renderError.css";
 
 export function renderError(parent: HTMLElement): void {
@@ -19,7 +20,7 @@ export function renderError(parent: HTMLElement): void {
 
   const picture = createElement("div", { class: "error-image-container" }, [
     createElement("img", {
-      src: "../../assets/images/hanging-panda.png",
+      src: hangingPanda,
       alt: "Forest panda",
       class: "error-panda-image",
     }),
