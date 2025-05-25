@@ -5,12 +5,14 @@ import { renderLogin } from "../views/renderLogin/renderLogin";
 import { renderRegistration } from "../views/renderRegistration/renderRegistration";
 import { renderMain } from "../views/renderMain/renderMain";
 import { renderError } from "../views/renderError/renderError";
+import { renderHome } from "../views/renderHome/renderHome";
 
 const routes: Routes = {
   "/": "Log In",
   login: "Log In",
   main: "Main",
   registration: "Registration",
+  home: "Home",
 };
 
 export function routeHandler(): void {
@@ -59,6 +61,9 @@ function renderView(): void {
       break;
     case "registration":
       renderRegistration(root);
+      break;
+    case "home":
+      renderHome(root);
       break;
     case "main":
       renderMain(root);
