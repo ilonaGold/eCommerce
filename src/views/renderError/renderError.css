@@ -4,7 +4,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  background: url("../../assets/images/jungle-bg.jpg") center/cover no-repeat;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 /* Error Main */
@@ -13,9 +16,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: url("../../assets/images/jungle-bg.jpg") center/cover no-repeat;
   position: relative;
-  width: 100vw;
+  width: 100%;
   height: calc(100vh - 56px);
   text-shadow:
     2px 2px 4px rgba(0, 0, 0, 0.5),
@@ -33,7 +35,7 @@
 }
 
 /* Image Container */
-.image-container {
+.error-image-container {
   width: 50%;
   height: 100%;
   display: flex;
@@ -43,7 +45,7 @@
   padding: 0 1rem 1rem 1rem;
 }
 
-.panda-image {
+.error-panda-image {
   width: 100%;
   height: auto;
   max-width: 500px;
@@ -62,6 +64,7 @@
 .error-info-container {
   display: flex;
   flex-direction: column;
+  gap: 5px;
   color: white;
   width: 100%;
 }
@@ -90,7 +93,7 @@
 
 /* Z-index Layers */
 .error-info,
-.image-container,
+.error-image-container,
 .footer {
   position: relative;
   z-index: 2;
@@ -122,4 +125,71 @@
 
 .error-button:active {
   transform: translateY(0);
+}
+
+/* Media Queries */
+
+@media (max-width: 1440px) {
+  .error-section {
+    width: 80%;
+  }
+}
+
+@media (max-width: 900px) {
+  .error-section {
+    width: 90%;
+  }
+
+  .error-header {
+    font-size: 2rem;
+  }
+
+  .error-text {
+    font-size: 1.5rem;
+  }
+
+  .error-button {
+    font-size: 0.9rem
+  }
+
+  .error-button {
+    width: 60%;
+  }
+}
+
+@media (max-width: 600px) {
+  .error-section {
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 15px;
+  }
+
+  .error-image-container {
+    order: 1;
+    height: 40%;
+    width: 230px;
+  }
+
+  .error-info {
+    order: 2;
+    width: 100%;
+  }
+
+  .error-info-container {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .error-header {
+    font-size: 1.8rem;
+  }
+
+  .error-text {
+    font-size: 1.3rem;
+  }
+
+  .error-button {
+    width: 50%;
+  }
 }
