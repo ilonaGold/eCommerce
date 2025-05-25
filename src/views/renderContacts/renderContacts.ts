@@ -2,6 +2,8 @@ import { createElement } from "../../utils/dom/createElement";
 import { getState } from "../../state/state";
 import { createHeader } from "../../components/header/header";
 import { createFooter } from "../../components/footer/footer";
+
+import contactPanda from "../../assets/images/contact-panda.png";
 import "./renderContacts.css";
 
 export function renderContacts(parent: HTMLElement): void {
@@ -9,7 +11,7 @@ export function renderContacts(parent: HTMLElement): void {
   const customer = getState("customer");
   const imageContainer = createElement("div", { class: "contacts-image-container" }, [
     createElement("img", {
-      src: "../../assets/images/contact-panda.png",
+      src: contactPanda,
       alt: "Contacts panda",
       class: "contacts-panda-image",
     }),

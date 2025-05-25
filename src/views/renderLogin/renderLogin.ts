@@ -4,6 +4,7 @@ import { createHeader } from "../../components/header/header";
 import { createFooter } from "../../components/footer/footer";
 import { getState } from "../../state/state";
 
+import pandaNinjaImg from "../../assets/images/panda-ninja.png";
 import "../../components/login/loginForm.css";
 
 export const renderLogin = (parent: HTMLElement): void => {
@@ -19,7 +20,7 @@ export const renderLogin = (parent: HTMLElement): void => {
         createElement("div", { class: "form-container" }, [createLoginForm()]),
         createElement("div", { class: "image-container" }, [
           createElement("img", {
-            src: "../../assets/images/panda-ninja.png",
+            src: pandaNinjaImg,
             alt: "Panda Ninja",
             class: "panda-image",
           }),

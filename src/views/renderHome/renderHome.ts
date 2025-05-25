@@ -2,6 +2,8 @@ import { createElement } from "../../utils/dom/createElement";
 import { getState } from "../../state/state";
 import { createHeader } from "../../components/header/header";
 import { createFooter } from "../../components/footer/footer";
+
+import homePanda from "../../assets/images/sleeping-panda.png";
 import "./renderHome.css";
 
 export function renderHome(parent: HTMLElement): void {
@@ -9,7 +11,7 @@ export function renderHome(parent: HTMLElement): void {
   const customer = getState("customer");
   const imageContainer = createElement("div", { class: "home-image-container" }, [
     createElement("img", {
-      src: "../../assets/images/sleeping-panda.png",
+      src: homePanda,
       alt: "Home panda",
       class: "home-panda-image",
     }),
