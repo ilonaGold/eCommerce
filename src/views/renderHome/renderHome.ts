@@ -13,7 +13,7 @@ export function renderHome(parent: HTMLElement): void {
       alt: "Home panda",
       class: "home-panda-image",
     }),
-    createElement("p", { class: "home-text" }, ["Relax while we're building this page for you"]),
+    createElement("p", { class: "page-text" }, ["Relax while we're building this page for you"]),
   ]);
   const main = createElement("main", { class: "home-main" }, [imageContainer]);
   const container = createElement("main", { class: "home-container" }, [

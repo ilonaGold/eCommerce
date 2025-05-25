@@ -93,11 +93,13 @@ export function createHeader(isLoggedIn: boolean, customer: Customer | null): HT
     const navLinks = document.querySelector(".nav-links");
     const welcomeText = document.querySelector(".welcome-text");
     const mainContent = document.querySelector(".main-content");
+    const text = document.querySelector(".page-text");
 
     navLinks?.classList.toggle("active");
     hamburgerMenu.classList.toggle("active");
     welcomeText?.classList.toggle("menu-open");
     mainContent?.classList.toggle("nav-open");
+    text?.classList.toggle("open");
   });
 
   return createElement("header", { class: "header" }, [navigation]);

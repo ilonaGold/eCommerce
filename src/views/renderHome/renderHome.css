@@ -36,7 +36,7 @@
   z-index: -1;
 }
 
-.home-text {
+.page-text {
   color: white;
   text-shadow:
     2px 2px 4px rgba(0, 0, 0, 0.5),
@@ -48,8 +48,11 @@
   line-height: 1.2;
   position: relative;
   z-index: 2;
-  transition: opacity 0.3s ease;
   padding: 30px;
+}
+
+.page-text.open {
+  transform: translateY(300px);
 }
 
 /* Background Overlay */
@@ -66,13 +69,13 @@
 
 /* Media Queries */
 @media (max-width: 1400px) {
-  .home-text {
+  .page-text {
     font-size: 3rem;
   }
 }
 
 @media (max-width: 480px) {
-  .home-text {
+  .page-text {
     font-size: 2rem;
   }
 }
