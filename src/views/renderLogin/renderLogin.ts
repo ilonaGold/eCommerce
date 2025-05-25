@@ -2,13 +2,16 @@ import { createElement } from "../../utils/dom/createElement";
 import { createLoginForm } from "../../components/login/loginForm";
 import { createHeader } from "../../components/header/header";
 import { createFooter } from "../../components/footer/footer";
+import { getState } from "../../state/state";
 
 import "../../components/login/loginForm.css";
 
 export const renderLogin = (parent: HTMLElement): void => {
+  const isAuth = getState("userAuth");
+  const customer = getState("customer");
   const container = createElement("div", { class: "login-container" }, [
     // Header
-    createHeader(),
+    createHeader(isAuth, customer),
     // Main content
     createElement("main", { class: "main-content" }, [
       createElement("h2", { class: "welcome-text" }, ["Welcome to Red Panda Squad Shop"]),
