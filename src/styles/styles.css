@@ -42,3 +42,15 @@ ul {
 a {
   text-decoration: none;
 }
+
+/*
+=============== 
+Global Classes
+===============
+*/
+.center {
+  max-width: var(--max-width);
+  width: 95vw;
+  margin: 0 auto;
+  height: 100%;
+}
