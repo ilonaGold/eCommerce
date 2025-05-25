@@ -1,4 +1,5 @@
 import { createFooter } from "../../components/footer/footer";
+import { goToView } from "../../routing/router";
 import { createElement } from "../../utils/dom/createElement";
 
 import "./renderError.css";
@@ -10,15 +11,17 @@ export function renderError(parent: HTMLElement): void {
       createElement("p", { class: "error-text" }, [
         "Sorry, we couldn't find the page you're looking for",
       ]),
-      createElement("button", { class: "error-button" }, ["Back to home"]),
+      createElement("button", { class: "error-button" }, ["Back to home"], {
+        events: { click: () => goToView("home") },
+      }),
     ]),
   ]);
 
-  const picture = createElement("div", { class: "image-container" }, [
+  const picture = createElement("div", { class: "error-image-container" }, [
     createElement("img", {
       src: "../../assets/images/hanging-panda.png",
       alt: "Forest panda",
-      class: "panda-image",
+      class: "error-panda-image",
     }),
   ]);
 
