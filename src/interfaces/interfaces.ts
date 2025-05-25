@@ -1,8 +1,12 @@
+import { Customer } from "./dataInterfaces";
+
 export interface AppState {
   view: string;
   userAuth: boolean;
+  customer: Customer | null;
   setView: (view: string) => void;
   setAuth: (isAuth: boolean) => void;
+  setCustomer: (customer: Customer | null) => void;
   getState: <K extends keyof Omit<AppState, "getState" | "setView" | "setAuth">>(
     property: K
   ) => AppState[K];
