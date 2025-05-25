@@ -5,11 +5,7 @@ import { renderLogin } from "../views/renderLogin/renderLogin";
 import { renderRegistration } from "../views/renderRegistration/renderRegistration";
 import { renderMain } from "../views/renderMain/renderMain";
 import { renderError } from "../views/renderError/renderError";
-<<<<<<< HEAD
-import { isTokenValid } from "../services/auth/isTokenValid";
 import { renderHome } from "../views/renderHome/renderHome";
-=======
->>>>>>> origin/release/login-registration-main
 
 const routes: Routes = {
   "/": "Log In",

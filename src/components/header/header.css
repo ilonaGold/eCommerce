@@ -242,6 +242,10 @@
   .nav-links .nav-item .nav-link:hover::after {
     width: 100%;
   }
+
+  .logo {
+    font-size: 0.9rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -251,6 +255,10 @@
   }
 
   .logo {
-    font-size: 1.5rem;
+    font-size: 0.7rem;
+  }
+
+  .header-btn {
+    font-size: 0.8rem;
   }
 }
