@@ -19,7 +19,7 @@ const routes: Routes = {
   contacts: "Contacts",
 };
 
-const restrictedRoutes = ["login", "registration"];
+const restrictedRoutes = ["login", "registration", "/"];
 
 export function routeHandler(): void {
   const path = location.pathname;
