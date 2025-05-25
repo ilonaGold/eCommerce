@@ -31,6 +31,10 @@
   transform: translateY(-0.25em);
 }
 
+.footer-link {
+  letter-spacing: 6px;
+}
+
 .footer-link,
 .footer-year {
   color: #e5994e;

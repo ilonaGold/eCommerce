@@ -33,7 +33,7 @@ export function createFooter(): HTMLElement {
         target: "_blank",
         rel: "noopener noreferrer",
       },
-      ["Red Panda Squad"]
+      ["RPS"]
     ),
   ]);
 
