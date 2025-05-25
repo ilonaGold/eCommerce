@@ -2,6 +2,8 @@ import { createElement } from "../../utils/dom/createElement";
 import { getState } from "../../state/state";
 import { createHeader } from "../../components/header/header";
 import { createFooter } from "../../components/footer/footer";
+
+import aboutPanda from "../../assets/images/three-pandas.png";
 import "./renderAbout.css";
 
 export function renderAbout(parent: HTMLElement): void {
@@ -9,7 +11,7 @@ export function renderAbout(parent: HTMLElement): void {
   const customer = getState("customer");
   const imageContainer = createElement("div", { class: "about-image-container" }, [
     createElement("img", {
-      src: "../../assets/images/three-pandas.png",
+      src: aboutPanda,
       alt: "About panda",
       class: "about-panda-image",
     }),
