@@ -1,8 +1,11 @@
 import { createElement } from "../../utils/dom/createElement";
 import "./header.css";
 import { goToView } from "../../routing/router";
+import { Customer } from "../../interfaces/dataInterfaces";
+import { clearLoginData } from "../../services/localStorage/localStorage";
+import { setAuth, setCustomer } from "../../state/state";
 
-export function createHeader(): HTMLElement {
+export function createHeader(isLoggedIn: boolean, customer: Customer | null): HTMLElement {
   const navLinks = [
     { text: "Home", view: "home" },
     { text: "About", view: "about" },
@@ -10,27 +13,24 @@ export function createHeader(): HTMLElement {
     { text: "Contacts", view: "contacts" },
   ];
 
-  const navigation = createElement("nav", { class: "header-nav" }, [
-    createElement("h1", { class: "logo" }, ["Red Panda Squad"]),
-    createElement(
-      "ul",
-      { class: "nav-links" },
-      navLinks.map((link) =>
-        createElement("li", { class: "nav-item" }, [
-          createElement(
-            "a",
-            {
-              class: "nav-link",
-              href: "",
-            },
-            [link.text],
-            { events: { click: () => goToView(`${link.view}`) } }
-          ),
-        ])
-      )
-    ),
-    createElement("div", { class: "header-controls" }, [
-      createElement("div", { class: "header-buttons" }, [
+  const logOutBtn = createElement("a", {}, ["Log Out"], {
+    events: {
+      click: (e) => {
+        e.preventDefault();
+        setAuth(false);
+        setCustomer(null);
+        clearLoginData();
+        goToView("main");
+      },
+    },
+    styles: {
+      cursor: "pointer",
+    },
+  });
+
+  const headerButtonChildren = isLoggedIn
+    ? [`Welcome, ${customer?.firstName}`, " / ", logOutBtn]
+    : [
         createElement(
           "button",
           {
@@ -49,7 +49,38 @@ export function createHeader(): HTMLElement {
           ["Register"],
           { events: { click: () => goToView("registration") } }
         ),
-      ]),
+      ];
+
+  const navigation = createElement("nav", { class: "header-nav" }, [
+    createElement("h1", { class: "logo" }, ["Red Panda Squad"], {
+      events: {
+        click: () => {
+          goToView("main");
+        },
+      },
+      styles: {
+        cursor: "pointer",
+      },
+    }),
+    createElement(
+      "ul",
+      { class: "nav-links" },
+      navLinks.map((link) =>
+        createElement("li", { class: "nav-item" }, [
+          createElement(
+            "a",
+            {
+              class: "nav-link",
+              href: "",
+            },
+            [link.text],
+            { events: { click: () => goToView(`${link.view}`) } }
+          ),
+        ])
+      )
+    ),
+    createElement("div", { class: "header-controls" }, [
+      createElement("div", { class: "header-buttons" }, headerButtonChildren),
       createElement("div", { class: "hamburger-menu" }, [
         createElement("span", { class: "hamburger-icon" }, []),
       ]),

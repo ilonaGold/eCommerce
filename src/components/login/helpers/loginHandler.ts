@@ -1,5 +1,8 @@
+import { LoginInfo } from "../../../interfaces/dataInterfaces";
 import { goToView } from "../../../routing/router";
 import { loginCustomer } from "../../../services/auth/loginCustomer";
+import { storeLoginData } from "../../../services/localStorage/localStorage";
+import { setAuth, setCustomer } from "../../../state/state";
 import { notificationModal } from "../../notificationModal/notificationModal";
 
 export const loginHandler = async (e: Event): Promise<void> => {
@@ -17,7 +20,13 @@ export const loginHandler = async (e: Event): Promise<void> => {
   const { email, password } = data;
 
   try {
-    await loginCustomer(email, password);
+    const loginInfo: LoginInfo = await loginCustomer(email, password);
+    // ----Handle customer data
+    storeLoginData(loginInfo);
+    setAuth(true);
+    setCustomer(loginInfo.customer);
+    // ----Handle customer data
+
     form.reset();
     console.log("Logged In, choose redirect method");
     notificationModal("Logged In successfully", "success");

@@ -8,9 +8,11 @@ import "./renderMain.css";
 
 export function renderMain(parent: HTMLElement): void {
   const isAuth = getState("userAuth");
+  const customer = getState("customer");
+  console.log(customer);
 
   const viewContainer = createElement("div", { class: "view-container" }, [
-    createHeader(),
+    createHeader(isAuth, customer),
     mainComponent(isAuth),
     createFooter(),
   ]);
