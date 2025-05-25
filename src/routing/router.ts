@@ -6,12 +6,14 @@ import { renderRegistration } from "../views/renderRegistration/renderRegistrati
 import { renderMain } from "../views/renderMain/renderMain";
 import { renderError } from "../views/renderError/renderError";
 import { isTokenValid } from "../services/auth/isTokenValid";
+import { renderHome } from "../views/renderHome/renderHome";
 
 const routes: Routes = {
   "/": "Log In",
   login: "Log In",
   main: "Main",
   registration: "Registration",
+  home: "Home",
 };
 
 export function routeHandler(): void {
@@ -58,6 +60,9 @@ function renderView(): void {
       break;
     case "registration":
       renderRegistration(root);
+      break;
+    case "home":
+      renderHome(root);
       break;
     case "main":
       renderMain(root);

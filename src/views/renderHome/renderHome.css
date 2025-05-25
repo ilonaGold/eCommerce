@@ -1,0 +1,35 @@
+/* Home container */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-content: center;
+  background: url("../../assets/images/sleeping-panda.png") center/cover no-repeat;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Home main */
+.home-main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  height: calc(100vh - 56px - 77px);
+}
+
+.home-text {
+  color: white;
+  text-shadow:
+    2px 2px 4px rgba(0, 0, 0, 0.5),
+    -1px -1px 0 rgba(0, 0, 0, 0.3);
+  font-size: 4.5rem;
+  text-align: center;
+  max-width: 90%;
+  margin-bottom: 2rem;
+  line-height: 1.2;
+  position: relative;
+  z-index: 2;
+  transition: opacity 0.3s ease;
+}
