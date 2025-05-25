@@ -13,14 +13,14 @@ export function validateLoginForm(form: HTMLFormElement): void {
   const password: HTMLInputElement | null = form.querySelector("#password");
   const passwordError: HTMLDivElement | null = form.querySelector("#passwordError");
 
-  const emailValidationHandler = () => {
+  const emailValidationHandler = (): void => {
     if (email) {
       const text = validateEmail(email);
       updateError({ fieldInput: email, fieldError: emailError, text: text });
     }
   };
 
-  const passwordValidationHandler = () => {
+  const passwordValidationHandler = (): void => {
     if (password) {
       const text = validatePassword(password);
       updateError({ fieldInput: password, fieldError: passwordError, text: text });
