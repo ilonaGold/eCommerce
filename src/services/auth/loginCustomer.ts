@@ -1,7 +1,6 @@
-import { setAuth } from "../../state/state";
-import { storeLoginData } from "../localStorage/localStorage";
+import { LoginInfo } from "../../interfaces/dataInterfaces";
 
-export async function loginCustomer(email: string, password: string): Promise<unknown> {
+export async function loginCustomer(email: string, password: string): Promise<LoginInfo> {
   const authUrl = `${import.meta.env.VITE_CTP_AUTH_URL}/oauth/${import.meta.env.VITE_CTP_PROJECT_KEY}/customers/token`;
   const apiUrl = `${import.meta.env.VITE_CTP_API_URL}/${import.meta.env.VITE_CTP_PROJECT_KEY}/login`;
 
@@ -45,7 +44,6 @@ export async function loginCustomer(email: string, password: string): Promise<un
   }
   // Customer Data:
   const customerData = await loginResponse.json();
-  setAuth(true);
 
   // save token & customer-data
   const loginInfo = {
@@ -54,7 +52,5 @@ export async function loginCustomer(email: string, password: string): Promise<un
     expiresAt: Date.now() + authData.expires_in * 1000,
     customer: customerData.customer,
   };
-  storeLoginData(loginInfo);
-  console.log(loginInfo);
   return loginInfo;
 }
