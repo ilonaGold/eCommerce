@@ -58,21 +58,24 @@ export function validateRepeatPssw(repeatPassword: HTMLInputElement): string {
 }
 
 export function validateString(field: HTMLInputElement): string {
-  const fieldName = field.name;
+  const fieldName = field.name.replace(/([A-Z])/g, " $1").trim(); // Convert camelCase to spaced words
+  const capitalizedName = fieldName.charAt(0).toUpperCase() + fieldName.slice(1); // Capitalize first letter
+
   const rules: Rule[] = [
     {
       test: () => !/[a-zA-Z]/.test(field.value),
-      message: `${fieldName} must contain at least 1 character`,
+      message: `Please enter your ${fieldName.toLowerCase()}`, // More natural phrasing
     },
     {
       test: () => /\d/.test(field.value),
-      message: `${fieldName} must not contain numbers`,
+      message: `${capitalizedName} cannot contain numbers`,
     },
     {
       test: () => /[^a-zA-Z0-9]/.test(field.value),
-      message: `${fieldName} must not contain special characters`,
+      message: `${capitalizedName} cannot contain special characters`,
     },
   ];
+
   for (const rule of rules) {
     if (rule.test()) return rule.message;
   }

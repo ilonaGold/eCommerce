@@ -18,7 +18,7 @@ export function createInputGroup(
     id: `${name}Error`,
   });
 
-  return createElement("div", { class: "form-group" }, [
+  return createElement("div", { class: "input-group" }, [
     createElement("label", { for: name }, [labelText]),
     input,
     errorMsg,
@@ -26,5 +26,5 @@ export function createInputGroup(
 }
 
 export function createSectionTitle(title: string): HTMLElement {
-  return createElement("h3", { class: "section-title" }, [title]);
+  return createElement("h2", { class: "section-title" }, [title]);
 }

@@ -13,13 +13,13 @@ export function createRegistrationForm(): HTMLFormElement {
       createInputGroup("First Name", "text", "firstName", true),
       createInputGroup("Last Name", "text", "lastName", true),
       createInputGroup("Password", "password", "password", true),
-      createInputGroup("RepeatPassword", "password", "repeatPassword", true),
+      createInputGroup("Repeat Password", "password", "repeatPassword", true),
       createInputGroup("Date of Birth", "date", "dateOfBirth", true),
     ]),
 
     createElement("div", { id: "addressFields" }, [
       createSectionTitle("Address Information"),
-      createInputGroup("Street Address", "text", "address", true),
+      createInputGroup("Street", "text", "address", true),
       createInputGroup("City", "text", "city", true),
       createSelectGroup("Country", "country", countryCodes, true),
       createInputGroup("Postal Code", "text", "postalCode"),
@@ -63,7 +63,7 @@ export function createRegistrationForm(): HTMLFormElement {
     ]),
 
     // Submit Button
-    createElement("button", { type: "submit" }, ["Register"]),
+    createElement("button", { type: "submit", class: "submit-btn" }, ["Register"]),
   ]);
   validateRegistrationForm(form);
   registrationFormInit(form);
