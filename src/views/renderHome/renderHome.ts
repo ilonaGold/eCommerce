@@ -3,7 +3,7 @@ import { getState } from "../../state/state";
 import { createHeader } from "../../components/header/header";
 import { createFooter } from "../../components/footer/footer";
 
-import homePanda from "../../assets/images/sleeping-panda.png";
+import homePanda from "../../assets/images/sleeping-panda.webp";
 import "./renderHome.css";
 
 export function renderHome(parent: HTMLElement): void {

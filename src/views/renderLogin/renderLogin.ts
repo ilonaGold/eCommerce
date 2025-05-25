@@ -4,7 +4,7 @@ import { createHeader } from "../../components/header/header";
 import { createFooter } from "../../components/footer/footer";
 import { getState } from "../../state/state";
 
-import pandaNinjaImg from "../../assets/images/panda-ninja.png";
+import pandaNinjaImg from "../../assets/images/panda-ninja.webp";
 import "../../components/login/loginForm.css";
 
 export const renderLogin = (parent: HTMLElement): void => {

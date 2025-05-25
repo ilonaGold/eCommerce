@@ -15,7 +15,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: url("../../assets/images/jungle-bg.jpg") center/cover no-repeat;
+  background: url("../../assets/images/jungle-bg.webp") center/cover no-repeat;
   position: relative;
 }
 

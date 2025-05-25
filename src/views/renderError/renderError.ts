@@ -2,7 +2,7 @@ import { createFooter } from "../../components/footer/footer";
 import { goToView } from "../../routing/router";
 import { createElement } from "../../utils/dom/createElement";
 
-import hangingPanda from "../../assets/images/hanging-panda.png";
+import hangingPanda from "../../assets/images/hanging-panda.webp";
 import "./renderError.css";
 
 export function renderError(parent: HTMLElement): void {

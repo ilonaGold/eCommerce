@@ -3,7 +3,7 @@ import { getState } from "../../state/state";
 import { createHeader } from "../../components/header/header";
 import { createFooter } from "../../components/footer/footer";
 
-import contactPanda from "../../assets/images/contact-panda.png";
+import contactPanda from "../../assets/images/contact-panda.webp";
 import "./renderContacts.css";
 
 export function renderContacts(parent: HTMLElement): void {
