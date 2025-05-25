@@ -1,25 +1,30 @@
 import { createFooter } from "../../components/footer/footer";
 import { createElement } from "../../utils/dom/createElement";
 
+import "./renderError.css";
+
 export function renderError(parent: HTMLElement): void {
   const info = createElement("div", { class: "error-info" }, [
-    createElement("h3", { class: "error-header" }, ["Page not found"]),
-    createElement("p", { class: "error-text" }, [
-      "Sorry, we couldn't find the page you're looking for",
+    createElement("div", { class: "error-info-container" }, [
+      createElement("h1", { class: "error-header" }, ["Page not found"]),
+      createElement("p", { class: "error-text" }, [
+        "Sorry, we couldn't find the page you're looking for",
+      ]),
+      createElement("button", { class: "error-button" }, ["Back to home"]),
     ]),
-    createElement("button", { class: "error-button" }, ["Go back to home"]),
   ]);
 
-  const picture = createElement("div", { class: "error-info" }, [
+  const picture = createElement("div", { class: "image-container" }, [
     createElement("img", {
-      src: "../../assets/images/panda-forest.png",
+      src: "../../assets/images/hanging-panda.png",
       alt: "Forest panda",
       class: "panda-image",
     }),
   ]);
 
   const section = createElement("section", { class: "error-section" }, [info, picture]);
+  const main = createElement("section", { class: "error-main" }, [section]);
 
-  const container = createElement("main", { class: "error-main" }, [section, createFooter()]);
+  const container = createElement("main", { class: "error-container" }, [main, createFooter()]);
   parent.append(container);
 }
