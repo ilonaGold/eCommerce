@@ -1,5 +1,14 @@
+/* Reset and Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f0f0f0;
+}
 
 /* Container and Layout */
 .login-container {
@@ -110,20 +119,21 @@
 .section-title {
   font-size: 2rem;
   color: maroon;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
   text-align: center;
   font-weight: 600;
   letter-spacing: 0.5px;
 }
 
 /* Form Groups */
-.form-group {
-  margin-bottom: 2rem;
+.input-group {
+  margin-bottom: 2.5rem;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
-.form-group label {
+.input-group label {
   font-size: 1.1rem;
   color: #333;
   margin-bottom: 0.8rem;
@@ -131,13 +141,14 @@
   letter-spacing: 0.3px;
 }
 
-.form-group input {
+.input-group input {
   width: 100%;
-  padding: 1rem;
+  padding: 0.6rem 1rem;
   border: 2px solid #e0e0e0;
   border-radius: 8px;
   font-size: 1rem;
   transition: all 0.3s ease;
+  margin-bottom: 0;
 }
 
 .form-group input:focus {
@@ -153,6 +164,7 @@
   gap: 10px;
   font-size: 1.1rem;
   color: #333;
+  margin-top: 0.5rem;
   margin-bottom: 0.8rem;
   font-weight: 500;
   letter-spacing: 0.3px;
@@ -160,9 +172,15 @@
 
 /* Error Messages */
 .error-message {
+  color: red;
+}
+
+.input-group .error-message {
   color: #dc3545;
   font-size: 0.875rem;
-  margin-top: 0.5rem;
+  position: absolute;
+  bottom: -1.5rem;
+  left: 0;
   min-height: 20px;
 }
 
@@ -184,7 +202,7 @@
 }
 
 .login-form .submit-btn:hover {
-  background: #8b0000;
+  background: #2ea065;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(139, 0, 0, 0.2);
 }
@@ -377,4 +395,3 @@
   border-color: red;
   outline: none;
 }
-
