@@ -9,7 +9,7 @@ export function createHeader(isLoggedIn: boolean, customer: Customer | null): HT
   const navLinks = [
     { text: "Home", view: "home" },
     { text: "About", view: "about" },
-    { text: "Products", view: "products" },
+    { text: "Products", view: "main" },
     { text: "Contacts", view: "contacts" },
   ];
 
