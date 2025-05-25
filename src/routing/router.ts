@@ -19,6 +19,8 @@ const routes: Routes = {
   contacts: "Contacts",
 };
 
+const restrictedRoutes = ["login", "registration", "/"];
+
 export function routeHandler(): void {
   const path = location.pathname;
   const LAST_INDEX = -1;
@@ -37,10 +39,12 @@ export function routeHandler(): void {
     if (!isAuth) {
       setView(endpoint);
     } else {
-      setView("main");
-      if (endpoint !== "main") {
+      if (restrictedRoutes.includes(endpoint)) {
         const newPath = createNewPath("main");
         history.replaceState(null, "", newPath);
+        setView("main");
+      } else {
+        setView(endpoint);
       }
     }
   } else {
