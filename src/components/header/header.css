@@ -70,6 +70,10 @@
   text-transform: uppercase;
 }
 
+.nav-open {
+  transform: translateY(300px);
+}
+
 .login-btn {
   background: maroon;
   color: white;
