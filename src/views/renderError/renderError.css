@@ -1,0 +1,195 @@
+/* Error Container */
+.error-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: url("../../assets/images/jungle-bg.jpg") center/cover no-repeat;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Error Main */
+.error-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 56px);
+  text-shadow:
+    2px 2px 4px rgba(0, 0, 0, 0.5),
+    -1px -1px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Error Section */
+.error-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  height: 100%;
+}
+
+/* Image Container */
+.error-image-container {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0 1rem 1rem 1rem;
+}
+
+.error-panda-image {
+  width: 100%;
+  height: auto;
+  max-width: 500px;
+  object-fit: contain;
+}
+
+/* Error Info */
+.error-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+  width: 50%;
+}
+
+.error-info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  color: white;
+  width: 100%;
+}
+
+.error-header {
+  font-size: 3rem;
+  font-weight: 600;
+}
+
+.error-text {
+  font-size: 1.7rem;
+}
+
+/* Background Overlay */
+.error-main::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(3px);
+  z-index: 1;
+}
+
+/* Z-index Layers */
+.error-info,
+.error-image-container,
+.footer {
+  position: relative;
+  z-index: 2;
+}
+
+
+/* Button */
+.error-button {
+  width: 40%;
+  padding: 1rem;
+  background: maroon;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  margin-top: 1rem;
+}
+
+.error-button:hover {
+  background: #8b0000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139, 0, 0, 0.2);
+}
+
+.error-button:active {
+  transform: translateY(0);
+}
+
+/* Media Queries */
+
+@media (max-width: 1440px) {
+  .error-section {
+    width: 80%;
+  }
+}
+
+@media (max-width: 900px) {
+  .error-section {
+    width: 90%;
+  }
+
+  .error-header {
+    font-size: 2rem;
+  }
+
+  .error-text {
+    font-size: 1.5rem;
+  }
+
+  .error-button {
+    font-size: 0.9rem
+  }
+
+  .error-button {
+    width: 60%;
+  }
+}
+
+@media (max-width: 600px) {
+  .error-section {
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 15px;
+  }
+
+  .error-image-container {
+    order: 1;
+    height: 40%;
+    width: 230px;
+  }
+
+  .error-info {
+    order: 2;
+    width: 100%;
+  }
+
+  .error-info-container {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .error-header {
+    font-size: 1.8rem;
+  }
+
+  .error-text {
+    font-size: 1.3rem;
+  }
+
+  .error-button {
+    width: 50%;
+  }
+}
