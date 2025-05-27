@@ -18,10 +18,10 @@ export function renderContacts(parent: HTMLElement): void {
     createElement("p", { class: "page-text" }, ["Relax while we're building this page for you"]),
   ]);
   const main = createElement("main", { class: "contacts-main" }, [imageContainer]);
-  const container = createElement("main", { class: "contacts-container" }, [
+  const pageContainer = createElement("main", { class: "page-container contacts-container" }, [
     createHeader(isAuth, customer),
     main,
     createFooter(),
   ]);
-  parent.append(container);
+  parent.append(pageContainer);
 }

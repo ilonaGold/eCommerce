@@ -4,7 +4,7 @@ import "./footer.css";
 export function createFooter(): HTMLElement {
   const currentYear = new Date().getFullYear();
 
-  const footerContent = createElement("div", { class: "footer-content" }, [
+  const footerContent = createElement("div", { class: "center footer-center" }, [
     createElement("span", { class: "footer-year" }, [`©${currentYear}`]),
     createElement(
       "a",

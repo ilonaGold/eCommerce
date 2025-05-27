@@ -18,10 +18,10 @@ export function renderHome(parent: HTMLElement): void {
     createElement("p", { class: "page-text" }, ["Relax while we're building this page for you"]),
   ]);
   const main = createElement("main", { class: "home-main" }, [imageContainer]);
-  const container = createElement("main", { class: "home-container" }, [
+  const pageContainer = createElement("div", { class: "page-container home-container" }, [
     createHeader(isAuth, customer),
     main,
     createFooter(),
   ]);
-  parent.append(container);
+  parent.append(pageContainer);
 }

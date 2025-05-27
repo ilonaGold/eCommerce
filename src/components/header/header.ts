@@ -28,7 +28,7 @@ export function createHeader(isLoggedIn: boolean, customer: Customer | null): HT
     },
   });
 
-  const headerButtonChildren = isLoggedIn
+  const userActionsChildren = isLoggedIn
     ? [`Welcome, ${customer?.firstName}`, " / ", logOutBtn]
     : [
         createElement(
@@ -51,36 +51,40 @@ export function createHeader(isLoggedIn: boolean, customer: Customer | null): HT
         ),
       ];
 
-  const navigation = createElement("nav", { class: "header-nav" }, [
-    createElement("h1", { class: "logo" }, ["Red Panda Squad"], {
-      events: {
-        click: () => {
-          goToView("main");
+  const headerCenter = createElement("div", { class: "center header-center" }, [
+    createElement("div", { class: "logo-container" }, [
+      createElement("h1", { class: "logo" }, ["Red Panda Squad"], {
+        events: {
+          click: () => {
+            goToView("main");
+          },
         },
-      },
-      styles: {
-        cursor: "pointer",
-      },
-    }),
-    createElement(
-      "ul",
-      { class: "nav-links" },
-      navLinks.map((link) =>
-        createElement("li", { class: "nav-item" }, [
-          createElement(
-            "a",
-            {
-              class: "nav-link",
-              href: "",
-            },
-            [link.text],
-            { events: { click: () => goToView(`${link.view}`) } }
-          ),
-        ])
-      )
-    ),
+        styles: {
+          cursor: "pointer",
+        },
+      }),
+    ]),
+    createElement("nav", { class: "navbar" }, [
+      createElement(
+        "ul",
+        { class: "nav-links" },
+        navLinks.map((link) =>
+          createElement("li", { class: "nav-item" }, [
+            createElement(
+              "a",
+              {
+                class: "nav-link",
+                href: "",
+              },
+              [link.text],
+              { events: { click: () => goToView(`${link.view}`) } }
+            ),
+          ])
+        )
+      ),
+    ]),
     createElement("div", { class: "header-controls" }, [
-      createElement("div", { class: "header-buttons" }, headerButtonChildren),
+      createElement("div", { class: "user-actions" }, userActionsChildren),
       createElement("div", { class: "hamburger-menu" }, [
         createElement("span", { class: "hamburger-icon" }, []),
       ]),
@@ -88,7 +92,7 @@ export function createHeader(isLoggedIn: boolean, customer: Customer | null): HT
   ]);
 
   // Add event listener to hamburger menu
-  const hamburgerMenu = navigation.querySelector(".hamburger-menu");
+  const hamburgerMenu = headerCenter.querySelector(".hamburger-menu");
   hamburgerMenu?.addEventListener("click", () => {
     const navLinks = document.querySelector(".nav-links");
     const mainContent = document.querySelector(".main-content");
@@ -100,5 +104,5 @@ export function createHeader(isLoggedIn: boolean, customer: Customer | null): HT
     text?.classList.toggle("open");
   });
 
-  return createElement("header", { class: "header" }, [navigation]);
+  return createElement("header", { class: "header" }, [headerCenter]);
 }

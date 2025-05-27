@@ -13,10 +13,9 @@
   z-index: 2;
 }
 
-.footer-content {
-  margin: 0 auto;
+.footer-center {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   gap: 1.5rem;
 }
