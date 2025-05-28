@@ -5,11 +5,13 @@ import { mainComponent } from "../../components/main/main";
 import { createFooter } from "../../components/footer/footer";
 
 import "./renderMain.css";
+import { getProducts } from "../../services/API/products/getProducts";
 
 export function renderMain(parent: HTMLElement): void {
   const isAuth = getState("userAuth");
   const customer = getState("customer");
   console.log(customer);
+  getProducts();
 
   const viewContainer = createElement("div", { class: "view-container" }, [
     createHeader(isAuth, customer),
