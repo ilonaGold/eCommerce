@@ -37,7 +37,7 @@ interface ProductVariant {
   attributes?: Attribute[];
 }
 
-interface Price {
+export interface Price {
   id?: string;
   value: {
     type?: "centPrecision";
