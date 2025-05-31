@@ -1,3 +1,11 @@
+export interface ProductsData {
+  count: number;
+  limit: number;
+  offset: number;
+  results: Product[];
+  total: number;
+}
+
 export interface Product {
   id: string;
   version: number;

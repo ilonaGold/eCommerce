@@ -1,5 +1,6 @@
 import { Product, Price } from "../../../interfaces/products/Product";
 import "./productCard.css";
+import tempPlaceholderImg from "../../../assets/images/red-panda.png";
 
 export class ProductCard {
   private element: HTMLElement;
@@ -13,7 +14,7 @@ export class ProductCard {
     const description =
       product.masterData.current.description?.["en-US"] || "No description available";
     const price = this.formatPrice(product.masterData.current.masterVariant.prices?.[0]);
-    const image = product.masterData.current.masterVariant.images?.[0]?.url || "placeholder.jpg";
+    const image = product.masterData.current.masterVariant.images?.[0]?.url || tempPlaceholderImg;
 
     this.element.innerHTML = `
       <div class="product-card__image-container">
