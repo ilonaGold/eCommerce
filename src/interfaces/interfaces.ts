@@ -13,7 +13,8 @@ export interface AppState {
 }
 
 export interface Routes {
-  [index: string]: string;
+  path: string;
+  handle: (route?: string) => void;
 }
 
 export interface Fields {
