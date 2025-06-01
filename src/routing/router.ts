@@ -10,16 +10,16 @@ import { renderAbout } from "../views/renderAbout/renderAbout";
 import { renderContacts } from "../views/renderContacts/renderContacts";
 
 const routes: Routes = {
-  "/": "Log In",
-  login: "Log In",
+  "/": "Main",
   main: "Main",
+  login: "Log In",
   registration: "Registration",
   home: "Home",
   about: "About",
   contacts: "Contacts",
 };
 
-const restrictedRoutes = ["login", "registration", "/"];
+const restrictedRoutes = ["login", "registration"];
 
 export function routeHandler(): void {
   const path = location.pathname;
@@ -64,6 +64,9 @@ function renderView(): void {
   }
   switch (view) {
     case "/":
+    case "main":
+      renderMain(root);
+      break;
     case "login":
       renderLogin(root);
       break;
@@ -78,9 +81,6 @@ function renderView(): void {
       break;
     case "contacts":
       renderContacts(root);
-      break;
-    case "main":
-      renderMain(root);
       break;
     default:
       renderError(root);
