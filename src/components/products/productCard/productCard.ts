@@ -13,27 +13,51 @@ export class ProductCard {
     const name = product.masterData.current.name["en-US"];
     const description =
       product.masterData.current.description?.["en-US"] || "No description available";
-    const price = this.formatPrice(product.masterData.current.masterVariant.prices?.[0]);
+    const originalPrice = product.masterData.current.masterVariant.prices?.[0];
+    const formattedPrice = this.formatPrice(originalPrice);
     const image = product.masterData.current.masterVariant.images?.[0]?.url || tempPlaceholderImg;
 
-    // Sample discount logic - you can replace with actual discount data
+    // Sample discount logic - can be replaced with actual discount data
     const hasDiscount = Math.random() > 0.5;
     const discountPercentage = hasDiscount ? Math.floor(Math.random() * 30) + 10 : 0;
-    const discountHtml = hasDiscount
-      ? `<span class="product-card__discount">-${discountPercentage}%</span>`
-      : "";
+
+    let priceHtml = "";
+
+    if (hasDiscount && originalPrice?.value?.centAmount) {
+      const origAmount = (originalPrice.value.centAmount / 100).toFixed(2);
+      const discountAmount = (
+        (originalPrice.value.centAmount * (1 - discountPercentage / 100)) /
+        100
+      ).toFixed(2);
+
+      priceHtml = `
+    <div class="product-card__price-row">
+      <div class="product-card__price-group">
+        <span class="product-card__discounted-price">€${discountAmount}</span>
+        <span class="product-card__original-price">€${origAmount}</span>
+      </div>
+      <span class="product-card__discount">-${discountPercentage}%</span>
+    </div>
+  `;
+    } else {
+      const formattedPrice = this.formatPrice(originalPrice);
+      priceHtml = `
+        <div class="product-card__price-row">
+          <div class="product-card__price">${formattedPrice}</div>
+        </div>
+      `;
+    }
 
     this.element.innerHTML = `
-      <div class="product-card__image-container">
-        <img class="product-card__image" src="${image}" alt="${name}" />
-      </div>
-      <h3 class="product-card__title">${name}</h3>
-      <p class="product-card__description">${description}</p>
-            <div class="product-card__price-row">
-      <div class="product-card__price">${price}</div>
-              ${discountHtml}
-      </div>
-      <button class="product-card__buy-button">Add to Cart</button>
+  <div class="product-card__image-container">
+    <img class="product-card__image" src="${image}" alt="${name}" />
+  </div>
+  <div class="product-card__content">
+    <h3 class="product-card__title">${name}</h3>
+    <p class="product-card__description">${description}</p>
+    ${priceHtml}
+  </div>
+  <button class="product-card__buy-button">Add to Cart</button>
     `;
 
     this.element.addEventListener("click", (e) => {
