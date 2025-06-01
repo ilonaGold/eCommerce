@@ -1,21 +1,19 @@
-import { Product, Price } from "../../../interfaces/products/Product";
 import "./productCard.css";
 import tempPlaceholderImg from "../../../assets/images/red-panda.png";
+import { Price, ProductProjection } from "../../../interfaces/products/ProductProjection";
 
 export class ProductCard {
   private element: HTMLElement;
 
-  constructor(product: Product) {
+  constructor(product: ProductProjection) {
     this.element = document.createElement("div");
     this.element.classList.add("product-card");
     this.element.dataset.productId = product.id;
 
-    const name = product.masterData.current.name["en-US"];
-    const description =
-      product.masterData.current.description?.["en-US"] || "No description available";
-    const originalPrice = product.masterData.current.masterVariant.prices?.[0];
-    const formattedPrice = this.formatPrice(originalPrice);
-    const image = product.masterData.current.masterVariant.images?.[0]?.url || tempPlaceholderImg;
+    const name = product.name["en-US"];
+    const description = product.description?.["en-US"] || "No description available";
+    const originalPrice = product.masterVariant.prices?.[0];
+    const image = product.masterVariant.images?.[0]?.url || tempPlaceholderImg;
 
     // Sample discount logic - can be replaced with actual discount data
     const hasDiscount = Math.random() > 0.5;

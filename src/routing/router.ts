@@ -32,7 +32,6 @@ export function routeHandler(): void {
     endpoint = "/";
   }
   const isAuth = getState("userAuth");
-  console.log(isAuth);
 
   setAuth(isAuth);
   if (endpoint && routes[endpoint]) {
