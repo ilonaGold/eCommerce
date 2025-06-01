@@ -24,16 +24,18 @@ export class ProductCard {
       : "";
 
     this.element.innerHTML = `
-      <div class="product-card__image-container">
-        <img class="product-card__image" src="${image}" alt="${name}" />
-      </div>
-      <h3 class="product-card__title">${name}</h3>
-      <p class="product-card__description">${description}</p>
-            <div class="product-card__price-row">
+  <div class="product-card__image-container">
+    <img class="product-card__image" src="${image}" alt="${name}" />
+  </div>
+  <div class="product-card__content">
+    <h3 class="product-card__title">${name}</h3>
+    <p class="product-card__description">${description}</p>
+    <div class="product-card__price-row">
       <div class="product-card__price">${price}</div>
-              ${discountHtml}
-      </div>
-      <button class="product-card__buy-button">Add to Cart</button>
+      ${discountHtml}
+    </div>
+  </div>
+  <button class="product-card__buy-button">Add to Cart</button>
     `;
 
     this.element.addEventListener("click", (e) => {
