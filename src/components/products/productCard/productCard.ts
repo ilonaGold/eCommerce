@@ -31,14 +31,14 @@ export class ProductCard {
       ).toFixed(2);
 
       priceHtml = `
-        <div class="product-card__price-row">
-          <div class="product-card__price-group">
-            <span class="product-card__original-price">€${origAmount}</span>
-            <span class="product-card__discount">-${discountPercentage}%</span>
-            <span class="product-card__discounted-price">€${discountAmount}</span>
-            </div>
-         </div>
-      `;
+    <div class="product-card__price-row">
+      <div class="product-card__price-group">
+        <span class="product-card__discounted-price">€${discountAmount}</span>
+        <span class="product-card__original-price">€${origAmount}</span>
+      </div>
+      <span class="product-card__discount">-${discountPercentage}%</span>
+    </div>
+  `;
     } else {
       const formattedPrice = this.formatPrice(originalPrice);
       priceHtml = `
