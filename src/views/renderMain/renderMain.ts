@@ -7,6 +7,7 @@ import { productList } from "../../components/products/productList";
 import { getProducts } from "../../services/API/products/getProducts";
 
 import "./renderMain.css";
+import { productProjectionSearch } from "../../services/API/products/productProjectionSearch";
 
 export async function renderMain(parent: HTMLElement): Promise<void> {
   const isAuth = getState("userAuth");
@@ -14,6 +15,7 @@ export async function renderMain(parent: HTMLElement): Promise<void> {
 
   // Fetch products
   const products = await getProducts();
+  productProjectionSearch();
 
   console.log(products);
 
