@@ -4,15 +4,8 @@
   flex-direction: column;
 }
 
-/* TEPORARY, DUMMY CONTENT STYLING */
-.hero-center {
-  display: grid;
-  place-content: center;
-}
-
 .main {
   position: relative;
-  flex: 1 1 auto;
 }
 
 .main::before {
