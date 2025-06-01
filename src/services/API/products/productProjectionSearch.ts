@@ -19,9 +19,8 @@ export const productProjectionSearch = async (): Promise<PagedSearchResponse> =>
       );
     }
 
-    const data = await response.json();
+    const data: PagedSearchResponse = await response.json();
 
-    console.log(data);
     return data;
     //
   } catch (error) {

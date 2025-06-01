@@ -65,7 +65,7 @@ interface ProductVariant {
   availability?: ProductVariantAvailability;
 }
 
-interface Price {
+export interface Price {
   id: string;
   value: TypedMoney;
   country?: string;
