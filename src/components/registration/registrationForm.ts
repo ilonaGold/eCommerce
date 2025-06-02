@@ -24,13 +24,14 @@ export function createRegistrationForm(): HTMLFormElement {
       createSelectGroup("Country", "country", countryCodes, true),
       createInputGroup("Postal Code", "text", "postalCode"),
       // default shipping address checkbox
-      createElement("label", {}, [
+      createElement("label", { class: "custom-checkbox" }, [
+        "Use as default shipping address",
         createElement("input", {
           type: "checkbox",
           name: "defaultShipping",
           id: "defaultShipping",
         }),
-        " Use as default shipping address",
+        createElement("span", { class: "checkmark" }, []),
       ]),
     ]),
 
@@ -42,24 +43,26 @@ export function createRegistrationForm(): HTMLFormElement {
       createSelectGroup("Country", "billingCountry", countryCodes, true),
       createInputGroup("Billing Postal Code", "text", "billingPostalCode"),
       // default billing address checkbox
-      createElement("label", {}, [
+      createElement("label", { class: "custom-checkbox" }, [
+        "Use as default billing address",
         createElement("input", {
           type: "checkbox",
           name: "defaultBilling",
           id: "defaultBilling",
         }),
-        " Use as default billing address",
+        createElement("span", { class: "checkmark" }, []),
       ]),
     ]),
 
     // Separate billing address checkbox
-    createElement("label", {}, [
+    createElement("label", { class: "custom-checkbox" }, [
+      "Use separate billing address",
       createElement("input", {
         type: "checkbox",
         name: "separateBilling",
         id: "separateBilling",
       }),
-      " Use separate billing address",
+      createElement("span", { class: "checkmark" }, []),
     ]),
 
     // Submit Button
