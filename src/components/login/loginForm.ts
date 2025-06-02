@@ -12,10 +12,12 @@ export function createLoginForm(): HTMLElement {
     createSectionTitle("Sign In"),
     createInputGroup("Email", "email", "email", true),
     createInputGroup("Password", "password", "password", true),
-    //createInputGroup("Show password", "checkbox", "showPassword"),
     createElement("div", { class: "toggle-password" }, [
-      createElement("span", {}, ["Show password"]),
-      createElement("input", { type: "checkbox", name: "showPassword", id: "showPassword" }),
+      createElement("label", { class: "custom-checkbox" }, [
+        "Show password",
+        createElement("input", { type: "checkbox", name: "showPassword", id: "showPassword" }),
+        createElement("span", { class: "checkmark" }, []),
+      ]),
     ]),
     createElement(
       "button",
