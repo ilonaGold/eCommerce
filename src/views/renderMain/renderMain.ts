@@ -3,11 +3,12 @@ import { createElement } from "../../utils/dom/createElement";
 import { createHeader } from "../../components/header/header";
 import { mainComponent } from "../../components/main/main";
 import { createFooter } from "../../components/footer/footer";
-import { productList } from "../../components/products/productList";
+import { catalogComponent } from "../../components/catalog/catalogComponent";
 
-import "./renderMain.css";
 import { productProjectionSearch } from "../../services/API/products/productProjectionSearch";
 import { dummyLoading } from "../../components/dummyLoading/dummyLoading";
+
+import "./renderMain.css";
 
 export async function renderMain(parent: HTMLElement): Promise<void> {
   const isAuth = getState("userAuth");
@@ -21,7 +22,8 @@ export async function renderMain(parent: HTMLElement): Promise<void> {
 
   parent.append(viewContainer);
 
+  // Fetching & Appending
   const products = await productProjectionSearch();
-  const productsCatalog = productList(products.results);
+  const productsCatalog = catalogComponent(products);
   main.replaceChildren(productsCatalog);
 }

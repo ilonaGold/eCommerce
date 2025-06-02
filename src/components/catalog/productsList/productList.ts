@@ -1,5 +1,5 @@
-import { ProductProjection } from "../../interfaces/products/ProductProjection";
-import { createElement } from "../../utils/dom/createElement";
+import { ProductProjection } from "../../../interfaces/products/ProductProjection";
+import { createElement } from "../../../utils/dom/createElement";
 import { ProductCard } from "./productCard/productCard";
 import "./productList.css";
 
