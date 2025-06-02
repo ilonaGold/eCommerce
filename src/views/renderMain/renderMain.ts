@@ -7,21 +7,21 @@ import { productList } from "../../components/products/productList";
 
 import "./renderMain.css";
 import { productProjectionSearch } from "../../services/API/products/productProjectionSearch";
+import { dummyLoading } from "../../components/dummyLoading/dummyLoading";
 
 export async function renderMain(parent: HTMLElement): Promise<void> {
   const isAuth = getState("userAuth");
   const customer = getState("customer");
 
-  // Fetch products
-  const products = await productProjectionSearch();
+  const header = createHeader(isAuth, customer);
+  const main = mainComponent(dummyLoading());
+  const footer = createFooter();
 
-  console.log(products);
-
-  const viewContainer = createElement("div", { class: "view-container" }, [
-    createHeader(isAuth, customer),
-    mainComponent(productList(products.results)),
-    createFooter(),
-  ]);
+  const viewContainer = createElement("div", { class: "view-container" }, [header, main, footer]);
 
   parent.append(viewContainer);
+
+  const products = await productProjectionSearch();
+  const productsCatalog = productList(products.results);
+  main.replaceChildren(productsCatalog);
 }
