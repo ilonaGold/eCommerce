@@ -3,25 +3,27 @@ import { createElement } from "../../utils/dom/createElement";
 import { createHeader } from "../../components/header/header";
 import { mainComponent } from "../../components/main/main";
 import { createFooter } from "../../components/footer/footer";
-import { productList } from "../../components/products/productList";
+import { catalogComponent } from "../../components/catalog/catalogComponent";
+
+import { productProjectionSearch } from "../../services/API/products/productProjectionSearch";
+import { dummyLoading } from "../../components/dummyLoading/dummyLoading";
 
 import "./renderMain.css";
-import { productProjectionSearch } from "../../services/API/products/productProjectionSearch";
 
 export async function renderMain(parent: HTMLElement): Promise<void> {
   const isAuth = getState("userAuth");
   const customer = getState("customer");
 
-  // Fetch products
-  const products = await productProjectionSearch();
+  const header = createHeader(isAuth, customer);
+  const main = mainComponent(dummyLoading());
+  const footer = createFooter();
 
-  console.log(products);
-
-  const viewContainer = createElement("div", { class: "view-container" }, [
-    createHeader(isAuth, customer),
-    mainComponent(productList(products.results)),
-    createFooter(),
-  ]);
+  const viewContainer = createElement("div", { class: "view-container" }, [header, main, footer]);
 
   parent.append(viewContainer);
+
+  // Fetching & Appending
+  const products = await productProjectionSearch();
+  const productsCatalog = catalogComponent(products);
+  main.replaceChildren(productsCatalog);
 }

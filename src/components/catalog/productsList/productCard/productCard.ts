@@ -1,6 +1,6 @@
 import "./productCard.css";
-import tempPlaceholderImg from "../../../assets/images/red-panda.png";
-import { Price, ProductProjection } from "../../../interfaces/products/ProductProjection";
+import tempPlaceholderImg from "../../../../assets/images/red-panda.png";
+import { Price, ProductProjection } from "../../../../interfaces/products/ProductProjection";
 
 export class ProductCard {
   private element: HTMLElement;
