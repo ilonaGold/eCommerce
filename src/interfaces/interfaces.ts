@@ -1,15 +1,14 @@
 import { Customer } from "./dataInterfaces";
-import { ProductProjection } from "./products/ProductProjection";
 
 export interface AppState {
   view: string;
   userAuth: boolean;
   customer: Customer | null;
-  product: ProductProjection | null;
+  productId: string | undefined;
   setView: (view: string) => void;
   setAuth: (isAuth: boolean) => void;
   setCustomer: (customer: Customer | null) => void;
-  setProduct: (customer: ProductProjection | null) => void;
+  setProductId: (productId: string) => void;
   getState: <K extends keyof Omit<AppState, "getState" | "setView" | "setAuth">>(
     property: K
   ) => AppState[K];
