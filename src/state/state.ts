@@ -25,4 +25,5 @@ const state: AppState = {
 export const setView = state.setView.bind(state);
 export const setAuth = state.setAuth.bind(state);
 export const setCustomer = state.setCustomer.bind(state);
+export const setProductId = state.setProductId.bind(state);
 export const getState = state.getState.bind(state);

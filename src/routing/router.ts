@@ -61,7 +61,7 @@ const routes: Routes[] = [
     },
   },
   {
-    path: "main/:slug",
+    path: "products/:slug",
     handle: (): void => {
       setView("product-details");
       renderProductDetails(getRoot());
@@ -124,6 +124,6 @@ export function routeHandler(): void {
 }
 
 export function goToView(view: string): void {
-  history.pushState({}, "", `/${view}`);
+  history.pushState({}, "", view);
   routeHandler();
 }
