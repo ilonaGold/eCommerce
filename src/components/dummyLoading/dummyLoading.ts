@@ -1,6 +1,6 @@
 import { createElement } from "../../utils/dom/createElement";
 
-export const dummyLoading = () =>
+export const dummyLoading = (): HTMLElement =>
   createElement("div", {}, ["Loading..."], {
     styles: {
       display: "flex",

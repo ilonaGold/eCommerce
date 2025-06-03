@@ -6,7 +6,6 @@
   column-gap: 1.5rem;
   row-gap: 2rem;
   padding: 1.5rem;
-  max-width: var(--max-width);
   margin: 1rem auto;
 }
 
