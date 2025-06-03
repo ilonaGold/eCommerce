@@ -8,7 +8,7 @@ import { renderError } from "../views/renderError/renderError";
 import { renderHome } from "../views/renderHome/renderHome";
 import { renderAbout } from "../views/renderAbout/renderAbout";
 import { renderContacts } from "../views/renderContacts/renderContacts";
-import { renderProductDetails } from "../views/renderProductDetails/renderProductDetails";
+import { handleProductDetails } from "../utils/dom/product/productHandler";
 
 const routes: Routes[] = [
   {
@@ -62,10 +62,7 @@ const routes: Routes[] = [
   },
   {
     path: "products/:slug",
-    handle: (): void => {
-      setView("product-details");
-      renderProductDetails(getRoot());
-    },
+    handle: handleProductDetails,
   },
   {
     path: "*",
@@ -78,7 +75,7 @@ const routes: Routes[] = [
 
 const protectedRoutes = ["login", "registration"];
 
-function getRoot(): HTMLElement {
+export function getRoot(): HTMLElement {
   let root: HTMLElement | null = document.querySelector("#root");
   if (root) {
     root.innerHTML = "";

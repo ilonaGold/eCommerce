@@ -1,4 +1,5 @@
 import { Customer } from "./dataInterfaces";
+import { PagedSearchResponse } from "./products/ProductProjection";
 
 export interface AppState {
   view: string;
@@ -38,4 +39,9 @@ export interface ValidationProps {
   input: HTMLInputElement;
   validate: (input: HTMLInputElement) => string;
   divError: HTMLDivElement;
+}
+
+export interface ProductDetailsProps {
+  parent: HTMLElement;
+  product: PagedSearchResponse | null;
 }
