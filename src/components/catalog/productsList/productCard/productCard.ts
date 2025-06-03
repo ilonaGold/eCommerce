@@ -1,7 +1,6 @@
 import "./productCard.css";
 import tempPlaceholderImg from "../../../../assets/images/red-panda.png";
 import { Price, ProductProjection } from "../../../../interfaces/products/ProductProjection";
-import { setProductId } from "../../../../state/state";
 import { goToView } from "../../../../routing/router";
 
 export class ProductCard {
@@ -70,7 +69,6 @@ export class ProductCard {
       }
 
       // Navigate to product detail page
-      setProductId(product.id);
       goToView(`products/${product.slug?.["en-US"]}`);
     });
   }

@@ -1,6 +1,6 @@
-import { getState } from "../../state/state";
+import { ProductDetailsProps } from "../../interfaces/interfaces";
 
-export function renderProductDetails(parent: HTMLElement): void {
+export function renderProductDetails({ parent, product }: ProductDetailsProps): void {
   console.log(`Dummy page appends to ${parent}`);
-  console.log(getState("productId"));
+  console.log(product?.results);
 }

@@ -4,7 +4,6 @@ const state: AppState = {
   view: "/",
   userAuth: false,
   customer: null,
-  productId: undefined,
   setView(view) {
     this.view = view;
   },
@@ -14,9 +13,6 @@ const state: AppState = {
   setCustomer(customer) {
     this.customer = customer;
   },
-  setProductId(productId) {
-    this.productId = productId;
-  },
   getState(property) {
     return this[property];
   },
@@ -25,5 +21,4 @@ const state: AppState = {
 export const setView = state.setView.bind(state);
 export const setAuth = state.setAuth.bind(state);
 export const setCustomer = state.setCustomer.bind(state);
-export const setProductId = state.setProductId.bind(state);
 export const getState = state.getState.bind(state);
