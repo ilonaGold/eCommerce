@@ -125,6 +125,7 @@ interface Image {
 }
 
 interface ProductVariantAvailability {
+  id: string;
   isOnStock?: boolean;
   availableQuantity?: number;
   channels?: Record<string, ProductVariantChannelAvailability>;
