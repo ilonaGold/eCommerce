@@ -15,7 +15,7 @@ export async function handleProductDetails(): Promise<void> {
   if (slug) {
     product = await productProjectionSearchByText(slug);
     if (product.total) {
-      renderProductDetails({ parent: root, product: product });
+      renderProductDetails({ parent: root, product: product.results[0] });
     } else {
       renderError(root);
     }
