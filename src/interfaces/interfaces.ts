@@ -1,5 +1,5 @@
 import { Customer } from "./dataInterfaces";
-import { PagedSearchResponse } from "./products/ProductProjection";
+import { ProductProjection } from "./products/ProductProjection";
 
 export interface AppState {
   view: string;
@@ -41,5 +41,5 @@ export interface ValidationProps {
 
 export interface ProductDetailsProps {
   parent: HTMLElement;
-  product: PagedSearchResponse | null;
+  product: ProductProjection | null;
 }
