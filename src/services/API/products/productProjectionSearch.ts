@@ -1,7 +1,11 @@
 import { PagedSearchResponse } from "../../../interfaces/products/ProductProjection";
 import { getAccessTokenData } from "../../auth/getAccessTokenData";
 
-export const productProjectionSearch = async (): Promise<PagedSearchResponse> => {
+export const productProjectionSearch = async (
+  queryObj: {
+    [key: string]: string;
+  } = {}
+): Promise<PagedSearchResponse> => {
   const searchUrl = `${import.meta.env.VITE_CTP_API_URL}/${import.meta.env.VITE_CTP_PROJECT_KEY}/product-projections/search`;
   const accessToken = (await getAccessTokenData()).access_token;
 
@@ -10,6 +14,8 @@ export const productProjectionSearch = async (): Promise<PagedSearchResponse> =>
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
+      method: "POST",
+      body: new URLSearchParams(queryObj),
     });
 
     if (!response.ok) {

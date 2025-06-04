@@ -17,7 +17,7 @@ export interface AppState {
   ) => AppState[K];
 }
 
-export type SubscriberFunction = (state: AppState) => AppState;
+export type SubscriberFunction = (state: AppState) => void;
 
 export interface Routes {
   [index: string]: string;
