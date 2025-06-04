@@ -1,5 +1,5 @@
 import { Routes } from "../interfaces/interfaces";
-import { getState, setView, setAuth } from "../state/state";
+import { getState, setAuth } from "../state/state";
 import { createElement } from "../utils/dom/createElement";
 import { renderLogin } from "../views/renderLogin/renderLogin";
 import { renderRegistration } from "../views/renderRegistration/renderRegistration";
@@ -14,49 +14,42 @@ const routes: Routes[] = [
   {
     path: "/",
     handle: (): void => {
-      setView("main");
       renderMain(getRoot());
     },
   },
   {
     path: "main",
     handle: (): void => {
-      setView("main");
       renderMain(getRoot());
     },
   },
   {
     path: "login",
     handle: (): void => {
-      setView("login");
       renderLogin(getRoot());
     },
   },
   {
     path: "registration",
     handle: (): void => {
-      setView("registration");
       renderRegistration(getRoot());
     },
   },
   {
     path: "home",
     handle: (): void => {
-      setView("home");
       renderHome(getRoot());
     },
   },
   {
     path: "about",
     handle: (): void => {
-      setView("about");
       renderAbout(getRoot());
     },
   },
   {
     path: "contacts",
     handle: (): void => {
-      setView("contacts");
       renderContacts(getRoot());
     },
   },
@@ -67,7 +60,6 @@ const routes: Routes[] = [
   {
     path: "*",
     handle: (): void => {
-      setView("error");
       renderError(getRoot());
     },
   },
@@ -107,7 +99,6 @@ export function routeHandler(): void {
       } else {
         if (protectedRoutes.includes(path)) {
           history.replaceState(null, "", "/main");
-          setView("main");
           renderMain(getRoot());
         } else {
           route.handle();
@@ -116,7 +107,6 @@ export function routeHandler(): void {
       return;
     }
   }
-  setView("error");
   renderError(getRoot());
 }
 
