@@ -16,20 +16,30 @@ export function notificationModal(message: string, type: ModalType): void {
     },
   };
 
+  const modalOverlayStyles =
+    type === "success"
+      ? {
+          position: "fixed",
+          bottom: "20px",
+          right: "20px",
+          zIndex: "9999",
+        }
+      : {
+          position: "fixed",
+          top: "0",
+          left: "0",
+          width: "100%",
+          height: "100%",
+          backgroundColor: "rgba(0, 0, 0, 0.3)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          zIndex: "9999",
+        };
+
   const modalOverlay = createElement("div", undefined, [], {
     classes: ["modal-overlay"],
-    styles: {
-      position: "fixed",
-      top: "0",
-      left: "0",
-      width: "100%",
-      height: "100%",
-      backgroundColor: "rgba(0, 0, 0, 0.3)",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      zIndex: "9999",
-    },
+    styles: modalOverlayStyles,
   });
 
   const modalBox = createElement("div", undefined, [], {
