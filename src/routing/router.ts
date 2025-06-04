@@ -121,6 +121,6 @@ export function routeHandler(): void {
 }
 
 export function goToView(view: string): void {
-  history.pushState({}, "", view);
+  history.pushState({}, "", `/${view}`);
   routeHandler();
 }
