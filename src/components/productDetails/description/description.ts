@@ -5,12 +5,15 @@ import { createInputGroup } from "../../../utils/dom/form/createInputGroup";
 import "./description.css";
 
 export const description = (product: ProductProjection): HTMLElement => {
+  const productName = createElement("h3", { class: "product-details__product-name" }, [
+    `${product.name["en-US"]}`,
+  ]);
   const originalPrice = product.masterVariant.prices?.[0].value.centAmount || 0;
   const discountedPrice =
     product.masterVariant.prices?.[0].discounted?.value.centAmount || originalPrice;
   const discount = Math.round(((originalPrice - discountedPrice) / originalPrice) * 100);
-
   const priceField = createElement("div", { class: "product-details__product-price" });
+
   if (discount) {
     priceField.append(
       createElement("div", { class: "" }, [
@@ -30,25 +33,48 @@ export const description = (product: ProductProjection): HTMLElement => {
       ])
     );
   }
-  const productDescription = product.description?.["en-US"] || "No description available";
+
+  const desc = product.description?.["en-US"] || "No description available";
+  const productDescription = createElement("p", { class: "product-details__product-description" }, [
+    `${desc}`,
+  ]);
   const channelKey = "a619c99e-3bda-46ab-bf47-4d8bec0144e8";
   const stock = product.masterVariant.availability?.channels?.[channelKey]?.isOnStock
     ? "On stock"
     : "Out of stock";
-  const productAttributes = `${product.masterVariant.attributes?.[0].name}: ${product.masterVariant.attributes?.[0].value}`;
+  const stockAvailability = createElement("div", { class: "product-details__stock" }, [`${stock}`]);
+  stockAvailability.classList.toggle("out-of-stock", stock === "Out of stock");
+
+  const productAttributes = createElement("div", { class: "product-details__product-attributes" });
+  const attrArray = product.masterVariant.attributes;
+  if (attrArray?.length) {
+    for (const attr of attrArray) {
+      const attrName = attr.name;
+      const attrValue = attr.value;
+      const attributes = attrName !== "new-arrival" ? `${attrName}: ${attrValue}` : `${attrName}`;
+      const attrGroup = createElement(
+        "div",
+        { class: "product-details__product-attributes-group" },
+        [`${attributes}`]
+      );
+      attrGroup.classList.toggle("new-arrival", attrName === "new-arrival");
+      attrGroup.classList.toggle("color", attrName === "color");
+      attrGroup.classList.toggle("size", attrName === "size");
+      productAttributes.append(attrGroup);
+    }
+  }
+
   const input = createInputGroup("", "text", "quantity");
   const button = createElement("button", { type: "submit" }, ["Add to Cart"]);
+  const addToCartForm = createElement("form", { class: "product-details__cart" }, [input, button]);
+
   const container = createElement("section", { class: "product-details" }, [
-    createElement("h3", { class: "product-details__product-header" }, [`${product.name["en-US"]}`]),
+    productName,
     priceField,
-    createElement("p", { class: "product-details__product-description" }, [
-      `${productDescription}`,
-    ]),
-    createElement("div", { class: "product-details__product-attributes" }, [
-      `${productAttributes}`,
-    ]),
-    createElement("div", { class: "product-details__stock" }, [`${stock}`]),
-    createElement("form", { class: "product-details__cart" }, [input, button]),
+    productDescription,
+    productAttributes,
+    stockAvailability,
+    addToCartForm,
   ]);
   return container;
 };
