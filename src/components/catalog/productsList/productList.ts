@@ -4,10 +4,12 @@ import { ProductCard } from "./productCard/productCard";
 import "./productList.css";
 
 export function productList(products: ProductProjection[]): HTMLElement {
-  return createElement(
-    "section",
+  const productList = createElement(
+    "div",
     {},
     products.map((product) => new ProductCard(product).render()),
     { classes: ["product-list"] }
   );
+
+  return productList;
 }
