@@ -64,7 +64,9 @@ export const description = (product: ProductProjection): HTMLElement => {
     }
   }
 
-  const input = createInputGroup("", "text", "quantity");
+  const input = createInputGroup("", "number", "quantity");
+  const quantity = input.querySelector("#quantity");
+  quantity?.setAttribute("value", "1");
   const button = createElement("button", { type: "submit" }, ["Add to Cart"]);
   const addToCartForm = createElement("form", { class: "product-details__cart" }, [input, button]);
 
