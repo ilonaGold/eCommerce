@@ -5,6 +5,7 @@ export const productProjectionSearch = async (
   queryStr: string = ""
 ): Promise<PagedSearchResponse> => {
   const query = queryStr ? `?${queryStr}` : "";
+
   const searchUrl = `${import.meta.env.VITE_CTP_API_URL}/${import.meta.env.VITE_CTP_PROJECT_KEY}/product-projections/search${query}`;
   const accessToken = (await getAccessTokenData()).access_token;
 

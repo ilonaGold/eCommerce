@@ -1,6 +1,9 @@
 type SortKey = "priceAsc" | "priceDesc" | "newest" | "nameAsc" | "nameDesc";
 
 export const queryBuilder = (formData: { [key: string]: string }): string => {
+  if (Object.keys(formData).length === 0) {
+    return "";
+  }
   console.log(formData);
 
   const params = new URLSearchParams();
@@ -34,6 +37,8 @@ export const queryBuilder = (formData: { [key: string]: string }): string => {
   params.append("fuzzy", "true");
   params.append("priceCurrency", "EUR");
   params.append("priceCountry", "EU");
+
+  console.log(params.toString());
 
   return params.toString();
 };
