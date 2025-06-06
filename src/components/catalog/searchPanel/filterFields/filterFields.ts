@@ -1,3 +1,4 @@
+import { getCategories } from "../../../../services/API/products/getCategories";
 import { createElement } from "../../../../utils/dom/createElement";
 
 import "./filterFields.css";
@@ -5,26 +6,32 @@ import "./filterFields.css";
 export const createFilterFields = (): HTMLDivElement => {
   const sortSelect = createElement("select", { class: "sort-select", name: "sort" }, [
     createElement("option", { value: "" }, ["Sort by"]),
-    createElement("option", { value: "price-asc" }, ["Price: Low to High"]),
-    createElement("option", { value: "price-desc" }, ["Price: High to Low"]),
-    createElement("option", { value: "name-asc" }, ["Name: A-Z"]),
+    createElement("option", { value: "newest" }, ["Newest"]),
+    createElement("option", { value: "priceAsc" }, ["Price: Low to High"]),
+    createElement("option", { value: "priceDesc" }, ["Price: High to Low"]),
+    createElement("option", { value: "nameAsc" }, ["Name: A-Z"]),
+    createElement("option", { value: "nameDesc" }, ["Name: Z-A"]),
   ]);
 
   const categoriesSelect = createElement(
     "select",
     { class: "categories-select", name: "category" },
-    [
-      createElement("option", { value: "" }, ["All Categories"]),
-      createElement("option", { value: "animal" }, ["Animal"]),
-      createElement("option", { value: "brand" }, ["Brand"]),
-      createElement("option", { value: "home" }, ["Home & Kitchen"]),
-    ]
+    [createElement("option", { value: "" }, ["All Categories"])]
   );
+
+  // populate categories element with options
+  getCategories().then((categoriesPagedResponse) => {
+    const categories = categoriesPagedResponse.results;
+    const options = categories.map((category) => {
+      return createElement("option", { value: `${category.id}` }, [`${category.name["en-US"]}`]);
+    });
+    categoriesSelect.append(...options);
+  });
 
   const priceMin = createElement("input", {
     type: "number",
     class: "price-input",
-    name: "priceMin",
+    name: "minPrice",
     placeholder: "Min Price",
     min: "0",
   });
@@ -32,7 +39,7 @@ export const createFilterFields = (): HTMLDivElement => {
   const priceMax = createElement("input", {
     type: "number",
     class: "price-input",
-    name: "priceMax",
+    name: "maxPrice",
     placeholder: "Max Price",
     min: "0",
   });

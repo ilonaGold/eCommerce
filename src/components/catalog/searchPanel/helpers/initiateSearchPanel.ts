@@ -37,11 +37,11 @@ export const initiateSearchPanel = (
       isFilterOpen = !isFilterOpen;
 
       if (isFilterOpen) {
-        filterFieldsContainer.style.maxHeight = filterFieldsContainer.scrollHeight + "px";
-        filterButton.setAttribute("aria-expanded", "true");
+        filterFieldsContainer.classList.add("expanded");
+        filterFieldsContainer.style.maxHeight = `calc(${filterFieldsContainer.scrollHeight}px + 3rem + 2px)`;
       } else {
+        filterFieldsContainer.classList.remove("expanded");
         filterFieldsContainer.style.maxHeight = "0";
-        filterButton.setAttribute("aria-expanded", "false");
       }
     });
   }

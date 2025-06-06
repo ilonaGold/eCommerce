@@ -8,7 +8,7 @@ export const searchPanel = (): HTMLDivElement => {
     class: "search-input",
     type: "text",
     placeholder: "Search...",
-    name: "text.en-US",
+    name: "keyword",
   });
 
   const clearButton = createElement(
@@ -45,10 +45,20 @@ export const searchPanel = (): HTMLDivElement => {
     ["🔍 Search"]
   );
 
+  const resetButton = createElement(
+    "button",
+    {
+      type: "reset",
+      class: "search-button",
+    },
+    ["↺ Reset"]
+  );
+
   const formSimpleView = createElement("div", { class: "form-simple-view" }, [
     searchInputContainer,
     filterButton,
     searchButton,
+    resetButton,
   ]);
   const filterFieldsContainer = createFilterFields();
 

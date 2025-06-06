@@ -24,6 +24,8 @@ export async function renderMain(parent: HTMLElement): Promise<void> {
 
   // Fetching & Appending
   const products = await productProjectionSearch();
+  console.log(products);
+
   setProducts(products.results);
   const productsCatalog = catalogComponent(products);
   main.replaceChildren(productsCatalog);
