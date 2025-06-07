@@ -70,10 +70,6 @@
   text-transform: uppercase;
 }
 
-.nav-open {
-  transform: translateY(300px);
-}
-
 .login-btn {
   background: maroon;
   color: white;
@@ -149,19 +145,18 @@
   bottom: 0;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1200px) {
   .nav-links {
-    font-size: 1.1rem;
-    gap: 1.5rem;
-  }
-
-  .header-btn {
-    padding: 0.7rem 1.2rem;
-    font-size: 0.9rem;
+    gap: 1rem;
+    margin-left: -3rem;
   }
 }
 
-@media (max-width: 860px) {
+@media (max-width: 900px) {
+  body {
+    overflow: hidden;
+  }
+
   .header-controls {
     display: flex;
     align-items: center;
@@ -192,63 +187,50 @@
 
   .nav-links.active {
     display: flex;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: rgba(255, 255, 255, 0.98);
-    padding: 1.5rem;
     flex-direction: column;
     align-items: center;
     gap: 1.2rem;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.98);
+    padding: 1.5rem 1rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    pointer-events: all;
+    z-index: 9999;
+    max-height: 80vh;
+    overflow-y: auto;
   }
 
-  .nav-links .nav-item {
-    width: 100%;
-    position: relative;
-    z-index: 1001;
-  }
-
-  .nav-links .nav-item .nav-link {
-    background-image: none;
-    background-position: unset;
-    background-size: unset;
-    display: block;
+  .nav-links.active .nav-item {
+    margin: 0.25rem 0;
     width: 100%;
     text-align: center;
-    padding: 0.5rem;
+    position: relative;
+    z-index: 10000;
+  }
+
+  .nav-links.active .nav-item .nav-link {
+    display: inline-block;
+    text-align: center;
+    padding: 0.25rem 0.5rem;
     color: maroon;
+    font-size: 1.2rem;
     font-weight: 500;
-    font-size: 1.1rem;
     cursor: pointer;
     position: relative;
+    z-index: 10001;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 4px;
   }
 
-  .nav-links .nav-item .nav-link::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background: #e5994e;
-    transition: width 0.3s ease;
-    transform: translateX(-50%);
-  }
-
-  .nav-links .nav-item .nav-link:hover {
+  .nav-links.active .nav-item .nav-link:hover {
     color: #e5994e;
-  }
-
-  .nav-links .nav-item .nav-link:hover::after {
-    width: 100%;
+    background-size: 100% 0.12em;
   }
 
   .logo {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
   }
 }
 
