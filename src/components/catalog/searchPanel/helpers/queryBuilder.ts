@@ -19,7 +19,7 @@ export const queryBuilder = (formData: { [key: string]: string }): string => {
   }
 
   if (formData.category) {
-    params.append("filter.query", `categories.id:"${formData.category}"`);
+    params.append("filter.query", `categories.id:subtree("${formData.category}")`);
   }
 
   const sortMap: Record<SortKey, string> = {
