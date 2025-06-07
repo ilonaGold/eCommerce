@@ -6,6 +6,7 @@ import { createElement } from "../../utils/dom/createElement";
 import { createHeader } from "../../components/header/header";
 import { createFooter } from "../../components/footer/footer";
 import { mainComponent } from "../../components/main/main";
+import { modalWithSlider } from "../../components/productDetails/productDetailsModal/productDetailsModal";
 
 import "./renderProductDetails.css";
 
