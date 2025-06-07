@@ -2,12 +2,21 @@ import { ProductProjection } from "../../../interfaces/products/ProductProjectio
 import { createElement } from "../../../utils/dom/createElement";
 import { createInputGroup } from "../../../utils/dom/form/createInputGroup";
 import { imageSlider } from "../slider/slider";
+import { modalWithSlider } from "../productDetailsModal/productDetailsModal";
 
 import "./description.css";
 import "../../catalog/productsList/productCard/productCard.css";
 
 export const description = (product: ProductProjection): HTMLElement => {
   const productImageSlider = imageSlider(product);
+
+  // Add event listener to the slider wrapper to open modal
+  const productImageSliderWrapper = productImageSlider.querySelector(
+    ".product-details__slider-wrapper"
+  );
+  productImageSliderWrapper?.addEventListener("click", () => {
+    modalWithSlider(product);
+  });
 
   const productInfo = createElement("div", { class: "product-info" }, []);
   const productName = createElement("h3", { class: "product-details__product-name" }, [
