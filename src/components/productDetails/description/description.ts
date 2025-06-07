@@ -1,10 +1,15 @@
 import { ProductProjection } from "../../../interfaces/products/ProductProjection";
 import { createElement } from "../../../utils/dom/createElement";
 import { createInputGroup } from "../../../utils/dom/form/createInputGroup";
+import { imageSlider } from "../slider/slider";
 
 import "./description.css";
+import "../../catalog/productsList/productCard/productCard.css";
 
 export const description = (product: ProductProjection): HTMLElement => {
+  const productImageSlider = imageSlider(product);
+
+  const productInfo = createElement("div", { class: "product-info" }, []);
   const productName = createElement("h3", { class: "product-details__product-name" }, [
     `${product.name["en-US"]}`,
   ]);
@@ -16,19 +21,31 @@ export const description = (product: ProductProjection): HTMLElement => {
 
   if (discount) {
     priceField.append(
-      createElement("div", { class: "" }, [
-        createElement("div", { class: "product-details__discounted-price" }, [
-          `€${(discountedPrice / 100).toFixed(2)}`,
+      createElement("div", { class: "product-details__price-row product-card__price-row" }, [
+        // Price group with discounted and original prices
+        createElement("div", { class: "product-details__price-group product-card__price-group" }, [
+          // Discounted price appears first due to order: -1 in CSS
+          createElement(
+            "span",
+            { class: "product-details__discounted-price product-card__discounted-price" },
+            [`€${(discountedPrice / 100).toFixed(2)}`]
+          ),
+          // Original price with strikethrough
+          createElement(
+            "span",
+            { class: "product-details__old-price product-card__original-price" },
+            [`€${(originalPrice / 100).toFixed(2)}`]
+          ),
         ]),
-        createElement("div", { class: "product-details__old-price" }, [
-          `€${(originalPrice / 100).toFixed(2)}`,
+        // Discount percentage pushed to the right with margin-left: auto
+        createElement("span", { class: "product-details__discount product-card__discount" }, [
+          `-${discount}%`,
         ]),
-      ]),
-      createElement("div", { class: "" }, [`${discount}%`])
+      ])
     );
   } else {
     priceField.append(
-      createElement("div", { class: "product-details__original-price" }, [
+      createElement("div", { class: "product-details__price product-card__price" }, [
         `€${(originalPrice / 100).toFixed(2)}`,
       ])
     );
@@ -67,16 +84,26 @@ export const description = (product: ProductProjection): HTMLElement => {
   const input = createInputGroup("", "number", "quantity");
   const quantity = input.querySelector("#quantity");
   quantity?.setAttribute("value", "1");
-  const button = createElement("button", { type: "submit" }, ["Add to Cart"]);
+  const button = createElement(
+    "button",
+    { type: "submit", class: "product-details__add-to-cart-btn" },
+    ["Add to Cart"]
+  );
   const addToCartForm = createElement("form", { class: "product-details__cart" }, [input, button]);
 
-  const container = createElement("section", { class: "product-details" }, [
+  productInfo.append(
     productName,
     priceField,
     productDescription,
     productAttributes,
     stockAvailability,
-    addToCartForm,
+    addToCartForm
+  );
+
+  const container = createElement("section", { class: "product-details" }, [
+    productImageSlider,
+    productInfo,
   ]);
+
   return container;
 };
