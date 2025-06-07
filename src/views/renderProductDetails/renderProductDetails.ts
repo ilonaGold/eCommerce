@@ -14,9 +14,7 @@ export function renderProductDetails({ parent, product }: ProductDetailsProps): 
   const customer = getState("customer");
 
   const descField = product ? description(product) : createElement("div");
-  const slider = product ? imageSlider(product) : createElement("div");
   const detailsContainer = createElement("div", { class: "product-details_container" }, [
-    slider,
     descField,
   ]);
   const header = createHeader(isAuth, customer);
