@@ -3,7 +3,6 @@ import { createElement } from "../../../utils/dom/createElement";
 import { imageSlider } from "../slider/slider";
 
 import "./productDetailsModal.css";
-import "./slider.css";
 
 export const modalWithSlider = (product: ProductProjection): void => {
   const modalOverlay = createElement("div", { class: "modal-overlay" });
