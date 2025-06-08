@@ -1,5 +1,5 @@
 import { Routes } from "../interfaces/interfaces";
-import { getState, setView, setAuth } from "../state/state";
+import { getState, setAuth } from "../state/state";
 import { createElement } from "../utils/dom/createElement";
 import { renderLogin } from "../views/renderLogin/renderLogin";
 import { renderRegistration } from "../views/renderRegistration/renderRegistration";
@@ -8,52 +8,73 @@ import { renderError } from "../views/renderError/renderError";
 import { renderHome } from "../views/renderHome/renderHome";
 import { renderAbout } from "../views/renderAbout/renderAbout";
 import { renderContacts } from "../views/renderContacts/renderContacts";
+import { handleProductDetails } from "../utils/dom/product/productHandler";
+import { renderUserProfile } from "../views/renderUserProfile/renderUserProfile";
 
-const routes: Routes = {
-  "/": "Log In",
-  login: "Log In",
-  main: "Main",
-  registration: "Registration",
-  home: "Home",
-  about: "About",
-  contacts: "Contacts",
-};
+const routes: Routes[] = [
+  {
+    path: "/",
+    handle: (): void => {
+      renderMain(getRoot());
+    },
+  },
+  {
+    path: "main",
+    handle: (): void => {
+      renderMain(getRoot());
+    },
+  },
+  {
+    path: "login",
+    handle: (): void => {
+      renderLogin(getRoot());
+    },
+  },
+  {
+    path: "registration",
+    handle: (): void => {
+      renderRegistration(getRoot());
+    },
+  },
+  {
+    path: "user-profile",
+    handle: (): void => {
+      renderUserProfile(getRoot());
+    },
+  },
+  {
+    path: "home",
+    handle: (): void => {
+      renderHome(getRoot());
+    },
+  },
+  {
+    path: "about",
+    handle: (): void => {
+      renderAbout(getRoot());
+    },
+  },
+  {
+    path: "contacts",
+    handle: (): void => {
+      renderContacts(getRoot());
+    },
+  },
+  {
+    path: "products/:slug",
+    handle: handleProductDetails,
+  },
+  {
+    path: "*",
+    handle: (): void => {
+      renderError(getRoot());
+    },
+  },
+];
 
-const restrictedRoutes = ["login", "registration", "/"];
+const protectedRoutes = ["login", "registration"];
 
-export function routeHandler(): void {
-  const path = location.pathname;
-  const LAST_INDEX = -1;
-  const arr = path.split("/").filter(Boolean);
-  let endpoint: string | undefined;
-  if (arr.length) {
-    endpoint = arr.at(LAST_INDEX);
-  } else {
-    endpoint = "/";
-  }
-  const isAuth = getState("userAuth");
-
-  setAuth(isAuth);
-  if (endpoint && routes[endpoint]) {
-    if (!isAuth) {
-      setView(endpoint);
-    } else {
-      if (restrictedRoutes.includes(endpoint)) {
-        const newPath = createNewPath("main");
-        history.replaceState(null, "", newPath);
-        setView("main");
-      } else {
-        setView(endpoint);
-      }
-    }
-  } else {
-    setView("error");
-  }
-  renderView();
-}
-
-function renderView(): void {
-  const view = getState("view");
+export function getRoot(): HTMLElement {
   let root: HTMLElement | null = document.querySelector("#root");
   if (root) {
     root.innerHTML = "";
@@ -61,46 +82,47 @@ function renderView(): void {
     root = createElement("div", { id: "root" });
     document.body.append(root);
   }
-  switch (view) {
-    case "/":
-    case "login":
-      renderLogin(root);
-      break;
-    case "registration":
-      renderRegistration(root);
-      break;
-    case "home":
-      renderHome(root);
-      break;
-    case "about":
-      renderAbout(root);
-      break;
-    case "contacts":
-      renderContacts(root);
-      break;
-    case "main":
-      renderMain(root);
-      break;
-    default:
-      renderError(root);
-      break;
+  return root;
+}
+
+export function routeHandler(): void {
+  const path = location.pathname.replace(/^\/+/, "") || "/";
+  const isAuth = getState("userAuth");
+  setAuth(isAuth);
+  for (const route of routes) {
+    let pattern = route.path;
+    if (pattern === "*") {
+      pattern = ".*";
+    } else {
+      const slugRegExp = new RegExp(":[^/]+", "g");
+      pattern = pattern.replace(slugRegExp, "([^/]+)");
+    }
+    const patternRegEx = new RegExp(`^${pattern}$`);
+    const match = path.match(patternRegEx);
+
+    if (match) {
+      if (!isAuth) {
+        if (path === "user-profile") {
+          history.replaceState(null, "", "/login");
+          renderLogin(getRoot());
+        } else {
+          route.handle();
+        }
+      } else {
+        if (protectedRoutes.includes(path)) {
+          history.replaceState(null, "", "/main");
+          renderMain(getRoot());
+        } else {
+          route.handle();
+        }
+      }
+      return;
+    }
   }
+  renderError(getRoot());
 }
 
 export function goToView(view: string): void {
-  const newPath = createNewPath(view);
-  history.pushState({}, "", newPath);
+  history.pushState({}, "", `/${view}`);
   routeHandler();
-}
-
-export function createNewPath(view: string): string {
-  const path = location.pathname;
-  const arr = path.split("/").filter(Boolean);
-  if (!arr.length) {
-    arr.push(view);
-  } else {
-    arr[arr.length - 1] = view;
-  }
-  const newPath = `/${arr.join("/")}`;
-  return newPath;
 }

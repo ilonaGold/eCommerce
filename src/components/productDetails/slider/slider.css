@@ -1,0 +1,154 @@
+.product-details__image-slider {
+  max-width: 400px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 250px;
+  box-sizing: border-box;
+}
+
+/* Slider wrapper and container styles */
+.product-details__slider-wrapper,
+.product-details__image-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex: 0 0 auto;
+  min-height: 100px;
+}
+
+/* Navigation arrows - using the better styling from description.css */
+.prev-arrow,
+.next-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #333;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 20;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  font-size: 18px;
+  transition: all 0.2s ease;
+  opacity: 0.9;
+}
+
+.prev-arrow {
+  left: 5px;
+}
+
+.next-arrow {
+  right: 5px;
+}
+
+.prev-arrow:hover,
+.next-arrow:hover {
+  background-color: maroon;
+  color: white;
+  box-shadow: 0 3px 8px rgba(128, 0, 0, 0.4);
+}
+
+.hide-arrow {
+  display: none;
+}
+
+/* Clean up any nested elements that shouldn't appear */
+.product-details__image-slider > *:not(.product-details__slider-wrapper),
+.product-details__slider-wrapper
+  > *:not(.product-details__image-container):not(.prev-arrow):not(.next-arrow) {
+  display: none;
+}
+
+/* Modal-specific overrides - applied only to the modal context */
+.modal-slider.product-details__image-slider {
+  max-width: 90% !important;
+  width: auto !important;
+  min-height: 400px !important;
+}
+
+.modal-slider .product-details__image {
+  max-height: 600px !important;
+  object-fit: contain !important;
+}
+
+.modal-slider .prev-arrow,
+.modal-slider .next-arrow {
+  width: 60px !important;
+  height: 60px !important;
+  font-size: 24px !important;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.modal-slider .prev-arrow:hover,
+.modal-slider .next-arrow:hover {
+  background-color: maroon !important;
+  color: white !important;
+  box-shadow: 0 3px 8px rgba(128, 0, 0, 0.4) !important;
+}
+
+/* Image styles */
+.modal-slider .product-details__image-container {
+  padding: 10px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(229, 153, 78, 0.2) 50%,
+    rgba(128, 0, 0, 0.2) 100%
+  );
+  border-radius: 8px;
+}
+
+.modal-window {
+  animation: fadeScale 0.3s ease-out;
+}
+
+@keyframes fadeScale {
+  from {
+    opacity: 0.8;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .product-details__image {
+    max-height: 350px;
+  }
+
+  .modal-slider .product-details__image {
+    max-height: 450px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .product-details__image {
+    max-height: 280px;
+  }
+
+  .modal-slider .product-details__image {
+    max-height: 350px !important;
+  }
+
+  .modal-slider .prev-arrow,
+  .modal-slider .next-arrow {
+    width: 45px !important;
+    height: 45px !important;
+  }
+}
