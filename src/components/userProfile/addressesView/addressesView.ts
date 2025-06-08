@@ -13,35 +13,97 @@ export const addressesView = (): HTMLElement => {
     return message;
   }
 
-  const firstName = createInfoGroup({
-    headerText: "First Name",
-    contentClass: "user-profile__content",
-    contentText: user?.firstName,
-  });
-  const lastName = createInfoGroup({
-    headerText: "Last Name",
-    contentClass: "user-profile__content",
-    contentText: user?.lastName,
-  });
-  const email = createInfoGroup({
-    headerText: "Email",
-    contentClass: "user-profile__content",
-    contentText: user?.email,
-  });
-  const dateOfBirth = createInfoGroup({
-    headerText: "Email",
-    contentClass: "user-profile__content",
-    contentText: user?.dateOfBirth,
-  });
+  const addresses = user?.addresses;
+  const billingAddresses = user?.billingAddresses;
+  const defaultBillingAddress = user?.defaultBillingAddress;
+  const billingAddressesContainer = createElement(
+    "div",
+    {
+      class: "user-info__billing-addresses-container",
+    },
+    [createElement("h2", { class: "address-type-name" }, ["Billing addresses"])]
+  );
+  for (let i = 0; i < billingAddresses.length; i++) {
+    const billingAddress = createElement("div", { class: "user-info__billing-address" });
+    const street = createInfoGroup({
+      headerText: "Street",
+      contentText: addresses[billingAddresses[i]].streetName,
+      contentClass: "user-profile__content",
+    });
+    const city = createInfoGroup({
+      headerText: "City",
+      contentText: addresses[billingAddresses[i]].city,
+      contentClass: "user-profile__content",
+    });
+    const country = createInfoGroup({
+      headerText: "Country",
+      contentText: addresses[billingAddresses[i]].country,
+      contentClass: "user-profile__content",
+    });
+    const postCode = createInfoGroup({
+      headerText: "Post code",
+      contentText: addresses[billingAddresses[i]].postalCode,
+      contentClass: "user-profile__content",
+    });
+    if (i === defaultBillingAddress) {
+      const defaultBadge = createElement("div", { class: "user-profile__default-badge" }, [
+        "Default address",
+      ]);
+      billingAddress.append(defaultBadge);
+    }
+    billingAddress.append(street, city, country, postCode);
+    billingAddressesContainer.append(billingAddress);
+  }
+
+  const shippingAddresses = user?.shippingAddresses;
+  const defaultShippingAddress = user?.defaultShippingAddress;
+
+  const shippingAddressesContainer = createElement(
+    "div",
+    {
+      class: "user-info__shipping-addresses-container",
+    },
+    [createElement("h2", { class: "address-type-name" }, ["Shipping addresses"])]
+  );
+  for (let i = 0; i < shippingAddresses.length; i++) {
+    const shippingAddress = createElement("div", { class: "user-info__billing-address" });
+    const street = createInfoGroup({
+      headerText: "Street",
+      contentText: addresses[shippingAddresses[i]].streetName,
+      contentClass: "user-profile__content",
+    });
+    const city = createInfoGroup({
+      headerText: "City",
+      contentText: addresses[shippingAddresses[i]].city,
+      contentClass: "user-profile__content",
+    });
+    const country = createInfoGroup({
+      headerText: "Country",
+      contentText: addresses[shippingAddresses[i]].country,
+      contentClass: "user-profile__content",
+    });
+    const postCode = createInfoGroup({
+      headerText: "Post code",
+      contentText: addresses[shippingAddresses[i]].postalCode,
+      contentClass: "user-profile__content",
+    });
+    if (i === defaultShippingAddress) {
+      const defaultBadge = createElement("div", { class: "user-profile__default-badge" }, [
+        "Default address",
+      ]);
+      shippingAddress.append(defaultBadge);
+    }
+    shippingAddress.append(street, city, country, postCode);
+    shippingAddressesContainer.append(shippingAddress);
+  }
+
   const headerOfSection = createElement("h2", { class: "user-info__section-header" }, [
     "Personal information",
   ]);
-  const personalInfo = createElement("section", { class: "user-info__personal-info" }, [
+  const addressInfo = createElement("section", { class: "user-info__address-info" }, [
     headerOfSection,
-    firstName,
-    lastName,
-    dateOfBirth,
-    email,
+    billingAddressesContainer,
+    shippingAddressesContainer,
   ]);
-  return personalInfo;
+  return addressInfo;
 };
