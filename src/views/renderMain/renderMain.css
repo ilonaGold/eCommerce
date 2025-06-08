@@ -3,12 +3,35 @@
   display: flex;
   flex-direction: column;
 }
+
 .main {
+  position: relative;
   flex: 1 1 auto;
 }
 
-/* TEPORARY, DUMMY CONTENT STYLING */
-.hero-center {
-  display: grid;
-  place-content: center;
+.main::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("../../assets/images/bamboo-bg.png") center center fixed;
+  filter: blur(3px);
+  z-index: -2;
+}
+
+.main::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(45, 94, 64, 0.6); /* green overlay */
+  z-index: -1;
+}
+
+.main > * {
+  position: relative; /* ensures content stays above the background layers */
 }
