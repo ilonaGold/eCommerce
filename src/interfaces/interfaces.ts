@@ -4,12 +4,18 @@ import { ProductProjection } from "./products/ProductProjection";
 export interface AppState {
   userAuth: boolean;
   customer: Customer | null;
+  products: ProductProjection[];
+  subscribers: Set<SubscriberFunction>;
   setAuth: (isAuth: boolean) => void;
   setCustomer: (customer: Customer | null) => void;
-  getState: <K extends keyof Omit<AppState, "getState" | "setView" | "setAuth">>(
+  setProducts: (products: ProductProjection[]) => void;
+  subscribe: (callback: SubscriberFunction) => () => void;
+  getState: <K extends keyof Omit<AppState, "getState" | "setView" | "setAuth" | "setProducts">>(
     property: K
   ) => AppState[K];
 }
+
+export type SubscriberFunction = (state: AppState) => void;
 
 export interface Routes {
   path: string;

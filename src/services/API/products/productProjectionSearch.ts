@@ -1,8 +1,12 @@
 import { PagedSearchResponse } from "../../../interfaces/products/ProductProjection";
 import { getAccessTokenData } from "../../auth/getAccessTokenData";
 
-export const productProjectionSearch = async (): Promise<PagedSearchResponse> => {
-  const searchUrl = `${import.meta.env.VITE_CTP_API_URL}/${import.meta.env.VITE_CTP_PROJECT_KEY}/product-projections/search`;
+export const productProjectionSearch = async (
+  queryStr: string = ""
+): Promise<PagedSearchResponse> => {
+  const query = queryStr ? `?${queryStr}` : "";
+
+  const searchUrl = `${import.meta.env.VITE_CTP_API_URL}/${import.meta.env.VITE_CTP_PROJECT_KEY}/product-projections/search${query}`;
   const accessToken = (await getAccessTokenData()).access_token;
 
   try {
@@ -25,7 +29,7 @@ export const productProjectionSearch = async (): Promise<PagedSearchResponse> =>
     //
   } catch (error) {
     throw new Error(
-      `Couldn't get access token data. Error: ${error instanceof Error ? error.message : String(error)}`
+      `Couldn't get data. Error: ${error instanceof Error ? error.message : String(error)}`
     );
   }
 };
