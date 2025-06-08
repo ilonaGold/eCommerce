@@ -1,0 +1,47 @@
+import { getState } from "../../../state/state";
+import { createElement } from "../../../utils/dom/createElement";
+import { createInfoGroup } from "../../../utils/dom/userProfile/createInfoGroup";
+
+import "./addressesView.css";
+
+export const addressesView = (): HTMLElement => {
+  const user = getState("customer");
+  if (!user) {
+    const message = createElement("section", { class: "user-info__addresses" }, [
+      "Address information is not available",
+    ]);
+    return message;
+  }
+
+  const firstName = createInfoGroup({
+    headerText: "First Name",
+    contentClass: "user-profile__content",
+    contentText: user?.firstName,
+  });
+  const lastName = createInfoGroup({
+    headerText: "Last Name",
+    contentClass: "user-profile__content",
+    contentText: user?.lastName,
+  });
+  const email = createInfoGroup({
+    headerText: "Email",
+    contentClass: "user-profile__content",
+    contentText: user?.email,
+  });
+  const dateOfBirth = createInfoGroup({
+    headerText: "Email",
+    contentClass: "user-profile__content",
+    contentText: user?.dateOfBirth,
+  });
+  const headerOfSection = createElement("h2", { class: "user-info__section-header" }, [
+    "Personal information",
+  ]);
+  const personalInfo = createElement("section", { class: "user-info__personal-info" }, [
+    headerOfSection,
+    firstName,
+    lastName,
+    dateOfBirth,
+    email,
+  ]);
+  return personalInfo;
+};
