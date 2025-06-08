@@ -6,6 +6,8 @@ import "./addressesView.css";
 
 export const addressesView = (): HTMLElement => {
   const user = getState("customer");
+  console.log(user);
+
   if (!user) {
     const message = createElement("section", { class: "user-info__addresses" }, [
       "Address information is not available",
