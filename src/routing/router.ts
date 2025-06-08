@@ -9,6 +9,7 @@ import { renderHome } from "../views/renderHome/renderHome";
 import { renderAbout } from "../views/renderAbout/renderAbout";
 import { renderContacts } from "../views/renderContacts/renderContacts";
 import { handleProductDetails } from "../utils/dom/product/productHandler";
+import { renderUserProfile } from "../views/renderUserProfile/renderUserProfile";
 
 const routes: Routes[] = [
   {
@@ -33,6 +34,12 @@ const routes: Routes[] = [
     path: "registration",
     handle: (): void => {
       renderRegistration(getRoot());
+    },
+  },
+  {
+    path: "user-profile",
+    handle: (): void => {
+      renderUserProfile(getRoot());
     },
   },
   {
