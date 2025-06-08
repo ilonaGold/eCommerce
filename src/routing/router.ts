@@ -102,7 +102,12 @@ export function routeHandler(): void {
 
     if (match) {
       if (!isAuth) {
-        route.handle();
+        if (path === "user-profile") {
+          history.replaceState(null, "", "/login");
+          renderLogin(getRoot());
+        } else {
+          route.handle();
+        }
       } else {
         if (protectedRoutes.includes(path)) {
           history.replaceState(null, "", "/main");
