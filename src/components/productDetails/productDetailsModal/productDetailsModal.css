@@ -1,4 +1,4 @@
-.modal-overlay{
+.modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -22,8 +22,37 @@
   position: relative;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-  border: 1px solid black;
+  border: none !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
+  padding: 30px !important;
+}
+
+/* Larger modal slider */
+.modal-window .product-details__image-slider,
+.modal-slider.product-details__image-slider {
+  max-width: 90% !important; /* Much wider than product page */
+  width: auto !important;
+  min-height: 400px !important;
+}
+
+/* Larger images in modal */
+.modal-window .product-details__image,
+.modal-slider .product-details__image {
+  max-height: 600px !important;
+  object-fit: contain !important;
+}
+
+.modal-window .prev-arrow,
+.modal-window .next-arrow,
+.modal-slider .prev-arrow,
+.modal-slider .next-arrow {
+  width: 60px !important;
+  height: 60px !important;
+  font-size: 24px !important;
+}
+
+.modal-window .product-details__image-container {
+  transition: transform 0.3s ease;
 }
 
 .close-button {
@@ -35,7 +64,11 @@
   top: 10px;
   right: 15px;
   font-size: 18px;
-
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  z-index: 10000;
+  transition: background-color 0.2s ease;
 }
 
 .close-button:hover {

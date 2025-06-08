@@ -4,7 +4,7 @@ import tempPlaceholderImg from "../../../assets/images/red-panda.png";
 
 import "./slider.css";
 
-export const imageSlider = (product: ProductProjection): HTMLElement => {
+export const imageSlider = (product: ProductProjection, additionalClass?: string): HTMLElement => {
   const sliderWrapper = createElement("div", { class: "product-details__slider-wrapper" });
   const images = product.masterVariant.images;
   if (images?.length) {
@@ -77,10 +77,14 @@ export const imageSlider = (product: ProductProjection): HTMLElement => {
   prevPageArrow.addEventListener("click", showPrevSlide);
   nextPageArrow.addEventListener("click", showNextSlide);
 
-  const container = createElement("div", { class: "product-details__image-slider" }, [
-    sliderWrapper,
-    prevPageArrow,
-    nextPageArrow,
-  ]);
+  const container = createElement(
+    "div",
+    {
+      class: additionalClass
+        ? `product-details__image-slider ${additionalClass}`
+        : "product-details__image-slider",
+    },
+    [sliderWrapper, prevPageArrow, nextPageArrow]
+  );
   return container;
 };
