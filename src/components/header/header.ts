@@ -13,7 +13,7 @@ export function createHeader(isLoggedIn: boolean, customer: Customer | null): HT
     { text: "Contacts", view: "contacts" },
   ];
 
-  const logOutBtn = createElement("a", {}, ["Log Out"], {
+  const logOutBtn = createElement("a", { class: "logout-btn" }, ["Log Out"], {
     events: {
       click: (e) => {
         e.preventDefault();
@@ -28,7 +28,7 @@ export function createHeader(isLoggedIn: boolean, customer: Customer | null): HT
     },
   });
 
-  const userProfileBtn = createElement("a", {}, ["User Profile"], {
+  const userProfileBtn = createElement("a", { class: "user-profile-link" }, ["User Profile"], {
     events: {
       click: (e) => {
         e.preventDefault();
@@ -41,17 +41,19 @@ export function createHeader(isLoggedIn: boolean, customer: Customer | null): HT
   });
 
   const headerButtonChildren = isLoggedIn
-    ? [`Welcome, ${customer?.firstName}`, " / ", logOutBtn, userProfileBtn]
+    ? [
+        createElement("div", { class: "user-account" }, [
+          createElement("div", { class: "welcome-message" }, [
+            `Welcome, `,
+            createElement("span", { class: "user-name" }, [customer?.firstName || "User"]),
+          ]),
+          createElement("div", { class: "user-controls" }, [userProfileBtn, logOutBtn]),
+        ]),
+      ]
     : [
-        createElement(
-          "button",
-          {
-            class: "header-btn login-btn",
-            type: "button",
-          },
-          ["Sign In"],
-          { events: { click: () => goToView("login") } }
-        ),
+        createElement("button", { class: "header-btn login-btn", type: "button" }, ["Sign In"], {
+          events: { click: () => goToView("login") },
+        }),
         createElement(
           "button",
           {

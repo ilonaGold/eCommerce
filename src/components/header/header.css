@@ -266,3 +266,109 @@
     font-size: 0.8rem;
   }
 }
+
+/* User Account Section */
+.user-account {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-left: auto;
+}
+
+.welcome-message {
+  color: #333;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.user-name {
+  color: maroon;
+  font-weight: 600;
+}
+
+.user-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* User Profile Link */
+.user-profile-link {
+  color: maroon;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.6rem 0.8rem;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  background-color: rgba(229, 153, 78, 0.2);
+}
+
+.user-profile-link:hover {
+  background-color: rgba(229, 153, 78, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Logout Button */
+.logout-btn {
+  background: transparent;
+  color: maroon;
+  border: 1px solid maroon;
+  border-radius: 6px;
+  padding: 0.5rem 0.8rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: maroon;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Responsive adjustments for user account elements */
+@media (max-width: 900px) {
+  .welcome-message {
+    font-size: 0.85rem;
+  }
+
+  .user-controls {
+    gap: 0.75rem;
+  }
+
+  .user-profile-link,
+  .logout-btn {
+    padding: 0.4rem 0.7rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .user-account {
+    flex-direction: row;
+    gap: 1rem;
+    margin-left: 0;
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 480px) {
+  .user-account {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  .welcome-message {
+    margin-bottom: 0.25rem;
+  }
+
+  .user-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
