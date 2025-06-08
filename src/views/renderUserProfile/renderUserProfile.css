@@ -6,8 +6,41 @@
 }
 
 .user-profile__container {
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  gap: 20px;
+  padding: 50px;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.user-profile__info-and-address {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
   gap: 50px;
+}
+
+.user-profile__edit-button,
+.user-profile__change-password-button {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
+
+.user-profile__edit-button {
+  background: maroon;
+  color: white;
+}
+
+.user-profile__change-password-button {
+  background: #e5994e;
+  color: white;
 }

@@ -1,0 +1,13 @@
+.user-info__address-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.user-info__address-fields {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}

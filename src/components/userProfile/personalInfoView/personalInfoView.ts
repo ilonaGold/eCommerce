@@ -36,12 +36,15 @@ export const personalInfoView = (): HTMLElement => {
   const headerOfSection = createElement("h2", { class: "user-info__section-header" }, [
     "Personal information",
   ]);
-  const personalInfo = createElement("section", { class: "user-info__personal-info" }, [
-    headerOfSection,
+  const personalInfo = createElement("div", { class: "user-info__info-fields" }, [
     firstName,
     lastName,
     dateOfBirth,
     email,
   ]);
-  return personalInfo;
+  const personalInfoSection = createElement("section", { class: "user-info__personal-info" }, [
+    headerOfSection,
+    personalInfo,
+  ]);
+  return personalInfoSection;
 };

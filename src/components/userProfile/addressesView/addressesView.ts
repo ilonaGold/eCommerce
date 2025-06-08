@@ -104,12 +104,15 @@ export const addressesView = (): HTMLElement => {
   }
 
   const headerOfSection = createElement("h2", { class: "user-info__section-header" }, [
-    "Personal information",
+    "Address information",
   ]);
-  const addressInfo = createElement("section", { class: "user-info__address-info" }, [
-    headerOfSection,
+  const addressInfo = createElement("div", { class: "user-info__address-fields" }, [
     billingAddressesContainer,
     shippingAddressesContainer,
   ]);
-  return addressInfo;
+  const addressInfoSection = createElement("section", { class: "user-info__address-info" }, [
+    headerOfSection,
+    addressInfo,
+  ]);
+  return addressInfoSection;
 };

@@ -27,8 +27,12 @@ export function renderUserProfile(parent: HTMLElement): void {
   buttonContainer.append(editProfileButton, changePassword);
   const userPersonalInfo = personalInfoView();
   const userAddresses = addressesView();
+  const personalInfoAndAddress = createElement("div", { class: "user-profile__info-and-address" }, [
+    userPersonalInfo,
+    userAddresses,
+  ]);
   const userProfile = createElement("div", { class: "user-profile__container" });
-  userProfile.append(buttonContainer, userPersonalInfo, userAddresses);
+  userProfile.append(buttonContainer, personalInfoAndAddress);
   const main = mainComponent(userProfile);
   const footer = createFooter();
   const viewContainer = createElement("div", { class: "product-details-page view-container" }, [
