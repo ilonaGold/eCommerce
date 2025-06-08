@@ -14,12 +14,12 @@ export const personalInfoView = (): HTMLElement => {
   }
 
   const firstName = createInfoGroup({
-    headerText: "First Name",
+    headerText: "First name",
     contentClass: "user-profile__content",
     contentText: user?.firstName,
   });
   const lastName = createInfoGroup({
-    headerText: "Last Name",
+    headerText: "Last name",
     contentClass: "user-profile__content",
     contentText: user?.lastName,
   });
@@ -29,7 +29,7 @@ export const personalInfoView = (): HTMLElement => {
     contentText: user?.email,
   });
   const dateOfBirth = createInfoGroup({
-    headerText: "Email",
+    headerText: "Date of birth",
     contentClass: "user-profile__content",
     contentText: user?.dateOfBirth,
   });
