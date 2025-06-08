@@ -12,7 +12,6 @@ export function createLoginForm(): HTMLElement {
     createSectionTitle("Sign In"),
     createInputGroup("Email", "email", "email", true),
     createInputGroup("Password", "password", "password", true),
-    //createInputGroup("Show password", "checkbox", "showPassword"),
     createElement("div", { class: "toggle-password" }, [
       createElement("span", {}, ["Show password"]),
       createElement("input", { type: "checkbox", name: "showPassword", id: "showPassword" }),
