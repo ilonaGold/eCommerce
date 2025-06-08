@@ -61,7 +61,7 @@ export interface Customer {
 // Supporting interfaces
 export interface Address {
   id?: string;
-  key?: string;
+  key: string;
   country: string;
   title?: string;
   salutation?: string;
