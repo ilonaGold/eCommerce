@@ -6,6 +6,8 @@ import { createElement } from "../../utils/dom/createElement";
 import { personalInfoView } from "../../components/userProfile/personalInfoView/personalInfoView";
 import { addressesView } from "../../components/userProfile/addressesView/addressesView";
 
+import "./renderUserProfile.css";
+
 export function renderUserProfile(parent: HTMLElement): void {
   const isAuth = getState("userAuth");
   const customer = getState("customer");
