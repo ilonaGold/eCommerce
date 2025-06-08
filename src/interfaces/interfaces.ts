@@ -41,3 +41,9 @@ export interface ProductDetailsProps {
   parent: HTMLElement;
   product: ProductProjection | null;
 }
+
+export interface infoGroupProps {
+  headerText: string;
+  contentClass: string;
+  contentText: string;
+}

@@ -1,7 +1,7 @@
-import { Address } from "./../../../interfaces/dataInterfaces";
-import { Customer } from "../../../interfaces/dataInterfaces";
+import { AddressFormData } from "./../../../interfaces/dataInterfaces";
+import { CustomerFormData } from "../../../interfaces/dataInterfaces";
 
-export const createCustomerDraft = (form: HTMLFormElement): Customer => {
+export const createCustomerDraft = (form: HTMLFormElement): CustomerFormData => {
   const formData = new FormData(form);
   const data = Object.fromEntries(formData) as Record<string, string>;
 
@@ -16,7 +16,7 @@ export const createCustomerDraft = (form: HTMLFormElement): Customer => {
     defaultBilling,
   } = data;
 
-  const shippingAddr: Address = {
+  const shippingAddr: AddressFormData = {
     streetName: data.address,
     city: data.city,
     country: data.country,
@@ -25,7 +25,7 @@ export const createCustomerDraft = (form: HTMLFormElement): Customer => {
 
   const hasSeparateBilling = separateBilling === "on";
 
-  const billingAddr: Address = hasSeparateBilling
+  const billingAddr: AddressFormData = hasSeparateBilling
     ? {
         streetName: data.billingAddress,
         city: data.billingCity,
@@ -36,7 +36,7 @@ export const createCustomerDraft = (form: HTMLFormElement): Customer => {
         ...shippingAddr,
       };
 
-  const addresses: Address[] = [shippingAddr, billingAddr];
+  const addresses: AddressFormData[] = [shippingAddr, billingAddr];
 
   const shippingAddresses = [0];
   const billingAddresses = [1];
