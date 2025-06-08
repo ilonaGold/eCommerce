@@ -28,8 +28,20 @@ export function createHeader(isLoggedIn: boolean, customer: Customer | null): HT
     },
   });
 
+  const userProfileBtn = createElement("a", {}, ["User Profile"], {
+    events: {
+      click: (e) => {
+        e.preventDefault();
+        goToView("user-profile");
+      },
+    },
+    styles: {
+      cursor: "pointer",
+    },
+  });
+
   const headerButtonChildren = isLoggedIn
-    ? [`Welcome, ${customer?.firstName}`, " / ", logOutBtn]
+    ? [`Welcome, ${customer?.firstName}`, " / ", logOutBtn, userProfileBtn]
     : [
         createElement(
           "button",
