@@ -1,4 +1,4 @@
-import { getState, setProducts } from "../../state/state";
+import { getState, setProductsData } from "../../state/state";
 import { createElement } from "../../utils/dom/createElement";
 import { createHeader } from "../../components/header/header";
 import { mainComponent } from "../../components/main/main";
@@ -23,10 +23,9 @@ export async function renderMain(parent: HTMLElement): Promise<void> {
   parent.append(viewContainer);
 
   // Fetching & Appending
-  const products = await productProjectionSearch();
-  console.log(products);
+  const productsData = await productProjectionSearch("facet=categories.id");
 
-  setProducts(products.results);
-  const productsCatalog = catalogComponent(products);
+  setProductsData(productsData);
+  const productsCatalog = await catalogComponent(productsData);
   main.replaceChildren(productsCatalog);
 }

@@ -1,18 +1,23 @@
 import { Customer } from "./dataInterfaces";
-import { ProductProjection } from "./products/ProductProjection";
+import { PagedSearchResponse } from "./products/ProductProjection";
 
 export interface AppState {
   view: string;
   userAuth: boolean;
   customer: Customer | null;
-  products: ProductProjection[];
+  productsData: PagedSearchResponse;
   subscribers: Set<SubscriberFunction>;
   setView: (view: string) => void;
   setAuth: (isAuth: boolean) => void;
   setCustomer: (customer: Customer | null) => void;
-  setProducts: (products: ProductProjection[]) => void;
+  setProductsData: (productsData: PagedSearchResponse) => void;
   subscribe: (callback: SubscriberFunction) => () => void;
-  getState: <K extends keyof Omit<AppState, "getState" | "setView" | "setAuth" | "setProducts">>(
+  getState: <
+    K extends keyof Omit<
+      AppState,
+      "getState" | "setView" | "setAuth" | "setProductsData" | "subscribe" | "setCustomer"
+    >,
+  >(
     property: K
   ) => AppState[K];
 }

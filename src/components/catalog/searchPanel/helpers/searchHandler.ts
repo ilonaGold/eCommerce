@@ -1,5 +1,5 @@
 import { productProjectionSearch } from "../../../../services/API/products/productProjectionSearch";
-import { setProducts } from "../../../../state/state";
+import { setProductsData } from "../../../../state/state";
 import { queryBuilder } from "./queryBuilder";
 
 export const searchHandler = async (e: Event): Promise<void> => {
@@ -13,5 +13,5 @@ export const searchHandler = async (e: Event): Promise<void> => {
   const query = queryBuilder(fields);
 
   const products = await productProjectionSearch(query);
-  setProducts(products.results);
+  setProductsData(products);
 };
