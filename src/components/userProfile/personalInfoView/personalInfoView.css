@@ -1,6 +1,6 @@
 .user-info__personal-info {
   max-width: 900px;
-  width: 50%;
+  width: clamp(300px, 50%, 900px);
   margin: 2rem auto 0.5rem;
   padding: 2rem 4rem;
   background-color: #fff;
