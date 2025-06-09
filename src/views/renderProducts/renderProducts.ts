@@ -8,9 +8,9 @@ import { catalogComponent } from "../../components/catalog/catalogComponent";
 import { productProjectionSearch } from "../../services/API/products/productProjectionSearch";
 import { loadingAnimation } from "../../components/loadingAnimation/loadingAnimation";
 
-import "./renderMain.css";
+import "./renderProducts.css";
 
-export async function renderMain(parent: HTMLElement): Promise<void> {
+export async function renderProducts(parent: HTMLElement): Promise<void> {
   const isAuth = getState("userAuth");
   const customer = getState("customer");
 
