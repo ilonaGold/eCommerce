@@ -10,7 +10,6 @@ export function createHeader(isLoggedIn: boolean, customer: Customer | null): HT
     { text: "Home", view: "home" },
     { text: "About", view: "about" },
     { text: "Products", view: "main" },
-    { text: "Contacts", view: "contacts" },
   ];
 
   const logOutBtn = createElement("a", { class: "logout-btn" }, ["Log Out"], {
