@@ -8,6 +8,8 @@ import { catalogComponent } from "../../components/catalog/catalogComponent";
 import { productProjectionSearch } from "../../services/API/products/productProjectionSearch";
 import { loadingAnimation } from "../../components/loadingAnimation/loadingAnimation";
 
+import { queryBuilder } from "../../components/catalog/searchPanel/helpers/queryBuilder";
+import { readFiltersFromUrl } from "./helpers/readFiltersFromUrl";
 import "./renderProducts.css";
 
 export async function renderProducts(parent: HTMLElement): Promise<void> {
@@ -23,7 +25,13 @@ export async function renderProducts(parent: HTMLElement): Promise<void> {
   parent.append(viewContainer);
 
   // Fetching & Appending
-  const productsData = await productProjectionSearch("facet=categories.id");
+  let productsData;
+
+  if (location.search) {
+    productsData = await productProjectionSearch(queryBuilder(readFiltersFromUrl()));
+  } else {
+    productsData = await productProjectionSearch("facet=categories.id");
+  }
 
   setProductsData(productsData);
   const productsCatalog = await catalogComponent(productsData);

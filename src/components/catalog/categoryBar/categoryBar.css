@@ -1,0 +1,7 @@
+.category-navbar {
+  display: flex;
+  gap: 1rem;
+
+  color: white;
+  margin: 2rem 0;
+}

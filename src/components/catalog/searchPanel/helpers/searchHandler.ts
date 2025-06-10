@@ -10,6 +10,20 @@ export const searchHandler = async (e: Event): Promise<void> => {
   const fields = Object.fromEntries(formData.entries().filter(([, value]) => Boolean(value))) as {
     [key: string]: string;
   };
+
+  // decorative query
+  const params = new URLSearchParams();
+  if (fields.keyword) params.set("keyword", fields.keyword);
+  if (fields.minPrice) params.set("minPrice", fields.minPrice);
+  if (fields.maxPrice) params.set("maxPrice", fields.maxPrice);
+  if (fields.category) params.set("category", fields.category);
+  if (fields.sort) params.set("sort", fields.sort);
+
+  const qs = params.toString();
+  const newUrl = `${location.pathname}${qs ? "?" + qs : ""}`;
+  history.pushState({}, "", newUrl);
+
+  // real query
   const query = queryBuilder(fields);
 
   const products = await productProjectionSearch(query);

@@ -6,7 +6,7 @@ import { productList } from "./productsList/productList";
 import { subscribe } from "../../state/state";
 
 import { getCategories } from "../../services/API/products/getCategories";
-import { categorySidebar } from "./categorySidebar/categorySidebar";
+import { categorySidebar } from "./categoryBar/categoryBar";
 
 import "./catalogComponent.css";
 
@@ -16,8 +16,14 @@ export const catalogComponent = async (productsData: PagedSearchResponse): Promi
 
   const categories = await getCategories();
 
+  const categoryBar = categorySidebar(productsData, categories);
+
   const catalog = createElement("section", { class: "catalog-section" }, [
-    createElement("div", { class: "center catalog-center" }, [searchPanelComponent, products]),
+    createElement("div", { class: "center catalog-center" }, [
+      searchPanelComponent,
+      categoryBar,
+      products,
+    ]),
   ]);
 
   subscribe((state) => {
@@ -25,7 +31,7 @@ export const catalogComponent = async (productsData: PagedSearchResponse): Promi
     products.replaceWith(newProducts);
     products = newProducts;
     // Testing
-    categorySidebar(productsData, categories);
+    categoryBar.replaceWith(categorySidebar(productsData, categories));
     // Testing
   });
 
