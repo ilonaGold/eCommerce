@@ -15,7 +15,7 @@ const routes: Routes[] = [
   {
     path: "/",
     handle: (): void => {
-      renderProducts(getRoot());
+      renderHome(getRoot());
     },
   },
   {
@@ -40,12 +40,6 @@ const routes: Routes[] = [
     path: "user-profile",
     handle: (): void => {
       renderUserProfile(getRoot());
-    },
-  },
-  {
-    path: "home",
-    handle: (): void => {
-      renderHome(getRoot());
     },
   },
   {
@@ -110,8 +104,8 @@ export function routeHandler(): void {
         }
       } else {
         if (protectedRoutes.includes(path)) {
-          history.replaceState(null, "", "/main");
-          renderProducts(getRoot());
+          history.replaceState(null, "", "/");
+          renderHome(getRoot());
         } else {
           route.handle();
         }

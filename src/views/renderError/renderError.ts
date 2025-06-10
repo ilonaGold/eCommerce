@@ -13,7 +13,7 @@ export function renderError(parent: HTMLElement): void {
         "Sorry, we couldn't find the page you're looking for",
       ]),
       createElement("button", { class: "error-button" }, ["Back to home"], {
-        events: { click: () => goToView("home") },
+        events: { click: () => goToView("") },
       }),
     ]),
   ]);

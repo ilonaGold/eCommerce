@@ -7,7 +7,7 @@ import { setAuth, setCustomer } from "../../state/state";
 
 export function createHeader(isLoggedIn: boolean, customer: Customer | null): HTMLElement {
   const navLinks = [
-    { text: "Home", view: "home" },
+    { text: "Home", view: "" },
     { text: "About", view: "about" },
     { text: "Products", view: "products" },
     { text: "Contacts", view: "contacts" },
@@ -20,7 +20,7 @@ export function createHeader(isLoggedIn: boolean, customer: Customer | null): HT
         setAuth(false);
         setCustomer(null);
         clearLoginData();
-        goToView("home");
+        goToView("");
       },
     },
     styles: {
@@ -103,7 +103,7 @@ export function createHeader(isLoggedIn: boolean, customer: Customer | null): HT
 
   const nav = createElement("nav", { class: "header-nav" }, [
     createElement("h1", { class: "logo" }, ["Red Panda Squad"], {
-      events: { click: () => goToView("home") },
+      events: { click: () => goToView("") },
       styles: { cursor: "pointer" },
     }),
     navList,
