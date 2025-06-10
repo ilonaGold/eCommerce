@@ -3,7 +3,7 @@ import { getState, setAuth } from "../state/state";
 import { createElement } from "../utils/dom/createElement";
 import { renderLogin } from "../views/renderLogin/renderLogin";
 import { renderRegistration } from "../views/renderRegistration/renderRegistration";
-import { renderMain } from "../views/renderMain/renderMain";
+import { renderProducts } from "../views/renderProducts/renderProducts";
 import { renderError } from "../views/renderError/renderError";
 import { renderHome } from "../views/renderHome/renderHome";
 import { renderAbout } from "../views/renderAbout/renderAbout";
@@ -15,13 +15,13 @@ const routes: Routes[] = [
   {
     path: "/",
     handle: (): void => {
-      renderMain(getRoot());
+      renderHome(getRoot());
     },
   },
   {
-    path: "main",
+    path: "products",
     handle: (): void => {
-      renderMain(getRoot());
+      renderProducts(getRoot());
     },
   },
   {
@@ -40,12 +40,6 @@ const routes: Routes[] = [
     path: "user-profile",
     handle: (): void => {
       renderUserProfile(getRoot());
-    },
-  },
-  {
-    path: "home",
-    handle: (): void => {
-      renderHome(getRoot());
     },
   },
   {
@@ -110,8 +104,8 @@ export function routeHandler(): void {
         }
       } else {
         if (protectedRoutes.includes(path)) {
-          history.replaceState(null, "", "/main");
-          renderMain(getRoot());
+          history.replaceState(null, "", "/");
+          renderHome(getRoot());
         } else {
           route.handle();
         }

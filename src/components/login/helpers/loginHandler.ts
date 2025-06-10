@@ -28,7 +28,7 @@ export const loginHandler = async (e: Event): Promise<void> => {
     // ----Handle customer data
     console.log("Logged In, choose redirect method");
     notificationModal("Logged In successfully", "success");
-    goToView("main");
+    goToView("");
 
     form.reset();
   } catch (error) {
