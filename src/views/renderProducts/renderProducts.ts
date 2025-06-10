@@ -6,16 +6,16 @@ import { createFooter } from "../../components/footer/footer";
 import { catalogComponent } from "../../components/catalog/catalogComponent";
 
 import { productProjectionSearch } from "../../services/API/products/productProjectionSearch";
-import { dummyLoading } from "../../components/dummyLoading/dummyLoading";
+import { loadingAnimation } from "../../components/loadingAnimation/loadingAnimation";
 
-import "./renderMain.css";
+import "./renderProducts.css";
 
-export async function renderMain(parent: HTMLElement): Promise<void> {
+export async function renderProducts(parent: HTMLElement): Promise<void> {
   const isAuth = getState("userAuth");
   const customer = getState("customer");
 
   const header = createHeader(isAuth, customer);
-  const main = mainComponent(dummyLoading());
+  const main = mainComponent(loadingAnimation());
   const footer = createFooter();
 
   const viewContainer = createElement("div", { class: "view-container" }, [header, main, footer]);

@@ -1,0 +1,5 @@
+.user-info__personal-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

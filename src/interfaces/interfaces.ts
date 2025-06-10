@@ -2,12 +2,10 @@ import { Customer } from "./dataInterfaces";
 import { PagedSearchResponse } from "./products/ProductProjection";
 
 export interface AppState {
-  view: string;
   userAuth: boolean;
   customer: Customer | null;
   productsData: PagedSearchResponse;
   subscribers: Set<SubscriberFunction>;
-  setView: (view: string) => void;
   setAuth: (isAuth: boolean) => void;
   setCustomer: (customer: Customer | null) => void;
   setProductsData: (productsData: PagedSearchResponse) => void;
@@ -25,7 +23,8 @@ export interface AppState {
 export type SubscriberFunction = (state: AppState) => void;
 
 export interface Routes {
-  [index: string]: string;
+  path: string;
+  handle: (route?: string) => void;
 }
 
 export interface Fields {
@@ -47,4 +46,15 @@ export interface ValidationProps {
   input: HTMLInputElement;
   validate: (input: HTMLInputElement) => string;
   divError: HTMLDivElement;
+}
+
+export interface ProductDetailsProps {
+  parent: HTMLElement;
+  product: ProductProjection | null;
+}
+
+export interface infoGroupProps {
+  headerText: string;
+  contentClass: string;
+  contentText: string;
 }

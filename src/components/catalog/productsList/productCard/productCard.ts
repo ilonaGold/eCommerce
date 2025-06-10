@@ -1,6 +1,7 @@
 import "./productCard.css";
 import tempPlaceholderImg from "../../../../assets/images/red-panda.png";
 import { Price, ProductProjection } from "../../../../interfaces/products/ProductProjection";
+import { goToView } from "../../../../routing/router";
 
 export class ProductCard {
   private element: HTMLElement;
@@ -12,21 +13,18 @@ export class ProductCard {
 
     const name = product.name["en-US"];
     const description = product.description?.["en-US"] || "No description available";
-    const originalPrice = product.masterVariant.prices?.[0];
     const image = product.masterVariant.images?.[0]?.url || tempPlaceholderImg;
 
-    // Sample discount logic - can be replaced with actual discount data
-    const hasDiscount = Math.random() > 0.5;
-    const discountPercentage = hasDiscount ? Math.floor(Math.random() * 30) + 10 : 0;
+    const originalPrice = product.masterVariant.prices?.[0].value.centAmount || 0;
+    const discountedPrice =
+      product.masterVariant.prices?.[0].discounted?.value.centAmount || originalPrice;
+    const discount = Math.round(((originalPrice - discountedPrice) / originalPrice) * 100);
 
     let priceHtml = "";
 
-    if (hasDiscount && originalPrice?.value?.centAmount) {
-      const origAmount = (originalPrice.value.centAmount / 100).toFixed(2);
-      const discountAmount = (
-        (originalPrice.value.centAmount * (1 - discountPercentage / 100)) /
-        100
-      ).toFixed(2);
+    if (discount) {
+      const origAmount = (originalPrice / 100).toFixed(2);
+      const discountAmount = (discountedPrice / 100).toFixed(2);
 
       priceHtml = `
     <div class="product-card__price-row">
@@ -34,11 +32,11 @@ export class ProductCard {
         <span class="product-card__discounted-price">€${discountAmount}</span>
         <span class="product-card__original-price">€${origAmount}</span>
       </div>
-      <span class="product-card__discount">-${discountPercentage}%</span>
+      <span class="product-card__discount">-${discount}%</span>
     </div>
   `;
     } else {
-      const formattedPrice = this.formatPrice(originalPrice);
+      const formattedPrice = this.formatPrice(product.masterVariant.prices?.[0]);
       priceHtml = `
         <div class="product-card__price-row">
           <div class="product-card__price">${formattedPrice}</div>
@@ -68,7 +66,7 @@ export class ProductCard {
       }
 
       // Navigate to product detail page
-      window.location.href = `/product/${product.id}`;
+      goToView(`products/${product.slug?.["en-US"]}`);
     });
   }
 
