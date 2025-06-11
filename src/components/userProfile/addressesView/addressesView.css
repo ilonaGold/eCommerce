@@ -1,11 +1,12 @@
+/* User Info Address View */
 .user-info__address-info {
   max-width: 900px;
   width: 50%;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 25px;
   margin: 0 auto;
-  padding: 2rem 4rem;
+  padding: 1.5rem 4rem 1rem;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -31,11 +32,66 @@
   margin-bottom: 1rem;
 }
 
+.header-with-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.address-add-btn {
+  padding: 0.5rem 1rem;
+  background-color: #efefef;
+  border: 1px solid #ddd;
+  color: maroon;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  top: -10px;
+}
+
+.address-add-btn:hover {
+  background-color: maroon;
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Address actions */
+.address-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.address-edit-btn,
+.address-delete-btn,
+.set-default-btn {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.address-edit-btn:hover,
+.set-default-btn:hover {
+  background-color: maroon;
+  color: white;
+}
+
+.address-delete-btn:hover {
+  background-color: #ffebee;
+  color: #d32f2f;
+}
+
 /* Responsive styles */
 @media (max-width: 1100px) {
   .user-info__address-info {
     width: 70%;
-    padding: 2rem 2rem;
+    padding: 2rem;
   }
 }
 
