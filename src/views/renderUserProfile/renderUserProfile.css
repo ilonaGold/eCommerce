@@ -60,6 +60,12 @@
   color: white;
 }
 
+.user-profile__edit-button:hover,
+.user-profile__change-password-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 /* Info groups */
 .user-profile__info-group {
   display: flex;

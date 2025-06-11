@@ -1,0 +1,91 @@
+.address-form {
+  padding: 10px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.address-form__fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.address-form__field {
+  display: flex;
+  flex-direction: column;
+}
+
+.address-form__field label {
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #555;
+}
+
+.address-form__field input,
+.address-form__field select {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.address-form__field input:focus,
+.address-form__field select:focus {
+  border-color: maroon;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(128, 0, 0, 0.1);
+}
+
+.address-form__defaults {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.address-form__defaults .custom-checkbox {
+  display: block;
+  width: 100%;
+}
+
+.address-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.address-form__save-btn,
+.address-form__cancel-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.address-form__save-btn {
+  background-color: #efefef;
+  border: 1px solid #ddd;
+  color: maroon;
+}
+
+.address-form__cancel-btn {
+  background-color: white;
+  border: 1px solid #ddd;
+  color: #666;
+}
+
+.address-form__save-btn:hover,
+.address-form__cancel-btn:hover {
+  background-color: maroon;
+  color: white;
+  transform: scale(1.05);
+  border-color: maroon;
+}
+
+.address-form__save-btn:disabled {
+  background-color: #f5f5f5;
+  color: #999;
+  cursor: not-allowed;
+  transform: none;
+}
