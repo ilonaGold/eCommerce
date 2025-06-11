@@ -5,7 +5,7 @@
   align-items: center;
   width: 100%;
   position: relative;
-  z-index: 2;
+  z-index: auto;
 }
 
 .header-nav {
@@ -72,10 +72,6 @@
   cursor: pointer;
   transition: all 0.3s ease;
   text-transform: uppercase;
-}
-
-.nav-open {
-  transform: translateY(300px);
 }
 
 .login-btn {
@@ -153,15 +149,103 @@
   bottom: 0;
 }
 
-@media (max-width: 900px) {
-  .nav-links {
-    font-size: 1.1rem;
-    gap: 1.5rem;
-  }
+/* --- Hide content below when menu is open --- */
+body.menu-open .welcome-text,
+body.menu-open .page-text,
+body.menu-open .main-content,
+body.menu-open .registration-container,
+body.menu-open form,
+body.menu-open .footer {
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 1;
+}
 
-  .header-btn {
-    padding: 0.7rem 1.2rem;
-    font-size: 0.9rem;
+/* --- Ensure nav menu is on top --- */
+.nav-links.active,
+.nav-links.active .nav-link,
+.nav-links.active .nav-item {
+  pointer-events: auto !important;
+}
+
+.nav-links.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: url("../../assets/images/jungle-bg.jpg") center/cover no-repeat;
+  opacity: 0.98;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  height: 100vh;
+  padding: 1rem;
+  z-index: 9999;
+  overflow-y: auto;
+  pointer-events: auto;
+  text-transform: uppercase;
+  padding-left: 3rem;
+}
+
+.nav-links.active::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(3px);
+  z-index: 1;
+}
+
+/* --- Menu Links --- */
+.nav-links.active .nav-item {
+  margin: 8px auto;
+  width: 70%;
+  text-align: center;
+  z-index: 10000;
+}
+
+.nav-links.active .nav-link {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 1.2rem 4rem;
+  color: maroon;
+  font-size: 1.5rem;
+  font-weight: 600;
+  background-color: white;
+  opacity: 2;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(139, 0, 0, 0.5);
+  margin-bottom: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 10000;
+  pointer-events: auto;
+}
+
+.nav-links.active .nav-link:hover {
+  background-color: #f8f1ee;
+  color: #e5994e;
+  background-size: 100% 0.12em;
+}
+
+/* --- Responsive Styles --- */
+@media (max-width: 1200px) {
+  .nav-links {
+    gap: 1rem;
+    margin-left: -3rem;
+  }
+}
+
+@media (max-width: 900px) {
+  body.menu-open {
+    overflow: hidden;
   }
 }
 
@@ -187,7 +271,20 @@
   .hamburger-menu {
     display: block;
     cursor: pointer;
-    margin-left: 0.25rem;
+    position: relative;
+    z-index: 10001;
+    pointer-events: auto;
+  }
+
+  .hamburger-menu.active .hamburger-icon::before,
+  .hamburger-menu.active .hamburger-icon::after {
+    background-color: white;
+  }
+
+  .hamburger-menu.active .hamburger-icon:hover,
+  .hamburger-menu.active .hamburger-icon:focus {
+    background-color: #e5994e;
+    transform: scale(1.2);
   }
 
   .header-btn {
@@ -199,65 +296,8 @@
     display: none;
   }
 
-  .nav-links.active {
-    display: flex;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: rgba(255, 255, 255, 0.98);
-    padding: 1.5rem;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.2rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    pointer-events: all;
-  }
-
-  .nav-links .nav-item {
-    width: 100%;
-    position: relative;
-    z-index: 1001;
-  }
-
-  .nav-links .nav-item .nav-link {
-    background-image: none;
-    background-position: unset;
-    background-size: unset;
-    display: block;
-    width: 100%;
-    text-align: center;
-    padding: 0.5rem;
-    color: maroon;
-    font-weight: 500;
-    font-size: 1.1rem;
-    cursor: pointer;
-    position: relative;
-  }
-
-  .nav-links .nav-item .nav-link::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background: #e5994e;
-    transition: width 0.3s ease;
-    transform: translateX(-50%);
-  }
-
-  .nav-links .nav-item .nav-link:hover {
-    color: #e5994e;
-  }
-
-  .nav-links .nav-item .nav-link:hover::after {
-    width: 100%;
-  }
-
   .logo {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
   }
 }
 

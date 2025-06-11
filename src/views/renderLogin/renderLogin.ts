@@ -6,6 +6,7 @@ import { getState } from "../../state/state";
 
 import pandaNinjaImg from "../../assets/images/panda-ninja.png";
 import "../../components/login/loginForm.css";
+import "./renderLogin.css";
 
 export const renderLogin = (parent: HTMLElement): void => {
   const isAuth = getState("userAuth");
@@ -13,9 +14,10 @@ export const renderLogin = (parent: HTMLElement): void => {
   const container = createElement("div", { class: "login-container" }, [
     // Header
     createHeader(isAuth, customer),
+    // Welcome section
+    createElement("h2", { class: "welcome-text" }, ["Welcome to Red Panda Squad Shop"]),
     // Main content
     createElement("main", { class: "main-content" }, [
-      createElement("h2", { class: "welcome-text" }, ["Welcome to Red Panda Squad Shop"]),
       createElement("div", { class: "login-content" }, [
         createElement("div", { class: "form-container" }, [createLoginForm()]),
         createElement("div", { class: "image-container" }, [
