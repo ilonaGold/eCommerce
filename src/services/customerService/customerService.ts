@@ -3,6 +3,7 @@ import { Customer } from "../../interfaces/dataInterfaces";
 
 // Add this import at the top:
 import { getAccessTokenData } from "../auth/getAccessTokenData";
+import { getLoginInfo } from "../localStorage/localStorage";
 
 // Update customer information
 export async function updateCustomerInfo(customerData: {
@@ -84,8 +85,8 @@ export async function changeCustomerPassword(currentPassword: string, newPasswor
     }
 
     // Get a fresh token
-    const authData = await getAccessTokenData();
-    const accessToken = authData.access_token;
+    const accessToken = getLoginInfo()?.accessToken;
+    console.log(accessToken);
 
     const apiUrl = `${import.meta.env.VITE_CTP_API_URL}/${import.meta.env.VITE_CTP_PROJECT_KEY}/me/password`;
     const response = await fetch(apiUrl, {
@@ -109,6 +110,7 @@ export async function changeCustomerPassword(currentPassword: string, newPasswor
     }
 
     const updatedCustomer = responseData as Customer;
+
     setCustomer(updatedCustomer);
     return updatedCustomer;
   } catch (error: unknown) {

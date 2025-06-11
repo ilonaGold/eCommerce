@@ -23,7 +23,7 @@ export interface LoginInfo {
   accessToken: string;
   refreshToken: string;
   expiresAt: number;
-  customer: CustomerFormData;
+  customer: Customer;
 }
 
 // -------------------------------------------------------------------------

@@ -1,6 +1,5 @@
-import { getState, setCustomer } from "../../state/state";
+import { getState } from "../../state/state";
 import { Customer } from "../../interfaces/dataInterfaces";
-import { getAccessTokenData } from "../auth/getAccessTokenData";
 
 // Add new address
 export async function addAddress(addressData: {
@@ -14,6 +13,8 @@ export async function addAddress(addressData: {
   defaultShipping: boolean;
   defaultBilling: boolean;
 }) {
+  console.log(addressData);
+
   try {
     const customer = getState("customer") as Customer;
     if (!customer || !customer.id || !customer.version) {
@@ -43,6 +44,8 @@ export async function updateAddress(addressData: {
   defaultShipping: boolean;
   defaultBilling: boolean;
 }) {
+  console.log(addressData);
+
   try {
     const customer = getState("customer") as Customer;
     if (!customer || !customer.id || !customer.version) {
@@ -60,6 +63,8 @@ export async function updateAddress(addressData: {
 
 // Remove address
 export async function removeAddress(addressId: string) {
+  console.log(addressId);
+
   try {
     const customer = getState("customer") as Customer;
     if (!customer || !customer.id || !customer.version) {
@@ -77,6 +82,8 @@ export async function removeAddress(addressId: string) {
 
 // Set address as default shipping
 export async function setDefaultShippingAddress(addressId: string) {
+  console.log(addressId);
+
   try {
     const customer = getState("customer") as Customer;
     if (!customer || !customer.id || !customer.version) {
@@ -94,6 +101,8 @@ export async function setDefaultShippingAddress(addressId: string) {
 
 // Set address as default billing
 export async function setDefaultBillingAddress(addressId: string) {
+  console.log(addressId);
+
   try {
     const customer = getState("customer") as Customer;
     if (!customer || !customer.id || !customer.version) {
