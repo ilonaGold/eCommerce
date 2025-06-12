@@ -7,7 +7,7 @@ import { setAuth, setCustomer } from "../../state/state";
 
 export function createHeader(isLoggedIn: boolean, customer: Customer | null): HTMLElement {
   const navLinks = [
-    { text: "Home", view: "home" },
+    { text: "Home", view: "" },
     { text: "About", view: "about" },
     { text: "Products", view: "main" },
   ];
@@ -19,7 +19,7 @@ export function createHeader(isLoggedIn: boolean, customer: Customer | null): HT
         setAuth(false);
         setCustomer(null);
         clearLoginData();
-        goToView("main");
+        goToView("");
       },
     },
     styles: {
@@ -102,7 +102,7 @@ export function createHeader(isLoggedIn: boolean, customer: Customer | null): HT
 
   const nav = createElement("nav", { class: "header-nav" }, [
     createElement("h1", { class: "logo" }, ["Red Panda Squad"], {
-      events: { click: () => goToView("main") },
+      events: { click: () => goToView("") },
       styles: { cursor: "pointer" },
     }),
     navList,
@@ -112,13 +112,13 @@ export function createHeader(isLoggedIn: boolean, customer: Customer | null): HT
   const header = createElement("header", { class: "header" }, [nav]);
 
   // Event logic
-  function openMenu() {
+  function openMenu(): void {
     navList.classList.add("active");
     hamburger.classList.add("active");
     document.body.classList.add("menu-open");
   }
 
-  function closeMenu() {
+  function closeMenu(): void {
     navList.classList.remove("active");
     hamburger.classList.remove("active");
     document.body.classList.remove("menu-open");

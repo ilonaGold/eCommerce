@@ -1,4 +1,4 @@
-import { getState } from "../../state/state";
+import { getState, setProducts } from "../../state/state";
 import { createElement } from "../../utils/dom/createElement";
 import { createHeader } from "../../components/header/header";
 import { mainComponent } from "../../components/main/main";
@@ -8,9 +8,9 @@ import { catalogComponent } from "../../components/catalog/catalogComponent";
 import { productProjectionSearch } from "../../services/API/products/productProjectionSearch";
 import { loadingAnimation } from "../../components/loadingAnimation/loadingAnimation";
 
-import "./renderMain.css";
+import "./renderProducts.css";
 
-export async function renderMain(parent: HTMLElement): Promise<void> {
+export async function renderProducts(parent: HTMLElement): Promise<void> {
   const isAuth = getState("userAuth");
   const customer = getState("customer");
 
@@ -24,6 +24,9 @@ export async function renderMain(parent: HTMLElement): Promise<void> {
 
   // Fetching & Appending
   const products = await productProjectionSearch();
+  console.log(products);
+
+  setProducts(products.results);
   const productsCatalog = catalogComponent(products);
   main.replaceChildren(productsCatalog);
 }
