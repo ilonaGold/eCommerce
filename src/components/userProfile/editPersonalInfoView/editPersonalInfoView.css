@@ -1,0 +1,80 @@
+.edit-profile-form {
+  width: 100%;
+}
+
+.edit-profile__fields {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.edit-profile__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.edit-profile__field label {
+  color: #555;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.edit-profile__field input {
+  font-size: 1rem;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  color: #333;
+}
+
+.edit-profile__field input:focus {
+  outline: none;
+  border-color: maroon;
+  box-shadow: 0 0 0 2px rgba(128, 0, 0, 0.1);
+}
+
+.edit-profile__actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.edit-profile__cancel-btn,
+.edit-profile__save-btn {
+  padding: 0.7rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.edit-profile__cancel-btn {
+  background: transparent;
+  color: #777;
+  border: 1px solid #ddd;
+}
+
+.edit-profile__save-btn {
+  background-color: maroon;
+  color: white;
+  border: none;
+}
+
+.edit-profile__cancel-btn:hover {
+  background-color: #f5f5f5;
+}
+
+.edit-profile__save-btn:hover {
+  background-color: #900;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .edit-profile__fields {
+    grid-template-columns: 1fr;
+  }
+}

@@ -3,6 +3,7 @@
   flex-direction: row;
   justify-content: flex-start;
   gap: 15px;
+  margin: 0 auto -1rem;
 }
 
 .user-profile__container {
@@ -11,8 +12,20 @@
   flex-direction: column;
   justify-content: flex-start;
   gap: 20px;
-  padding: 50px;
+  padding: 42px;
   background-color: rgba(255, 255, 255, 0.9);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.user-info__section-header {
+  color: maroon;
+  font-size: 1.5rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid rgba(229, 153, 78, 0.4);
+  font-weight: 600;
+  text-align: center;
 }
 
 .user-profile__info-and-address {
@@ -20,8 +33,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 50px;
+  gap: 25px;
 }
+
+/* Buttons */
 
 .user-profile__edit-button,
 .user-profile__change-password-button {
@@ -43,4 +58,83 @@
 .user-profile__change-password-button {
   background: #e5994e;
   color: white;
+}
+
+.user-profile__edit-button:hover,
+.user-profile__change-password-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Info groups */
+.user-profile__info-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.user-profile__header {
+  color: #555;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.user-profile__content {
+  font-size: 1.1rem;
+  color: #333;
+  padding: 0.75rem 1rem;
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  border-left: 3px solid maroon;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .user-profile__container {
+    padding: 30px 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .user-profile__container {
+    padding: 20px 15px;
+  }
+
+  .user-profile__button-container {
+    flex-direction: column;
+    width: 100%;
+    max-width: 250px;
+  }
+
+  .user-profile__edit-button,
+  .user-profile__change-password-button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .user-profile__info-and-address {
+    gap: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .user-profile__button-container {
+    max-width: 220px;
+    margin: 0 auto 1rem;
+  }
+
+  .user-info__section-header {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .user-profile__edit-button,
+  .user-profile__change-password-button {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.9rem;
+  }
 }

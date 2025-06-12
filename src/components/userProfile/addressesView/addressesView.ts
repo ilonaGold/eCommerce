@@ -1,6 +1,14 @@
 import { getState } from "../../../state/state";
 import { createElement } from "../../../utils/dom/createElement";
 import { createInfoGroup } from "../../../utils/dom/userProfile/createInfoGroup";
+import { openModal } from "../../modal/modal";
+import { createAddAddressView } from "../addAddressView/addAddressView";
+import { createEditAddressView } from "../editAddressView/editAddressView";
+import {
+  removeAddress,
+  setDefaultShippingAddress,
+  setDefaultBillingAddress,
+} from "../../../services/addressService/addressService";
 
 import "./addressesView.css";
 
@@ -55,6 +63,51 @@ export const addressesView = (): HTMLElement => {
         billingAddress.append(defaultBadge);
       }
       billingAddress.append(street, city, country, postCode);
+
+      // Action buttons for each address
+      const addressActions = createElement("div", { class: "address-actions" }, [
+        createElement("button", { class: "address-edit-btn" }, ["Edit"], {
+          events: {
+            click: () => {
+              openModal(createEditAddressView(address.id || ""), "Edit Address");
+            },
+          },
+        }),
+        createElement("button", { class: "address-delete-btn" }, ["Delete"], {
+          events: {
+            click: () => {
+              if (confirm("Are you sure you want to delete this address?")) {
+                removeAddress(address.id || "")
+                  .then(() => {
+                    location.reload();
+                  })
+                  .catch((error) => {
+                    alert(`Failed to delete address: ${error.message}`);
+                  });
+              }
+            },
+          },
+        }),
+      ]);
+
+      if (address.id !== defaultBillingAddressId) {
+        addressActions.appendChild(
+          createElement("button", { class: "set-default-btn" }, ["Set as Default"], {
+            events: {
+              click: () => {
+                setDefaultBillingAddress(address.id || "")
+                  .then(() => {
+                    location.reload();
+                  })
+                  .catch((error) => {
+                    alert(`Failed to set default: ${error.message}`);
+                  });
+              },
+            },
+          })
+        );
+      }
+      billingAddress.append(addressActions);
       billingAddressesContainer.append(billingAddress);
     }
   }
@@ -99,6 +152,51 @@ export const addressesView = (): HTMLElement => {
         shippingAddress.append(defaultBadge);
       }
       shippingAddress.append(street, city, country, postCode);
+
+      // Action buttons for each address
+      const addressActions = createElement("div", { class: "address-actions" }, [
+        createElement("button", { class: "address-edit-btn" }, ["Edit"], {
+          events: {
+            click: () => {
+              openModal(createEditAddressView(address.id || ""), "Edit Address");
+            },
+          },
+        }),
+        createElement("button", { class: "address-delete-btn" }, ["Delete"], {
+          events: {
+            click: () => {
+              if (confirm("Are you sure you want to delete this address?")) {
+                removeAddress(address.id || "")
+                  .then(() => {
+                    location.reload();
+                  })
+                  .catch((error) => {
+                    alert(`Failed to delete address: ${error.message}`);
+                  });
+              }
+            },
+          },
+        }),
+      ]);
+
+      if (address.id !== defaultShippingAddressId) {
+        addressActions.appendChild(
+          createElement("button", { class: "set-default-btn" }, ["Set as Default"], {
+            events: {
+              click: () => {
+                setDefaultShippingAddress(address.id || "")
+                  .then(() => {
+                    location.reload();
+                  })
+                  .catch((error) => {
+                    alert(`Failed to set default: ${error.message}`);
+                  });
+              },
+            },
+          })
+        );
+      }
+      shippingAddress.append(addressActions);
       shippingAddressesContainer.append(shippingAddress);
     }
   }
@@ -106,13 +204,30 @@ export const addressesView = (): HTMLElement => {
   const headerOfSection = createElement("h2", { class: "user-info__section-header" }, [
     "Address information",
   ]);
+
+  // Add new address button
+  const addAddressBtn = createElement("button", { class: "address-add-btn" }, ["Add New Address"], {
+    events: {
+      click: () => {
+        openModal(createAddAddressView(), "Add New Address");
+      },
+    },
+  });
+
+  const headerContainer = createElement("div", { class: "header-with-button" }, [
+    headerOfSection,
+    addAddressBtn,
+  ]);
+
   const addressInfo = createElement("div", { class: "user-info__address-fields" }, [
     billingAddressesContainer,
     shippingAddressesContainer,
   ]);
+
   const addressInfoSection = createElement("section", { class: "user-info__address-info" }, [
-    headerOfSection,
+    headerContainer,
     addressInfo,
   ]);
+
   return addressInfoSection;
 };
