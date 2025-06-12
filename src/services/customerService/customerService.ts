@@ -41,8 +41,7 @@ export async function updateCustomerInfo(customerData: {
     // Only make API call if there are changes
     if (actions.length > 0) {
       // Get a fresh token
-      const authData = await getAccessTokenData();
-      const accessToken = authData.access_token;
+      const accessToken = getLoginInfo()?.accessToken;
 
       const apiUrl = `${import.meta.env.VITE_CTP_API_URL}/${import.meta.env.VITE_CTP_PROJECT_KEY}/me`;
       const response = await fetch(apiUrl, {
