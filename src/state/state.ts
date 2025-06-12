@@ -11,6 +11,13 @@ const state: AppState = {
     results: [],
     facets: undefined,
   },
+  searchFormData: {
+    keyword: "",
+    sort: "",
+    category: "",
+    minPrice: "",
+    maxPrice: "",
+  },
   subscribers: new Set(),
   setAuth(isAuth: boolean) {
     this.userAuth = isAuth;
@@ -22,6 +29,11 @@ const state: AppState = {
     this.productsData = productsData;
     this.subscribers.forEach((cb) => cb(this));
   },
+  setSearchFormData(searchFormData) {
+    this.searchFormData = searchFormData;
+    this.subscribers.forEach((cb) => cb(this));
+  },
+
   getState(property) {
     return this[property];
   },
@@ -38,3 +50,4 @@ export const setCustomer = state.setCustomer.bind(state);
 export const setProductsData = state.setProductsData.bind(state);
 export const getState = state.getState.bind(state);
 export const subscribe = state.subscribe.bind(state);
+export const setSearchFormData = state.setSearchFormData.bind(state);

@@ -1,6 +1,8 @@
 type SortKey = "priceAsc" | "priceDesc" | "newest" | "nameAsc" | "nameDesc";
 
 export const queryBuilder = (formData: { [key: string]: string }): string => {
+  console.log(formData);
+
   if (Object.keys(formData).length === 0) {
     return "facet=categories.id";
   }
@@ -38,8 +40,6 @@ export const queryBuilder = (formData: { [key: string]: string }): string => {
   params.append("priceCurrency", "EUR");
   params.append("priceCountry", "EU");
   params.append("facet", "categories.id");
-
-  console.log(params.toString());
 
   return params.toString();
 };

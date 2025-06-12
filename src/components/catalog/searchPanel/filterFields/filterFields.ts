@@ -1,4 +1,5 @@
 import { getCategories } from "../../../../services/API/products/getCategories";
+import { getState } from "../../../../state/state";
 import { createElement } from "../../../../utils/dom/createElement";
 
 import "./filterFields.css";
@@ -21,9 +22,21 @@ export const createFilterFields = (): HTMLDivElement => {
 
   // populate categories element with options
   getCategories().then((categoriesPagedResponse) => {
+    const statedCategory = getState("searchFormData").category;
+    const categoryFromURL = new URLSearchParams(location.search).get("category");
+
+    const choosenCategory = statedCategory ? statedCategory : categoryFromURL;
+
     const categories = categoriesPagedResponse.results;
     const options = categories.map((category) => {
-      return createElement("option", { value: `${category.id}` }, [`${category.name["en-US"]}`]);
+      return createElement(
+        "option",
+        {
+          value: `${category.id}`,
+          ...(category.id === choosenCategory ? { selected: "selected" } : {}),
+        },
+        [`${category.name["en-US"]}`]
+      );
     });
     categoriesSelect.append(...options);
   });

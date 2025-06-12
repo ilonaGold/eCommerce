@@ -3,6 +3,7 @@ import { PagedSearchResponse } from "../../../interfaces/products/ProductProject
 import { createElement } from "../../../utils/dom/createElement";
 import { categoryMapCreator } from "./helpers/categoryMapCreator";
 
+import { breadCrumbs } from "./breadCrumbs/breadCrumbs";
 import "./categoryBar.css";
 
 export const categorySidebar = (
@@ -12,20 +13,19 @@ export const categorySidebar = (
   const { categoryMap, rootCategories } = categoryMapCreator(productsData, categoriesData);
   console.log(categoryMap, rootCategories);
 
-  // const breadCrumbs = createElement("div", {}, ["Home > Products"]);
+  const breadCrumbsComponent = breadCrumbs();
 
-  // const listingGuantity = createElement("div", {}, ["Listings: 2300"]);
+  const listingQuantity = createElement("div", {}, [`Listings: ${productsData.total}`], {
+    styles: {
+      border: "1px solid #990000",
+      borderRadius: "0.3rem",
+      padding: "0.3rem 0.5rem",
+    },
+  });
 
-  const categoryNavbar = createElement(
-    "div",
-    {},
-    [
-      /*breadCrumbs, listingGuantity*/
-    ],
-    {
-      classes: ["category-navbar"],
-    }
-  );
+  const categoryNavbar = createElement("div", {}, [breadCrumbsComponent, listingQuantity], {
+    classes: ["category-navbar"],
+  });
 
   return categoryNavbar;
 };

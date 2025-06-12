@@ -1,5 +1,5 @@
 import { productProjectionSearch } from "../../../../services/API/products/productProjectionSearch";
-import { setProductsData } from "../../../../state/state";
+import { setProductsData, setSearchFormData } from "../../../../state/state";
 import { queryBuilder } from "./queryBuilder";
 
 export const searchHandler = async (e: Event): Promise<void> => {
@@ -10,6 +10,14 @@ export const searchHandler = async (e: Event): Promise<void> => {
   const fields = Object.fromEntries(formData.entries().filter(([, value]) => Boolean(value))) as {
     [key: string]: string;
   };
+
+  setSearchFormData({
+    keyword: fields.keyword ?? "",
+    sort: fields.sort ?? "",
+    category: fields.category ?? "",
+    minPrice: fields.minPrice ?? "",
+    maxPrice: fields.maxPrice ?? "",
+  });
 
   // decorative query
   const params = new URLSearchParams();

@@ -1,4 +1,4 @@
-import { getState, setProductsData } from "../../state/state";
+import { getState, setProductsData, subscribe } from "../../state/state";
 import { createElement } from "../../utils/dom/createElement";
 import { createHeader } from "../../components/header/header";
 import { mainComponent } from "../../components/main/main";
@@ -34,6 +34,12 @@ export async function renderProducts(parent: HTMLElement): Promise<void> {
   }
 
   setProductsData(productsData);
-  const productsCatalog = await catalogComponent(productsData);
+  let productsCatalog = await catalogComponent(productsData);
   main.replaceChildren(productsCatalog);
+
+  subscribe(async (state) => {
+    const newCatalog = await catalogComponent(state.productsData);
+    productsCatalog.replaceWith(newCatalog);
+    productsCatalog = newCatalog;
+  });
 }
