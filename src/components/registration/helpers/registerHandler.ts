@@ -29,7 +29,7 @@ export async function registerHandler(event: Event): Promise<void> {
     // ----Handle customer data
     console.log("Logged In, choose redirect method");
     notificationModal("Logged In successfully", "success");
-    goToView("main");
+    goToView("");
   } catch (error) {
     if (error instanceof Error) {
       console.log(error.message);
