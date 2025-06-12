@@ -1,6 +1,9 @@
 import { createElement } from "../../../utils/dom/createElement";
 import { getState } from "../../../state/state";
+import { updateAddress } from "../../../services/addressService/addressService";
+import countryCodes from "../../../assets/data/countryCodes.json";
 import "./editAddressView.css";
+import "../../../styles/styles.css"; // For custom checkboxes
 
 export const createEditAddressView = (addressId: string): HTMLElement => {
   const customer = getState("customer");
@@ -10,7 +13,7 @@ export const createEditAddressView = (addressId: string): HTMLElement => {
     return createElement("div", { class: "error-message" }, ["Address not found"]);
   }
 
-  // Create form container - similar to addAddressView but prefilled
+  // Create form container
   const container = createElement("form", { class: "address-form" }, []);
 
   // Form fields
@@ -87,7 +90,20 @@ export const createEditAddressView = (addressId: string): HTMLElement => {
     }),
   ]);
 
-  // Country field (dropdown)
+  // Country field with all countries from countryCodes.json
+  const countryOptions = [
+    ...countryCodes.map((country) => {
+      return createElement(
+        "option",
+        {
+          value: country.value,
+          selected: address.country === country.value ? "selected" : "",
+        },
+        [country.text]
+      );
+    }),
+  ];
+
   const countryField = createElement("div", { class: "address-form__field" }, [
     createElement("label", { for: "country" }, ["Country"]),
     createElement(
@@ -97,55 +113,32 @@ export const createEditAddressView = (addressId: string): HTMLElement => {
         name: "country",
         required: "required",
       },
-      [
-        createElement("option", { value: "" }, ["Select a country"]),
-        createElement(
-          "option",
-          { value: "US", selected: address.country === "US" ? "selected" : "" },
-          ["United States"]
-        ),
-        createElement(
-          "option",
-          { value: "GB", selected: address.country === "GB" ? "selected" : "" },
-          ["United Kingdom"]
-        ),
-        createElement(
-          "option",
-          { value: "DE", selected: address.country === "DE" ? "selected" : "" },
-          ["Germany"]
-        ),
-        createElement(
-          "option",
-          { value: "FR", selected: address.country === "FR" ? "selected" : "" },
-          ["France"]
-        ),
-        // Add more countries as needed
-      ]
+      countryOptions
     ),
   ]);
 
-  // Default address checkboxes
+  // Default address checkboxes with custom styling
   const isDefaultShipping = customer?.defaultShippingAddressId === address.id;
   const isDefaultBilling = customer?.defaultBillingAddressId === address.id;
 
   const defaultOptions = createElement("div", { class: "address-form__defaults" }, [
-    createElement("div", { class: "checkbox-container" }, [
+    createElement("label", { class: "custom-checkbox" }, [
       createElement("input", {
         type: "checkbox",
-        id: "defaultShipping",
         name: "defaultShipping",
-        ...(isDefaultShipping ? { checked: "checked" } : {}),
+        checked: isDefaultShipping ? "checked" : "",
       }),
-      createElement("label", { for: "defaultShipping" }, ["Set as default shipping address"]),
+      createElement("span", { class: "checkmark" }, []),
+      "Set as default shipping address",
     ]),
-    createElement("div", { class: "checkbox-container" }, [
+    createElement("label", { class: "custom-checkbox" }, [
       createElement("input", {
         type: "checkbox",
-        id: "defaultBilling",
         name: "defaultBilling",
-        ...(isDefaultBilling ? { checked: "checked" } : {}),
+        checked: isDefaultBilling ? "checked" : "",
       }),
-      createElement("label", { for: "defaultBilling" }, ["Set as default billing address"]),
+      createElement("span", { class: "checkmark" }, []),
+      "Set as default billing address",
     ]),
   ]);
 
@@ -193,14 +186,13 @@ export const createEditAddressView = (addressId: string): HTMLElement => {
     // Get form data
     const formData = new FormData(container as HTMLFormElement);
     const addressData = {
-      id: formData.get("addressId") as string,
-      firstName: formData.get("firstName") as string,
-      lastName: formData.get("lastName") as string,
-      streetName: formData.get("streetName") as string,
-      additionalStreetInfo: (formData.get("additionalStreetInfo") as string) || undefined,
-      city: formData.get("city") as string,
-      postalCode: formData.get("postalCode") as string,
-      country: formData.get("country") as string,
+      firstName: (formData.get("firstName") as string) || "",
+      lastName: (formData.get("lastName") as string) || "",
+      streetName: (formData.get("streetName") as string) || "",
+      additionalStreetInfo: (formData.get("additionalStreetInfo") as string) || "",
+      city: (formData.get("city") as string) || "",
+      postalCode: (formData.get("postalCode") as string) || "",
+      country: (formData.get("country") as string) || "",
       defaultShipping: formData.get("defaultShipping") === "on",
       defaultBilling: formData.get("defaultBilling") === "on",
     };
@@ -214,22 +206,20 @@ export const createEditAddressView = (addressId: string): HTMLElement => {
       saveBtn.textContent = "Saving...";
       saveBtn.disabled = true;
 
-      // Your team will implement this
-      console.log("Updating address:", addressData);
-
-      // Just for show
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // Call the API to update the address
+      await updateAddress(addressId, addressData);
 
       // Close the modal after successful update
       const modalOverlay = container.closest(".modal-overlay");
       const closeBtn = modalOverlay?.querySelector(".modal-close-btn") as HTMLButtonElement;
       if (closeBtn) closeBtn.click();
 
-      // This will be replaced by the team's implementation
-      alert("Address updated successfully!");
-    } catch (error) {
+      // Refresh to show updated addresses
+      location.reload();
+    } catch (error: unknown) {
       console.error("Error updating address:", error);
-      alert(`Failed to update address: ${(error as Error).message}`);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      alert(`Failed to update address: ${errorMessage}`);
 
       // Reset button
       saveBtn.textContent = originalText;

@@ -81,8 +81,9 @@ export const addressesView = (): HTMLElement => {
                   .then(() => {
                     location.reload();
                   })
-                  .catch((error) => {
-                    alert(`Failed to delete address: ${error.message}`);
+                  .catch((error: unknown) => {
+                    const errorMessage = error instanceof Error ? error.message : String(error);
+                    alert(`Failed to delete address: ${errorMessage}`);
                   });
               }
             },
@@ -99,8 +100,9 @@ export const addressesView = (): HTMLElement => {
                   .then(() => {
                     location.reload();
                   })
-                  .catch((error) => {
-                    alert(`Failed to set default: ${error.message}`);
+                  .catch((error: unknown) => {
+                    const errorMessage = error instanceof Error ? error.message : String(error);
+                    alert(`Failed to delete address: ${errorMessage}`);
                   });
               },
             },
@@ -170,8 +172,9 @@ export const addressesView = (): HTMLElement => {
                   .then(() => {
                     location.reload();
                   })
-                  .catch((error) => {
-                    alert(`Failed to delete address: ${error.message}`);
+                  .catch((error: unknown) => {
+                    const errorMessage = error instanceof Error ? error.message : String(error);
+                    alert(`Failed to delete address: ${errorMessage}`);
                   });
               }
             },
