@@ -12,7 +12,7 @@ export async function addAddress(addressData: {
   country: string;
   defaultShipping: boolean;
   defaultBilling: boolean;
-}) {
+}): Promise<null> {
   console.log(addressData);
 
   try {
@@ -43,7 +43,7 @@ export async function updateAddress(addressData: {
   country: string;
   defaultShipping: boolean;
   defaultBilling: boolean;
-}) {
+}): Promise<null> {
   console.log(addressData);
 
   try {
@@ -62,7 +62,7 @@ export async function updateAddress(addressData: {
 }
 
 // Remove address
-export async function removeAddress(addressId: string) {
+export async function removeAddress(addressId: string): Promise<null> {
   console.log(addressId);
 
   try {
@@ -81,7 +81,7 @@ export async function removeAddress(addressId: string) {
 }
 
 // Set address as default shipping
-export async function setDefaultShippingAddress(addressId: string) {
+export async function setDefaultShippingAddress(addressId: string): Promise<null> {
   console.log(addressId);
 
   try {
@@ -100,9 +100,8 @@ export async function setDefaultShippingAddress(addressId: string) {
 }
 
 // Set address as default billing
-export async function setDefaultBillingAddress(addressId: string) {
+export async function setDefaultBillingAddress(addressId: string): Promise<null> {
   console.log(addressId);
-
   try {
     const customer = getState("customer") as Customer;
     if (!customer || !customer.id || !customer.version) {

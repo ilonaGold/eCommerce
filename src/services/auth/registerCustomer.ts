@@ -1,7 +1,7 @@
 import { notificationModal } from "../../components/notificationModal/notificationModal";
-import { Customer } from "../../interfaces/dataInterfaces";
+import { CustomerFormData } from "../../interfaces/dataInterfaces";
 
-export async function registerCustomer(customerDraft: Customer): Promise<void> {
+export async function registerCustomer(customerDraft: CustomerFormData): Promise<void> {
   console.log(customerDraft);
   const apiUrl = `${import.meta.env.VITE_CTP_API_URL}/${import.meta.env.VITE_CTP_PROJECT_KEY}/customers`;
 
