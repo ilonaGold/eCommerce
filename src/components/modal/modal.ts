@@ -42,7 +42,7 @@ export const createModal = (content: HTMLElement, title: string = ""): HTMLEleme
   });
 
   // Function to close the modal
-  function closeModal(modal: HTMLElement) {
+  function closeModal(modal: HTMLElement): void {
     // Add closing animation class
     modalContainer.classList.add("modal-closing");
 

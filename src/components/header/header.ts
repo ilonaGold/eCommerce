@@ -9,7 +9,7 @@ export function createHeader(isLoggedIn: boolean, customer: Customer | null): HT
   const navLinks = [
     { text: "Home", view: "" },
     { text: "About", view: "about" },
-    { text: "Products", view: "main" },
+    { text: "Products", view: "products" },
   ];
 
   const logOutBtn = createElement("a", { class: "logout-btn" }, ["Log Out"], {

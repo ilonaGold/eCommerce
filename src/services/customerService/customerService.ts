@@ -11,7 +11,7 @@ export async function updateCustomerInfo(customerData: {
   lastName?: string;
   email?: string;
   dateOfBirth?: string;
-}) {
+}): Promise<Customer> {
   try {
     const customer = getState("customer") as Customer;
 
@@ -75,7 +75,10 @@ export async function updateCustomerInfo(customerData: {
 }
 
 // Change customer password
-export async function changeCustomerPassword(currentPassword: string, newPassword: string) {
+export async function changeCustomerPassword(
+  currentPassword: string,
+  newPassword: string
+): Promise<Customer> {
   try {
     const customer = getState("customer") as Customer;
 
