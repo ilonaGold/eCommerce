@@ -6,14 +6,16 @@
 
 .address-form__fields {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
-  margin-bottom: 20px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  width: 100%;
 }
 
 .address-form__field {
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
 }
 
 .address-form__field label {
@@ -24,10 +26,14 @@
 
 .address-form__field input,
 .address-form__field select {
-  padding: 8px;
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
   border: 1px solid #ddd;
   border-radius: 4px;
-  font-size: 1rem;
+  color: #333;
+  height: auto;
+  box-sizing: border-box;
 }
 
 .address-form__field input:focus,
@@ -52,13 +58,16 @@
 .address-form__actions {
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
+  gap: 15px;
+  margin-top: 20px;
 }
 
 .address-form__save-btn,
 .address-form__cancel-btn {
-  padding: 0.5rem 1rem;
+  padding: 10px 20px;
   border-radius: 4px;
+  font-weight: 500;
+  min-width: 100px;
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -88,4 +97,10 @@
   color: #999;
   cursor: not-allowed;
   transform: none;
+}
+
+@media (max-width: 768px) {
+  .address-form__fields {
+    grid-template-columns: 1fr;
+  }
 }

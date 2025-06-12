@@ -1,32 +1,40 @@
 import { createElement } from "../../../utils/dom/createElement";
+import { getState } from "../../../state/state";
+import { addAddress } from "../../../services/addressService/addressService";
+import countryCodes from "../../../assets/data/countryCodes.json";
 import "./addAddressView.css";
 import "../../../styles/styles.css";
 
 export const createAddAddressView = (): HTMLElement => {
+  // Get current customer data to pre-fill the form
+  const customer = getState("customer");
+
   // Create form container
   const container = createElement("form", { class: "address-form" }, []);
 
   // Form fields
   const formFields = createElement("div", { class: "address-form__fields" }, []);
 
-  // First name field
+  // First name field - pre-filled with customer first name
   const firstNameField = createElement("div", { class: "address-form__field" }, [
     createElement("label", { for: "firstName" }, ["First Name"]),
     createElement("input", {
       type: "text",
       id: "firstName",
       name: "firstName",
+      value: customer?.firstName || "",
       required: "required",
     }),
   ]);
 
-  // Last name field
+  // Last name field - pre-filled with customer last name
   const lastNameField = createElement("div", { class: "address-form__field" }, [
     createElement("label", { for: "lastName" }, ["Last Name"]),
     createElement("input", {
       type: "text",
       id: "lastName",
       name: "lastName",
+      value: customer?.lastName || "",
       required: "required",
     }),
   ]);
@@ -74,7 +82,14 @@ export const createAddAddressView = (): HTMLElement => {
     }),
   ]);
 
-  // Country field (dropdown)
+  // Country field with all countries from countryCodes.json
+  const countryOptions = [
+    createElement("option", { value: "" }, ["Select a country"]),
+    ...countryCodes.map((country) => {
+      return createElement("option", { value: country.value }, [country.text]);
+    }),
+  ];
+
   const countryField = createElement("div", { class: "address-form__field" }, [
     createElement("label", { for: "country" }, ["Country"]),
     createElement(
@@ -84,14 +99,7 @@ export const createAddAddressView = (): HTMLElement => {
         name: "country",
         required: "required",
       },
-      [
-        createElement("option", { value: "" }, ["Select a country"]),
-        createElement("option", { value: "US" }, ["United States"]),
-        createElement("option", { value: "GB" }, ["United Kingdom"]),
-        createElement("option", { value: "DE" }, ["Germany"]),
-        createElement("option", { value: "FR" }, ["France"]),
-        // Add more countries as needed
-      ]
+      countryOptions
     ),
   ]);
 
@@ -171,22 +179,20 @@ export const createAddAddressView = (): HTMLElement => {
       saveBtn.textContent = "Adding...";
       saveBtn.disabled = true;
 
-      // Your team will implement this
-      console.log("Adding address:", addressData);
+      // Call the API to add the address
+      await addAddress(addressData);
 
-      // Just for show
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      // Close the modal after successful update
+      // Close the modal
       const modalOverlay = container.closest(".modal-overlay");
       const closeBtn = modalOverlay?.querySelector(".modal-close-btn") as HTMLButtonElement;
       if (closeBtn) closeBtn.click();
 
-      // This will be replaced by your team's implementation
-      alert("Address added successfully!");
-    } catch (error) {
+      // Refresh to show updated addresses
+      location.reload();
+    } catch (error: unknown) {
       console.error("Error adding address:", error);
-      alert(`Failed to add address: ${(error as Error).message}`);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      alert(`Failed to add address: ${errorMessage}`);
 
       // Reset button
       saveBtn.textContent = originalText;
