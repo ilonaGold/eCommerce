@@ -37,7 +37,7 @@ export async function renderProducts(parent: HTMLElement): Promise<void> {
   let productsCatalog = await catalogComponent(productsData);
   main.replaceChildren(productsCatalog);
 
-  subscribe(async (state) => {
+  subscribe(["productsData"], async (state) => {
     const newCatalog = await catalogComponent(state.productsData);
     productsCatalog.replaceWith(newCatalog);
     productsCatalog = newCatalog;

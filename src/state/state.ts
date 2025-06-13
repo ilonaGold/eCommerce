@@ -18,7 +18,7 @@ const state: AppState = {
     minPrice: "",
     maxPrice: "",
   },
-  subscribers: new Set(),
+  subscribersMap: {},
   setAuth(isAuth: boolean) {
     this.userAuth = isAuth;
   },
@@ -27,20 +27,27 @@ const state: AppState = {
   },
   setProductsData(productsData) {
     this.productsData = productsData;
-    this.subscribers.forEach((cb) => cb(this));
+    this.subscribersMap["productsData"]?.forEach((cb) => cb(this));
   },
   setSearchFormData(searchFormData) {
     this.searchFormData = searchFormData;
-    this.subscribers.forEach((cb) => cb(this));
+    this.subscribersMap["searchFormData"]?.forEach((cb) => cb(this));
   },
 
   getState(property) {
     return this[property];
   },
-  subscribe(cb: SubscriberFunction) {
-    this.subscribers.add(cb);
+  subscribe(keys: (keyof AppState)[], cb: SubscriberFunction) {
+    for (const key of keys) {
+      if (!this.subscribersMap[key]) {
+        this.subscribersMap[key] = new Set();
+      }
+      this.subscribersMap[key]!.add(cb);
+    }
     return () => {
-      this.subscribers.delete(cb);
+      for (const key of keys) {
+        this.subscribersMap[key]?.delete(cb);
+      }
     };
   },
 };
