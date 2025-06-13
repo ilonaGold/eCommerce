@@ -25,7 +25,7 @@ export const createFilterFields = (): HTMLDivElement => {
     const statedCategory = getState("searchFormData").category;
     const categoryFromURL = new URLSearchParams(location.search).get("category");
 
-    const choosenCategory = statedCategory ? statedCategory : categoryFromURL;
+    const choosenCategory = categoryFromURL ? categoryFromURL : statedCategory;
 
     const categories = categoriesPagedResponse.results;
     const options = categories.map((category) => {
