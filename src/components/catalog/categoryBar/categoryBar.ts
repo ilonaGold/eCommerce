@@ -10,10 +10,10 @@ export const categorySidebar = (
   productsData: PagedSearchResponse,
   categoriesData: CategoryPagedQueryResponse
 ): HTMLElement => {
-  const { categoryMap, rootCategories } = categoryMapCreator(productsData, categoriesData);
-  console.log(categoryMap, rootCategories);
+  const { categoryMap } = categoryMapCreator(productsData, categoriesData);
+  // console.log(categoryMap, rootCategories);
 
-  const breadCrumbsComponent = breadCrumbs();
+  const breadCrumbsComponent = breadCrumbs(categoryMap);
 
   const listingQuantity = createElement("div", {}, [`Listings: ${productsData.total}`], {
     styles: {

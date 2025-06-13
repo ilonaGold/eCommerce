@@ -1,12 +1,9 @@
 type SortKey = "priceAsc" | "priceDesc" | "newest" | "nameAsc" | "nameDesc";
 
 export const queryBuilder = (formData: { [key: string]: string }): string => {
-  console.log(formData);
-
   if (Object.keys(formData).length === 0) {
     return "facet=categories.id";
   }
-  console.log(formData);
 
   const params = new URLSearchParams();
 
