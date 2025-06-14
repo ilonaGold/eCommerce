@@ -1,3 +1,7 @@
+import { getState } from "../../../../state/state";
+import { createSearchFormData } from "./createSearchFormData";
+import { populateForm } from "./populateForm";
+import { resetHandler } from "./resetHandler";
 import { searchHandler } from "./searchHandler";
 
 export const initiateSearchPanel = (
@@ -7,6 +11,7 @@ export const initiateSearchPanel = (
   const searchInput = searchForm.querySelector<HTMLInputElement>(".search-input");
   const clearButton = searchForm.querySelector<HTMLButtonElement>(".clear-button");
   const filterButton = searchForm.querySelector<HTMLButtonElement>(".filter-button");
+  const resetButton = searchForm.querySelector<HTMLButtonElement>(".reset-button");
 
   let isFilterOpen = false;
 
@@ -29,8 +34,22 @@ export const initiateSearchPanel = (
     });
   }
 
-  searchForm.addEventListener("submit", searchHandler);
+  // ===================        Populate form data from state & url search        ===================
+  const statedFormData = getState("searchFormData");
+  const filteredFormData = Object.fromEntries(
+    Object.entries(statedFormData).filter(([, value]) => value !== "")
+  );
+  const formDataFromURL = createSearchFormData(location.search);
+  Object.assign(formDataFromURL, filteredFormData); // Make stated form data override data from URL
 
+  console.log({ statedFormData, formDataFromURL });
+
+  populateForm(searchForm, formDataFromURL);
+  // ===================        Populate form data from state & url search        ===================
+
+  searchForm.addEventListener("submit", searchHandler, { once: true });
+
+  resetButton?.addEventListener("click", resetHandler);
   if (filterButton) {
     filterButton.addEventListener("click", (e) => {
       e.preventDefault();
