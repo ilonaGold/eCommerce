@@ -1,18 +1,19 @@
+import { SearchFormData } from "./products/search/searchQuery";
 import { Customer } from "./dataInterfaces";
-import { ProductProjection } from "./products/ProductProjection";
+import { PagedSearchResponse, ProductProjection } from "./products/ProductProjection";
 
 export interface AppState {
   userAuth: boolean;
   customer: Customer | null;
-  products: ProductProjection[];
-  subscribers: Set<SubscriberFunction>;
+  productsData: PagedSearchResponse;
+  subscribersMap: { [K in keyof AppState]?: Set<SubscriberFunction> };
+  searchFormData: SearchFormData;
   setAuth: (isAuth: boolean) => void;
   setCustomer: (customer: Customer | null) => void;
-  setProducts: (products: ProductProjection[]) => void;
-  subscribe: (callback: SubscriberFunction) => () => void;
-  getState: <K extends keyof Omit<AppState, "getState" | "setView" | "setAuth" | "setProducts">>(
-    property: K
-  ) => AppState[K];
+  setProductsData: (productsData: PagedSearchResponse) => void;
+  setSearchFormData: (searchFormData: SearchFormData) => void;
+  subscribe: (keys: (keyof AppState)[], callback: SubscriberFunction) => () => void;
+  getState: <K extends keyof Omit<AppState, "getState">>(property: K) => AppState[K];
 }
 
 export type SubscriberFunction = (state: AppState) => void;

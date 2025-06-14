@@ -26,6 +26,12 @@ export interface Category {
   assets?: Asset[];
 }
 
+export interface CategoryWithChildren extends Category {
+  children: CategoryWithChildren[];
+  directCount: number;
+  aggregatedCount: number;
+}
+
 interface LocalizedString {
   [locale: string]: string;
 }

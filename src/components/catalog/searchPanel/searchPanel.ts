@@ -49,7 +49,7 @@ export const searchPanel = (): HTMLDivElement => {
     "button",
     {
       type: "reset",
-      class: "search-button",
+      class: "search-button reset-button",
     },
     ["↺ Reset"]
   );

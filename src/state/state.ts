@@ -4,31 +4,57 @@ import { AppState } from "../interfaces/interfaces";
 const state: AppState = {
   userAuth: false,
   customer: null,
-  products: [],
-  subscribers: new Set(),
+  productsData: {
+    limit: 0,
+    offset: 0,
+    count: 0,
+    results: [],
+    facets: undefined,
+  },
+  searchFormData: {
+    keyword: "",
+    sort: "",
+    category: "",
+    minPrice: "",
+    maxPrice: "",
+  },
+  subscribersMap: {},
   setAuth(isAuth: boolean) {
     this.userAuth = isAuth;
   },
   setCustomer(customer) {
     this.customer = customer;
   },
-  setProducts(products) {
-    this.products = products;
-    this.subscribers.forEach((cb) => cb(this));
+  setProductsData(productsData) {
+    this.productsData = productsData;
+    this.subscribersMap["productsData"]?.forEach((cb) => cb(this));
   },
+  setSearchFormData(searchFormData) {
+    this.searchFormData = searchFormData;
+    this.subscribersMap["searchFormData"]?.forEach((cb) => cb(this));
+  },
+
   getState(property) {
     return this[property];
   },
-  subscribe(cb: SubscriberFunction) {
-    this.subscribers.add(cb);
+  subscribe(keys: (keyof AppState)[], cb: SubscriberFunction) {
+    for (const key of keys) {
+      if (!this.subscribersMap[key]) {
+        this.subscribersMap[key] = new Set();
+      }
+      this.subscribersMap[key]!.add(cb);
+    }
     return () => {
-      this.subscribers.delete(cb);
+      for (const key of keys) {
+        this.subscribersMap[key]?.delete(cb);
+      }
     };
   },
 };
 
 export const setAuth = state.setAuth.bind(state);
 export const setCustomer = state.setCustomer.bind(state);
-export const setProducts = state.setProducts.bind(state);
+export const setProductsData = state.setProductsData.bind(state);
 export const getState = state.getState.bind(state);
 export const subscribe = state.subscribe.bind(state);
+export const setSearchFormData = state.setSearchFormData.bind(state);
