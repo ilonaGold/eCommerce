@@ -1,6 +1,0 @@
-.home-page__banner {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  background: url("../../../assets/images/red-panda-banner.png") no-repeat center cover;
-}
