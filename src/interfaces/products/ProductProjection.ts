@@ -77,7 +77,7 @@ export interface Price {
   custom?: CustomFields;
 }
 
-interface TypedMoney {
+export interface TypedMoney {
   type: string;
   currencyCode: string;
   centAmount: number;
