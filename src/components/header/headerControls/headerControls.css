@@ -1,0 +1,99 @@
+/* Hamburger menu */
+.hamburger-menu {
+  display: none;
+  cursor: pointer;
+  width: 24px;
+  height: 20px;
+  position: relative;
+  margin-left: 0.5rem;
+  padding: 0 0.5rem;
+}
+
+.hamburger-icon {
+  width: 100%;
+  height: 2px;
+  background-color: maroon;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+}
+
+.hamburger-icon::before,
+.hamburger-icon::after {
+  content: "";
+  width: 100%;
+  height: 2px;
+  background-color: maroon;
+  position: absolute;
+  transition: all 0.3s ease;
+}
+
+.hamburger-icon::before {
+  top: -8px;
+}
+
+.hamburger-icon::after {
+  bottom: -8px;
+}
+
+.hamburger-menu.active .hamburger-icon {
+  background-color: transparent;
+}
+
+.hamburger-menu.active .hamburger-icon::before {
+  transform: rotate(45deg);
+  top: 0;
+}
+
+.hamburger-menu.active .hamburger-icon::after {
+  transform: rotate(-45deg);
+  bottom: 0;
+}
+
+/* --- Hide content below when menu is open --- */
+body.menu-open .welcome-text,
+body.menu-open .page-text,
+body.menu-open .main-content,
+body.menu-open .registration-container,
+body.menu-open form,
+body.menu-open .footer {
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* --- Responsive Styles --- */
+
+@media (max-width: 900px) {
+  body.menu-open {
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 860px) {
+  .header-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .hamburger-menu {
+    display: block;
+    cursor: pointer;
+    position: relative;
+    z-index: 10001;
+    pointer-events: auto;
+  }
+
+  .hamburger-menu.active .hamburger-icon::before,
+  .hamburger-menu.active .hamburger-icon::after {
+    background-color: white;
+  }
+
+  .hamburger-menu.active .hamburger-icon:hover,
+  .hamburger-menu.active .hamburger-icon:focus {
+    background-color: #e5994e;
+    transform: scale(1.2);
+  }
+}

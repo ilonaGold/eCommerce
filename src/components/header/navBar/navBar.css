@@ -1,0 +1,119 @@
+/* 
+==================================
+Navbar
+==================================
+*/
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 6rem;
+  margin: 0;
+  padding: 0;
+  font-size: 1.35rem;
+  grid-column: 2;
+}
+
+.nav-link {
+  color: maroon;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 0.1rem;
+  background-image: linear-gradient(#e5994e, #e5994e);
+  background-size: 0% 0.1em;
+  background-position-y: 100%;
+  background-position-x: 50%;
+  background-repeat: no-repeat;
+  transition: background-size 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+  background-size: 100% 0.1em;
+}
+
+/* --- Ensure nav menu is on top --- */
+.nav-links.active,
+.nav-links.active .nav-link,
+.nav-links.active .nav-item {
+  pointer-events: auto !important;
+}
+
+.nav-links.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: url("../../assets/images/jungle-bg.jpg") center/cover no-repeat;
+  opacity: 0.98;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  height: 100vh;
+  padding: 1rem;
+  z-index: 9999;
+  overflow-y: auto;
+  pointer-events: auto;
+  text-transform: uppercase;
+  padding-left: 3rem;
+}
+
+.nav-links.active::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(3px);
+  z-index: 1;
+}
+
+/* --- Menu Links --- */
+.nav-links.active .nav-item {
+  margin: 8px auto;
+  width: 70%;
+  text-align: center;
+  z-index: 10000;
+}
+
+.nav-links.active .nav-link {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 1.2rem 4rem;
+  color: maroon;
+  font-size: 1.5rem;
+  font-weight: 600;
+  background-color: white;
+  opacity: 2;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(139, 0, 0, 0.5);
+  margin-bottom: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 10000;
+  pointer-events: auto;
+}
+
+.nav-links.active .nav-link:hover {
+  background-color: #f8f1ee;
+  color: #e5994e;
+  background-size: 100% 0.12em;
+}
+
+@media (max-width: 1200px) {
+  .nav-links {
+    gap: 1rem;
+    margin-left: -3rem;
+  }
+}
+
+@media (max-width: 860px) {
+  .nav-links {
+    display: none;
+  }
+}
