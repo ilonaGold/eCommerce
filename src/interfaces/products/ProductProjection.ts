@@ -32,12 +32,12 @@ export interface ProductProjection {
   reviewRatingStatistics?: ReviewRatingStatistics;
 }
 
-interface Reference {
+export interface Reference {
   typeId: string;
   id: string;
 }
 
-interface LocalizedString {
+export interface LocalizedString {
   [locale: string]: string;
 }
 
