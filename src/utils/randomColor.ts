@@ -1,5 +1,14 @@
 export function getRandomColor(): string {
-  const colors = ["#347433", "#FFC107", "#FF6F3C", "#B22222"];
+  const colors = [
+    "#DFFF00",
+    "#FFBF00",
+    "#FF7F50",
+    "#DE3163",
+    "#9FE2BF",
+    "#40E0D0",
+    "#6495ED",
+    "#CCCCFF",
+  ];
   const angle = Math.floor(Math.random() * 360);
   const color1 = colors[Math.floor(Math.random() * colors.length)];
   let color2;
