@@ -1,0 +1,7 @@
+.home-page__discounts-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  gap: 15px;
+}
