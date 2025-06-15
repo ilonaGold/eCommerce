@@ -5,6 +5,7 @@ Navbar
 */
 
 .nav-links {
+  justify-self: center;
   list-style: none;
   display: flex;
   gap: 6rem;
@@ -108,7 +109,6 @@ Navbar
 @media (max-width: 1200px) {
   .nav-links {
     gap: 1rem;
-    margin-left: -3rem;
   }
 }
 
