@@ -4,23 +4,47 @@
   align-items: center;
   gap: 1.5rem;
   margin-left: auto;
+  position: relative;
 }
 
 .welcome-message {
   color: #333;
   font-size: 0.95rem;
   font-weight: 500;
+
+  display: flex;
+  gap: 0.5rem;
 }
 
 .user-name {
   color: maroon;
   font-weight: 600;
 }
+.dropdown-icon {
+  transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.dropdown-active .dropdown-icon {
+  transform: rotate(180deg);
+}
 
 .user-controls {
   display: flex;
   align-items: center;
   gap: 1rem;
+
+  /* dropdown functionality */
+  display: none;
+  flex-direction: column;
+  padding-bottom: 1rem;
+  background-color: white;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  z-index: 1000;
+  border-radius: 4px;
+}
+.dropdown-active .user-controls {
+  display: inherit;
 }
 
 /* User Profile Link */
