@@ -54,3 +54,13 @@ export interface infoGroupProps {
   contentClass: string;
   contentText: string;
 }
+
+export interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  image: string;
+  description: string;
+  githubUrl: string;
+  contributions?: string[];
+}
