@@ -7,8 +7,8 @@
 .about-main {
   position: relative;
   min-height: calc(100vh - 133px); /* Account for header/footer */
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
   overflow-x: hidden;
 }
 
@@ -63,37 +63,55 @@
 
 /* Base card styling */
 .about-card {
-  display: flex;
-  max-width: 900px;
-  margin: 20px auto;
+  position: relative;
+  width: 100%;
+  height: 450px;
+  margin-bottom: 2rem;
+  perspective: 1000px;
+  transform-style: preserve-3d;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-  opacity: 1;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.about-card:first-child {
-  margin-top: 0;
+/* Card faces common styling */
+.card-face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  transition:
+    transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    opacity 0.4s ease;
+  border-radius: 12px;
+}
+
+/* Front face - maintain original layout */
+.card-front {
+  transform: rotateY(0deg);
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+}
+
+/* Maroon cards - slide in from left */
+.about-card:nth-child(odd) .card-front {
+  background-color: #800000;
+  color: white;
+  animation: slide-in-left 3s;
+}
+
+/* Yellow cards - slide in from right */
+.about-card:nth-child(even) .card-front {
+  background-color: #e5994e;
+  color: #333;
+  animation: slide-in-right 3s;
 }
 
 .about-card:last-child {
   margin-bottom: 0;
-}
-
-/* Maroon cards - slide in from left */
-.about-card:nth-child(odd) {
-  background-color: #800000;
-  color: white;
-  animation: slide-in-left 3s forwards;
-  /* animation-delay: calc(0.3s * var(--card-index, 0)); */
-}
-
-/* Yellow cards - slide in from right */
-.about-card:nth-child(even) {
-  background-color: #e5994e;
-  color: #333;
-  animation: slide-in-right 3s forwards;
-  /* animation-delay: calc(0.3s * var(--card-index, 0)); */
 }
 
 /* Horizontal animation keyframes */
@@ -135,72 +153,153 @@
   }
 }
 
-/* Image container */
+/* Image container on front */
 .about-card-image {
-  flex: 1;
-  padding: 20px;
+  flex: 0 0 30%;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1rem;
 }
 
 .about-card-image img {
-  width: 100%;
-  max-width: 200px;
-  aspect-ratio: 1/1;
-  object-fit: cover;
+  width: 90%;
+  height: auto;
+  object-fit: contain;
   border-radius: 50%;
-  border: 3px solid white;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease;
+  border: 3px solid;
 }
 
-.about-card:hover .about-card-image img {
-  transform: scale(1.05);
+/* Border color for images */
+.about-card:nth-child(odd) .about-card-image img {
+  border-color: #e5994e;
 }
 
-/* Content container */
+.about-card:nth-child(even) .about-card-image img {
+  border-color: #800000;
+}
+
+/* Content container on front */
 .about-card-content {
-  flex: 2;
-  padding: 25px 40px 20px 10px;
+  flex: 1;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .about-card-name {
-  margin-top: 0;
-  margin-bottom: 10px;
-  font-size: 1.8rem;
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
 }
 
 .about-card-role {
-  margin-top: 0;
-  margin-bottom: 15px;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+/* Front card description */
+.card-front .about-card-description {
   font-size: 1.2rem;
-  opacity: 0.8;
+  line-height: 1.5;
+  margin-bottom: 1rem;
 }
 
-.about-card-description {
-  margin-bottom: 15px;
-  line-height: 1.6;
-}
-
+/* Contributions list */
 .contributions-title {
-  margin-bottom: 10px;
-  font-size: 1.1rem;
+  margin-top: 0.625rem;
+  margin-bottom: 0.5rem;
 }
 
 .contributions-list {
-  margin-bottom: 15px;
-  padding-left: 20px;
+  margin-bottom: 1.6rem;
+  padding-left: 1.25rem;
+  column-count: 2;
+  column-gap: 1.25rem;
 }
 
 .contributions-list li {
   margin-bottom: 5px;
+  break-inside: avoid;
 }
 
-/* Button styling */
-.learn-more-btn {
+/* Back face styling */
+.card-back {
+  transform: rotateY(180deg);
+  padding: 2rem;
+  overflow: auto;
+}
+
+/* Card colors for back face */
+.about-card:nth-child(odd) .card-back {
+  background: linear-gradient(145deg, #e5994e, #f5b971);
+}
+
+.about-card:nth-child(even) .card-back {
+  background: linear-gradient(145deg, #800000, #9a3324);
+}
+
+/* Back content layout */
+.back-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-align: left; /* Left align all content except heading */
+}
+
+/* Back card name/heading */
+.card-back .about-card-name {
+  font-size: 2rem;
+  text-align: center; /* Center only the heading */
+  margin-bottom: 1.25rem;
+}
+
+.about-card:nth-child(odd) .card-back .about-card-name {
+  color: #800000;
+}
+
+.about-card:nth-child(even) .card-back .about-card-name {
+  color: #e5994e;
+}
+
+/* Back card description text */
+.card-back .about-card-description {
+  font-size: 1.05rem; /* Bigger font */
+  line-height: 1.6; /* Increased line height */
+  margin-bottom: 1.25rem;
+  flex-grow: 1;
+}
+
+.about-card:nth-child(odd) .card-back .about-card-description {
+  color: #222222;
+}
+
+.about-card:nth-child(even) .card-back .about-card-description {
+  color: #f5f5f5;
+}
+
+.about-card-description p {
+  margin-bottom: 0.75rem;
+}
+
+/* Button container */
+.card-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+}
+
+/* Button styles */
+.card-btn,
+.check-github-btn,
+.learn-more-btn,
+.website-btn,
+.go-back-btn {
   display: inline-block;
-  padding: 10px 20px;
+  padding: 0.625rem 1.25rem;
   border-radius: 30px;
   text-decoration: none;
   font-weight: 500;
@@ -208,92 +307,77 @@
   background-color: transparent;
   transition: all 0.3s ease;
   cursor: pointer;
+  font-family: inherit;
+  border: 2px solid;
 }
 
-.about-card:nth-child(odd) .learn-more-btn {
-  border: 2px solid #e5994e;
+/* Odd-numbered cards button styling */
+.about-card:nth-child(odd) .card-btn,
+.about-card:nth-child(odd) .check-github-btn,
+.about-card:nth-child(odd) .learn-more-btn,
+.about-card:nth-child(odd) .website-btn {
+  border-color: #e5994e;
   color: #e5994e;
 }
 
-.about-card:nth-child(even) .learn-more-btn {
-  border: 2px solid #800000;
+.about-card:nth-child(odd) .go-back-btn {
+  border-color: #800000;
   color: #800000;
 }
 
-.about-card:nth-child(odd) .learn-more-btn:hover {
+/* Even-numbered cards button styling */
+.about-card:nth-child(even) .card-btn,
+.about-card:nth-child(even) .check-github-btn,
+.about-card:nth-child(even) .learn-more-btn,
+.about-card:nth-child(even) .website-btn {
+  border-color: #800000;
+  color: #800000;
+}
+
+.about-card:nth-child(even) .go-back-btn {
+  border-color: #e5994e;
+  color: #e5994e;
+}
+
+/* Hover effects for buttons */
+.about-card:nth-child(odd) .card-btn:hover,
+.about-card:nth-child(odd) .check-github-btn:hover,
+.about-card:nth-child(odd) .learn-more-btn:hover,
+.about-card:nth-child(odd) .website-btn:hover {
   background-color: #e5994e;
   color: #800000;
 }
 
-.about-card:nth-child(even) .learn-more-btn:hover {
+.about-card:nth-child(odd) .go-back-btn:hover {
   background-color: #800000;
   color: #e5994e;
 }
 
-/* Social links styling */
-.social-links {
-  margin-top: 20px;
+.about-card:nth-child(even) .card-btn:hover,
+.about-card:nth-child(even) .check-github-btn:hover,
+.about-card:nth-child(even) .learn-more-btn:hover,
+.about-card:nth-child(even) .website-btn:hover {
+  background-color: #800000;
+  color: #e5994e;
 }
 
-.social-links a {
+.about-card:nth-child(even) .go-back-btn:hover {
+  background-color: #e5994e;
+  color: #800000;
+}
+
+/* Go Back button positioning */
+.go-back-btn {
+  align-self: center;
+  margin-top: 1.25rem;
   display: inline-block;
-  margin-right: 15px;
-  color: inherit;
-  text-decoration: underline;
-  opacity: 0.8;
-  transition: opacity 0.2s ease;
 }
 
-.social-links a:hover {
-  opacity: 1;
+/* Flip animation */
+.about-card.flipped .card-front {
+  transform: rotateY(180deg);
 }
 
-/* Responsive styling */
-@media (max-width: 768px) {
-  .about-card {
-    flex-direction: column;
-    margin: 20px auto;
-  }
-
-  .about-card-image {
-    padding: 20px 20px 0;
-  }
-
-  .about-card-image img {
-    max-width: 150px;
-  }
-
-  .about-card-content {
-    padding: 20px;
-  }
-
-  .about-heading {
-    font-size: 2rem;
-  }
-
-  /* Adjust animation for mobile */
-  .about-card:nth-child(odd),
-  .about-card:nth-child(even) {
-    transform: translateY(100px);
-  }
-
-  .about-card.animate {
-    transform: translateY(0);
-  }
-
-  @keyframes bounceIn {
-    0%,
-    20%,
-    50%,
-    80%,
-    100% {
-      transform: translateY(0);
-    }
-    40% {
-      transform: translateY(-10px);
-    }
-    60% {
-      transform: translateY(5px);
-    }
-  }
+.about-card.flipped .card-back {
+  transform: rotateY(0deg);
 }

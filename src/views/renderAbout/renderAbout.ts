@@ -7,13 +7,14 @@ import { TeamMember } from "../../interfaces/interfaces";
 
 import aboutPanda from "../../assets/images/three-pandas.png";
 import schoolLogo from "../../assets/images/school-logo.png";
+
 import "./renderAbout.css";
 
 export function renderAbout(parent: HTMLElement): void {
   const isAuth = getState("userAuth");
   const customer = getState("customer");
 
-  // Background image container (keeping your original structure)
+  // Background image container
   const imageContainer = createElement("div", { class: "about-image-container" }, [
     createElement("img", {
       src: aboutPanda,
@@ -31,9 +32,18 @@ export function renderAbout(parent: HTMLElement): void {
   // Create school card
   cardsContainer.append(createCard(SCHOOL_INFO, 0));
 
-  // Create team member cards
+  // Create team member cards with staggered animations
   TEAM_MEMBERS.forEach((member, index) => {
-    cardsContainer.append(createCard(member, index + 1));
+    const card = createCard(member, index + 1);
+    cardsContainer.append(card);
+
+    // Add slide-in animation class after a delay
+    setTimeout(
+      () => {
+        card.classList.add(index % 2 === 0 ? "slide-in-left" : "slide-in-right");
+      },
+      100 * (index + 1)
+    );
   });
 
   // Add cards container to content
@@ -50,46 +60,88 @@ export function renderAbout(parent: HTMLElement): void {
   ]);
 
   parent.append(container);
-
-  // Set up animation observer after DOM is loaded
-  setTimeout(() => {
-    setupCardAnimations();
-    adjustForMobile();
-  }, 100);
 }
 
 function createCard(info: TeamMember | any, index: number): HTMLElement {
   const card = createElement("div", {
     class: "about-card",
-    id: `card-${info.id}`,
+    "data-index": index.toString(),
   });
 
-  // Image section
+  // Create front face of the card
+  const cardFront = createElement("div", { class: "card-face card-front" });
+
   const imageContainer = createElement("div", { class: "about-card-image" });
-  const image = createElement("img", {
-    src: info.image,
-    alt: info.name,
-  });
+  const image = createElement("img", { src: info.image, alt: info.name });
   imageContainer.append(image);
 
-  // Content section
   const contentContainer = createElement("div", { class: "about-card-content" });
-  const name = createElement("h3", { class: "about-card-name" }, [info.name]);
-  contentContainer.append(name);
+  const name = createElement("h2", { class: "about-card-name" }, [info.name]);
+  const role = createElement("p", { class: "about-card-role" }, [info.role]);
 
-  const role = createElement("h4", { class: "about-card-role" }, [info.role]);
-  contentContainer.append(role);
+  const buttonsContainer = createElement("div", { class: "card-buttons" });
 
-  const description = createElement("p", { class: "about-card-description" }, [info.description]);
-  contentContainer.append(description);
+  // Add Github button
+  if (info.githubUrl) {
+    const githubButton = createElement(
+      "a",
+      {
+        href: info.githubUrl,
+        class: "card-btn check-github-btn",
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+      ["Check Github"]
+    );
+    buttonsContainer.append(githubButton);
+  }
 
-  // Create contributions list if available
+  // Add Learn More button for team members only
+  if (info.id !== "school") {
+    const learnMoreButton = createElement(
+      "button",
+      {
+        class: "card-btn learn-more-btn",
+        type: "button",
+      },
+      ["Learn More"]
+    );
+
+    learnMoreButton.addEventListener("click", (e) => {
+      e.stopPropagation();
+      card.classList.add("flipped");
+    });
+
+    buttonsContainer.append(learnMoreButton);
+  }
+
+  // Add Website button for school only
+  if (info.websiteUrl && info.id === "school") {
+    const websiteButton = createElement(
+      "a",
+      {
+        href: info.websiteUrl,
+        class: "card-btn website-btn",
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+      ["Visit Website"]
+    );
+    buttonsContainer.append(websiteButton);
+  }
+
+  // Build front content
+  contentContainer.append(name, role);
+  if (info.description) {
+    const description = createElement("p", { class: "about-card-description" }, [info.description]);
+    contentContainer.append(description);
+  }
+
+  // Add contributions to front face
   if (info.contributions && info.contributions.length > 0) {
-    const contributionsTitle = createElement("h5", { class: "contributions-title" }, [
+    const contributionsTitle = createElement("h3", { class: "contributions-title" }, [
       "Key Contributions:",
     ]);
-    contentContainer.append(contributionsTitle);
-
     const contributionsList = createElement("ul", { class: "contributions-list" });
 
     info.contributions.forEach((contribution: string) => {
@@ -97,77 +149,57 @@ function createCard(info: TeamMember | any, index: number): HTMLElement {
       contributionsList.append(item);
     });
 
-    contentContainer.append(contributionsList);
+    contentContainer.append(contributionsTitle, contributionsList);
   }
 
-  // Create button with appropriate link
-  const link = info.githubUrl || info.websiteUrl;
-  const linkText = info.githubUrl && !info.websiteUrl ? "Learn More" : "Visit Website";
+  contentContainer.append(buttonsContainer);
+  cardFront.append(imageContainer, contentContainer);
 
-  const button = createElement(
-    "a",
-    {
-      href: link,
-      class: "learn-more-btn",
-      target: "_blank",
-      rel: "noopener noreferrer",
-    },
-    [linkText]
-  );
-  contentContainer.append(button);
+  // Create back face of card (only for team members)
+  const cardBack = createElement("div", { class: "card-face card-back" });
 
-  // Add social links section
-  if (info.websiteUrl) {
-    const socialLinks = createElement("div", { class: "social-links" });
-    const schoolLink = createElement(
-      "a",
+  if (info.id !== "school") {
+    const backContent = createElement("div", { class: "back-content" });
+    const backName = createElement("h2", { class: "about-card-name" }, [info.name]);
+
+    const loremText = `
+      <p>As a dedicated developer on the PandaShop team, ${info.name} brings unique skills and passion to our project.</p>
+      <p>With expertise in ${info.contributions.join(", ")}, they have been instrumental in creating the seamless experience you see today.</p>
+      <p>Their journey in web development started with a deep curiosity about how digital experiences are built, and has evolved into a mastery of modern frontend technologies.</p>
+      <p>When not coding, they enjoy exploring new technologies and finding innovative solutions to complex problems.</p>
+    `;
+
+    const loremParagraph = createElement("div", { class: "about-card-description" });
+    loremParagraph.innerHTML = loremText;
+
+    const goBackButton = createElement(
+      "button",
       {
-        href: info.websiteUrl,
-        class: "school-link",
-        target: "_blank",
-        rel: "noopener noreferrer",
+        class: "card-btn go-back-btn",
+        type: "button",
       },
-      ["RS School Website"]
+      ["Go Back"]
     );
 
-    socialLinks.append(schoolLink);
-    contentContainer.append(socialLinks);
+    goBackButton.addEventListener("click", (e) => {
+      e.stopPropagation();
+      card.classList.remove("flipped");
+    });
+
+    backContent.append(backName, loremParagraph, goBackButton);
+    cardBack.append(backContent);
   }
 
-  // Assemble card
-  card.append(imageContainer);
-  card.append(contentContainer);
+  card.append(cardFront, cardBack);
+
+  // Add click handler for the whole card
+  card.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+    if (target.closest("a") || target.closest("button")) return;
+    if (info.id !== "school") {
+      card.classList.toggle("flipped");
+    }
+  });
 
   return card;
-}
-
-function setupCardAnimations(): void {
-  document.querySelectorAll(".about-card").forEach((card, index) => {
-    (card as HTMLElement).style.setProperty("--card-index", (index + 1).toString());
-  });
-}
-
-setTimeout(() => {
-  setupCardAnimations();
-}, 100);
-
-function adjustForMobile(): void {
-  const mediaQuery = window.matchMedia("(max-width: 768px)");
-  const cards = document.querySelectorAll(".about-card");
-
-  function handleScreenChange(e: MediaQueryListEvent | MediaQueryList): void {
-    cards.forEach((card) => {
-      if (e.matches) {
-        // Switch to column layout on mobile
-        (card as HTMLElement).style.flexDirection = "column";
-      } else {
-        (card as HTMLElement).style.flexDirection = "row";
-      }
-    });
-  }
-
-  // Initial check
-  handleScreenChange(mediaQuery);
-  // Add listener
-  mediaQuery.addEventListener("change", handleScreenChange);
 }
