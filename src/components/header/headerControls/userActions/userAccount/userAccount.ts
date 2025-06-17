@@ -3,6 +3,7 @@ import { goToView } from "../../../../../routing/router";
 import { clearLoginData } from "../../../../../services/localStorage/localStorage";
 import { setAuth, setCustomer } from "../../../../../state/state";
 import { createElement } from "../../../../../utils/dom/createElement";
+import { initiateDropDown } from "./helpers/initiateDropDown";
 
 import "./userAccount.css";
 
@@ -36,11 +37,16 @@ export const createUserAccountComponent = (customer: Customer | null): HTMLEleme
     },
   });
 
-  return createElement("div", { class: "user-account" }, [
-    createElement("div", { class: "welcome-message" }, [
-      `Welcome, `,
+  const userAccountComponent = createElement("div", { class: "user-account" }, [
+    createElement("div", { class: "welcome-message dropdown-trigger" }, [
+      createElement("span", {}, [`Welcome,`]),
       createElement("span", { class: "user-name" }, [customer?.firstName || "User"]),
+      createElement("i", { class: "dropdown-icon" }, ["▼"]),
     ]),
-    createElement("div", { class: "user-controls" }, [userProfileBtn, logOutBtn]),
+    createElement("div", { class: "user-controls dropdown-menu" }, [userProfileBtn, logOutBtn]),
   ]);
+
+  initiateDropDown(userAccountComponent);
+
+  return userAccountComponent;
 };
