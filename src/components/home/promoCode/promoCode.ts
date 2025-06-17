@@ -18,10 +18,16 @@ export const promoCode = async (): Promise<HTMLElement> => {
     class: "home-page__panda-image",
   });
 
+  const codes = createElement("div");
+  if (promoCodes.limit) {
+    for (const item of promoCodes.results) {
+      const code = createElement("div", {}, [`${item.code}`]);
+      codes.append(code);
+    }
+  }
+
   // Add SUMMER10 overlay on the image
-  const promoCodeElement = createElement("div", { class: "home-page__promo-overlay" }, [
-    "SUMMER10",
-  ]);
+  const promoCodeElement = createElement("div", { class: "home-page__promo-overlay" }, [codes]);
 
   // Create shop now button
   const shopNowButton = createElement("button", { class: "home-page__shop-button" }, ["Shop now"], {
