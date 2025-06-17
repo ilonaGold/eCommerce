@@ -24,8 +24,8 @@
   border-top: 4px solid maroon;
   border-bottom: 4px solid maroon;
   text-transform: uppercase;
-  width: auto;
-  min-width: 180px;
+  /* width: auto; */
+  width: 200px;
   text-align: center;
 }
 

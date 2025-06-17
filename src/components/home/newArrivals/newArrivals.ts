@@ -3,6 +3,9 @@ import { productProjectionSearch } from "../../../services/API/products/productP
 import { productList } from "../../catalog/productsList/productList";
 import { queryBuilder } from "../../catalog/searchPanel/helpers/queryBuilder";
 
+import "./newArrivals.css";
+import "../../../components/catalog/productsList/productList.css";
+
 export const newArrivals = async (): Promise<HTMLElement> => {
   const container = createElement("section", { class: "home-page__new-items-section" }, [
     createElement("h2", { class: "home-page__header" }, ["Explore our new items"]),

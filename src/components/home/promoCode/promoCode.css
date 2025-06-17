@@ -3,13 +3,97 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  padding: 0.5rem;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  gap: 5px;
 }
 
-.home-page__code-content {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
+.home-page__promocode-section .home-page__header {
+  color: #64cc41;
+  font-size: 2.2rem;
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.home-page__panda-promo {
+  position: relative;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.home-page__panda-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.home-page__promo-overlay {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  color: #800000;
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 5px 15px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.home-page__panda-promo .home-page__shop-button {
+  position: absolute;
+  bottom: 5%;
+  left: 52%;
+  transform: translateX(-50%);
+  padding: 0.75rem 1.25rem;
+  font-size: 1.2rem;
+  background-color: #e5994e;
+  color: maroon;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.home-page__panda-promo .home-page__shop-button:hover {
+  background-color: #64cc41;
+  color: #f67838;
+  transform: translateX(-50%) translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Decorative elements for the promo section */
+.home-page__promocode-section::before,
+.home-page__promocode-section::after {
+  content: "";
+  position: absolute;
+  bottom: -20px;
+  width: 120px;
+  height: 120px;
+  background-image: url("../../../assets/images/red-panda-discount.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.6;
+  transform: rotate(-15deg);
+}
+
+.home-page__promocode-section::before {
+  left: 20px;
+}
+
+.home-page__promocode-section::after {
+  right: 20px;
 }

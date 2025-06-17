@@ -7,20 +7,34 @@ import "./promoCode.css";
 export const promoCode = async (): Promise<HTMLElement> => {
   const promoCodes = await getPromoCodes();
   const container = createElement("section", { class: "home-page__promocode-section" }, [
-    createElement("h2", { class: "home-page__header" }, ["Save with our promo codes today!"]),
+    createElement("h2", { class: "home-page__header" }, ["Save with our promo codes TODAY!"]),
   ]);
-  const codes = createElement("div", { class: "home-page__code-content" });
-  if (promoCodes.limit) {
-    for (const item of promoCodes.results) {
-      const code = createElement("div", { class: "home-page__promocode" }, [`${item.code}`]);
-      codes.append(code);
-    }
-  }
+
+  // Create panda image container
+  const pandaPromoContainer = createElement("div", { class: "home-page__panda-promo" });
+  const pandaImage = createElement("img", {
+    src: "../../../assets/images/panda-promo10.png",
+    alt: "Red panda holding bamboo",
+    class: "home-page__panda-image",
+  });
+
+  // Add SUMMER10 overlay on the image
+  const promoCodeElement = createElement("div", { class: "home-page__promo-overlay" }, [
+    "SUMMER10",
+  ]);
+
+  // Create shop now button
   const shopNowButton = createElement("button", { class: "home-page__shop-button" }, ["Shop now"], {
     events: {
       click: () => goToView("products"),
     },
   });
-  container.append(codes, shopNowButton);
+
+  // Add all elements to the container
+  pandaPromoContainer.append(pandaImage, promoCodeElement, shopNowButton);
+
+  // We won't add additional promo codes to avoid duplication
+
+  container.append(pandaPromoContainer);
   return container;
 };
