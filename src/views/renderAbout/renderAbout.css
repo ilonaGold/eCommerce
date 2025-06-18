@@ -1,3 +1,8 @@
+body,
+html {
+  overflow-x: hidden;
+}
+
 /* About container */
 .about-container {
   width: 100%;
@@ -380,4 +385,127 @@
 
 .about-card.flipped .card-back {
   transform: rotateY(0deg);
+}
+
+/* Responsive styling */
+@media (max-width: 865px) {
+  .about-card {
+    height: auto;
+    min-height: 600px;
+    margin-bottom: 1.5rem;
+  }
+
+  .card-face {
+    position: relative;
+    height: auto;
+    min-height: 600px;
+  }
+
+  .card-front,
+  .card-back {
+    position: absolute;
+    height: 100%;
+    min-height: 600px;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-card-image {
+    flex: 0 0 40%;
+    padding-right: 0;
+  }
+
+  .contributions-list {
+    column-count: 1;
+    padding-left: 0;
+  }
+
+  .card-btn {
+    display: block;
+    width: 60%;
+    margin: 0 auto 0.5rem auto !important;
+  }
+
+  .card-back .about-card-description {
+    font-size: 1rem;
+    padding: 1rem;
+  }
+
+  .about-card .go-back-btn {
+    width: 30%;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-card {
+    height: auto;
+    min-height: 750px;
+  }
+
+  .card-front {
+    flex-direction: column;
+  }
+
+  .about-card-image {
+    flex: 0 0 auto;
+    width: 100%;
+    padding: 1rem 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .about-card-image img {
+    width: 7rem;
+    height: 7rem;
+  }
+
+  .about-card-content {
+    padding: 0.75rem 2.5rem 1.5rem;
+    text-align: left;
+  }
+
+  .about-card-name,
+  .about-card-role {
+    text-align: center;
+  }
+
+  .card-buttons {
+    justify-content: center;
+    margin-top: 1.25rem;
+  }
+
+  .about-card .go-back-btn {
+    width: 50%;
+  }
+}
+
+@media (max-width: 360px) {
+  .about-card {
+    min-height: 900px !important;
+  }
+
+  .card-btn {
+    width: 80%;
+  }
+
+  .about-card-image {
+    padding: 1.5rem 1rem 0.5rem !important;
+  }
+
+  .about-card-name {
+    margin-bottom: 0.5rem !important;
+  }
+
+  .about-card-role {
+    margin-bottom: 0.75rem !important;
+  }
+
+  .card-back {
+    padding: 1.75rem 1rem !important;
+  }
+
+  .card-back .about-card-description {
+    padding-left: 0.25rem !important;
+    padding-right: 0.25rem !important;
+  }
 }
