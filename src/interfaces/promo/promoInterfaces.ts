@@ -1,5 +1,10 @@
 import { Customer } from "../dataInterfaces";
-import { LocalizedString, Reference, TypedMoney } from "../products/ProductProjection";
+import {
+  LocalizedString,
+  ProductTypeReference,
+  Reference,
+  TypedMoney,
+} from "../products/ProductProjection";
 
 export interface ProductDiscountPagedQueryResponse {
   limit: number;
@@ -30,7 +35,7 @@ export interface ProductDiscount {
 
 type ProductDiscountValue = "relative" | "absolute" | "external";
 
-interface CreatedBy {
+export interface CreatedBy {
   clientId?: string;
   externalUserId?: string;
   customer?: CustomerReference;
@@ -39,7 +44,7 @@ interface CreatedBy {
   attributedTo?: Attribution;
 }
 
-interface LastModifiedBy {
+export interface LastModifiedBy {
   clientId?: string;
   externalUserId?: string;
   customer?: CustomerReference;
@@ -55,7 +60,52 @@ interface Attribution {
 
 type AttributionSource = "Import" | "Export";
 
-interface CustomerReference {
+export interface AttributeDefinition {
+  type: AttributeType;
+  name: string;
+  label: LocalizedString;
+  isRequired: boolean;
+  attributeConstraint: AttributeConstraintEnum;
+  inputTip?: LocalizedString;
+  inputHint: string;
+  isSearchable: boolean;
+}
+
+interface BasicAttributeType {
+  name: string;
+}
+
+interface AttributeEnumType extends BasicAttributeType {
+  values: AttributePlainEnumValue[];
+}
+
+interface AttributeReferenceType extends BasicAttributeType {
+  referenceTypeId: string;
+}
+
+interface AttributeSetType extends BasicAttributeType {
+  elementType: AttributeType;
+}
+
+interface AttributeNestedType extends BasicAttributeType {
+  typeReference: ProductTypeReference;
+}
+
+type AttributeType =
+  | BasicAttributeType
+  | AttributeEnumType
+  | AttributeReferenceType
+  | AttributeSetType
+  | AttributeNestedType;
+
+type AttributeConstraintEnum = "None" | "Unique" | "CombinationUnique" | "SameForAll";
+
+interface AttributePlainEnumValue {
+  key: string;
+  label: string | LocalizedString;
+}
+
+export interface CustomerReference {
   id: string;
   typeId: "customer";
   obj?: Customer;
@@ -93,7 +143,7 @@ export interface DiscountCode {
   lastModifiedBy?: LastModifiedBy;
 }
 
-interface CustomFields {
+export interface CustomFields {
   type: TypeReference;
   fields: FieldContainer;
 }
@@ -155,7 +205,7 @@ interface FieldContainer {
   [key: string]: FieldType;
 }
 
-interface CartDiscountReference {
+export interface CartDiscountReference {
   id: string;
   typeId: string;
   obj?: CartDiscount;
@@ -202,4 +252,40 @@ interface CartDiscountValue {
   permyriad?: number;
   money?: TypedMoney;
   applicationMode?: string;
+}
+
+export interface DiscountCodeInfo {
+  discountCode: DiscountCodeReference;
+  state: DiscountCodeState;
+}
+
+interface DiscountCodeReference {
+  id: string;
+  typeId: string;
+  obj?: DiscountCode;
+}
+
+type DiscountCodeState =
+  | "NotActive"
+  | "NotValid"
+  | "DoesNotMatchCart"
+  | "MatchesCart"
+  | "MaxApplicationReached"
+  | "ApplicationStoppedByPreviousDiscount";
+
+export interface DirectDiscount {
+  id: string;
+  value: CartDiscountValue;
+  target?: CartDiscountTarget;
+}
+
+export type DiscountTypeCombination = BestDeal | Stacking;
+
+interface BestDeal {
+  type: "BestDeal";
+  chosenDiscountType: string;
+}
+
+interface Stacking {
+  type: "Stacking";
 }

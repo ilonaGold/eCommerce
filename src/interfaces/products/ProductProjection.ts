@@ -1,3 +1,5 @@
+import { AttributeDefinition, CreatedBy, LastModifiedBy } from "../promo/promoInterfaces";
+
 export interface PagedSearchResponse {
   limit: number;
   offset: number;
@@ -54,7 +56,7 @@ interface SuggestTokenizer {
   type: string;
 }
 
-interface ProductVariant {
+export interface ProductVariant {
   id: number;
   sku?: string;
   key?: string;
@@ -170,4 +172,23 @@ interface FacetRange {
   to: number;
   toStr?: string;
   count: number;
+}
+
+export interface ProductTypeReference {
+  id: string;
+  typeId: string;
+  obj?: ProductType;
+}
+
+interface ProductType {
+  id: string;
+  version: number;
+  key?: string;
+  name: string;
+  description: string;
+  attributes?: AttributeDefinition[];
+  createdAt: string;
+  createdBy?: CreatedBy;
+  lastModifiedAt: string;
+  lastModifiedBy?: LastModifiedBy;
 }
