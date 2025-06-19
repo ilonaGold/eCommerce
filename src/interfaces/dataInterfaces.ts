@@ -1,3 +1,5 @@
+import { Cart } from "./cart/cart";
+
 export interface AddressFormData {
   streetName: string;
   city: string;
@@ -24,6 +26,7 @@ export interface LoginInfo {
   refreshToken: string;
   expiresAt: number;
   customer: Customer;
+  cart?: Cart;
 }
 
 // -------------------------------------------------------------------------

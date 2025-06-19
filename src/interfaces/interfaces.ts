@@ -1,15 +1,18 @@
 import { SearchFormData } from "./products/search/searchQuery";
 import { Customer } from "./dataInterfaces";
 import { PagedSearchResponse, ProductProjection } from "./products/ProductProjection";
+import { Cart } from "./cart/cart";
 
 export interface AppState {
   userAuth: boolean;
   customer: Customer | null;
+  cart: Cart | null;
   productsData: PagedSearchResponse;
   subscribersMap: { [K in keyof AppState]?: Set<SubscriberFunction> };
   searchFormData: SearchFormData;
   setAuth: (isAuth: boolean) => void;
   setCustomer: (customer: Customer | null) => void;
+  setCart: (cart: Cart | null) => void;
   setProductsData: (productsData: PagedSearchResponse) => void;
   setSearchFormData: (searchFormData: SearchFormData) => void;
   subscribe: (keys: (keyof AppState)[], callback: SubscriberFunction) => () => void;
