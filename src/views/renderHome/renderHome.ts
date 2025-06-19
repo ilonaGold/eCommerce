@@ -24,6 +24,7 @@ export async function renderHome(parent: HTMLElement): Promise<void> {
     sectionWithPromoCode,
     sectionWithNewArrivals,
   ]);
+
   const main = mainComponent(sections);
   const footer = createFooter();
   const viewContainer = createElement("div", { class: "view-container" }, [header, main, footer]);

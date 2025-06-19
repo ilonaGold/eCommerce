@@ -14,7 +14,7 @@ export async function addAddress(addressData: {
   country: string;
   defaultShipping: boolean;
   defaultBilling: boolean;
-}) {
+}): Promise<Customer> {
   try {
     const customer = getState("customer") as Customer;
     if (!customer || !customer.id || !customer.version) {
@@ -118,7 +118,7 @@ export async function updateAddress(
     defaultShipping: boolean;
     defaultBilling: boolean;
   }
-) {
+): Promise<Customer> {
   try {
     const customer = getState("customer") as Customer;
     if (!customer || !customer.id || !customer.version) {
@@ -225,7 +225,7 @@ export async function updateAddress(
 }
 
 // Remove address
-export async function removeAddress(addressId: string) {
+export async function removeAddress(addressId: string): Promise<Customer> {
   try {
     const customer = getState("customer") as Customer;
     if (!customer || !customer.id || !customer.version) {
@@ -274,7 +274,7 @@ export async function removeAddress(addressId: string) {
 }
 
 // Set default shipping address
-export async function setDefaultShippingAddress(addressId: string) {
+export async function setDefaultShippingAddress(addressId: string): Promise<Customer> {
   try {
     const customer = getState("customer") as Customer;
     if (!customer || !customer.id || !customer.version) {
@@ -322,7 +322,7 @@ export async function setDefaultShippingAddress(addressId: string) {
 }
 
 // Remove default shipping address
-export async function removeDefaultShippingAddress() {
+export async function removeDefaultShippingAddress(): Promise<Customer> {
   try {
     const customer = getState("customer") as Customer;
     if (!customer || !customer.id || !customer.version) {
@@ -370,7 +370,7 @@ export async function removeDefaultShippingAddress() {
 }
 
 // Set default billing address
-export async function setDefaultBillingAddress(addressId: string) {
+export async function setDefaultBillingAddress(addressId: string): Promise<Customer> {
   try {
     const customer = getState("customer") as Customer;
     if (!customer || !customer.id || !customer.version) {
@@ -418,7 +418,7 @@ export async function setDefaultBillingAddress(addressId: string) {
 }
 
 // Remove default billing address
-export async function removeDefaultBillingAddress() {
+export async function removeDefaultBillingAddress(): Promise<Customer> {
   try {
     const customer = getState("customer") as Customer;
     if (!customer || !customer.id || !customer.version) {
