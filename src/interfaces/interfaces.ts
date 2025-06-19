@@ -5,11 +5,13 @@ import { PagedSearchResponse, ProductProjection } from "./products/ProductProjec
 export interface AppState {
   userAuth: boolean;
   customer: Customer | null;
+  cartId?: string;
   productsData: PagedSearchResponse;
   subscribersMap: { [K in keyof AppState]?: Set<SubscriberFunction> };
   searchFormData: SearchFormData;
   setAuth: (isAuth: boolean) => void;
   setCustomer: (customer: Customer | null) => void;
+  setCartId: (id: string) => void;
   setProductsData: (productsData: PagedSearchResponse) => void;
   setSearchFormData: (searchFormData: SearchFormData) => void;
   subscribe: (keys: (keyof AppState)[], callback: SubscriberFunction) => () => void;

@@ -4,6 +4,7 @@ import { AppState } from "../interfaces/interfaces";
 const state: AppState = {
   userAuth: false,
   customer: null,
+  cartId: undefined,
   productsData: {
     limit: 0,
     offset: 0,
@@ -24,6 +25,9 @@ const state: AppState = {
   },
   setCustomer(customer) {
     this.customer = customer;
+  },
+  setCartId(id) {
+    this.cartId = id;
   },
   setProductsData(productsData) {
     this.productsData = productsData;
@@ -54,6 +58,7 @@ const state: AppState = {
 
 export const setAuth = state.setAuth.bind(state);
 export const setCustomer = state.setCustomer.bind(state);
+export const setCartId = state.setCartId.bind(state);
 export const setProductsData = state.setProductsData.bind(state);
 export const getState = state.getState.bind(state);
 export const subscribe = state.subscribe.bind(state);
