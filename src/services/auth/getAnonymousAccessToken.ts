@@ -4,14 +4,14 @@ export const getAnonymousAccessTokenData = async (
   anonymousId: string
 ): Promise<BaseAccessToken> => {
   try {
-    const authResponse = await fetch(`${import.meta.env.VITE_CTP_AUTH_URL}/oauth/token`, {
+    const authResponse = await fetch(`${import.meta.env.VITE_CTP_AUTH_URL}/anonymous/token`, {
       method: "POST",
       headers: {
         Authorization: `Basic ${btoa(`${import.meta.env.VITE_CTP_CLIENT_ID}:${import.meta.env.VITE_CTP_CLIENT_SECRET}`)}`,
         "Content-Type": "application/x-www-form-urlencoded",
       },
       body: new URLSearchParams({
-        grant_type: "anonymous_token",
+        grant_type: "client_credentials",
         scope: import.meta.env.VITE_CTP_ANONYMOUS_SCOPES.replace("{anonymousId}", anonymousId),
       }),
     });

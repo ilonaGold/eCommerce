@@ -5,19 +5,22 @@ export const getCustomerAccessTokenData = async (
   password: string
 ): Promise<BaseAccessToken> => {
   try {
-    const authResponse = await fetch(`${import.meta.env.VITE_CTP_AUTH_URL}/oauth/token`, {
-      method: "POST",
-      headers: {
-        Authorization: `Basic ${btoa(`${import.meta.env.VITE_CTP_CLIENT_ID}:${import.meta.env.VITE_CTP_CLIENT_SECRET}`)}`,
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: new URLSearchParams({
-        grant_type: "password",
-        username: email,
-        password: password,
-        scope: import.meta.env.VITE_CTP_CUSTOMER_SCOPES,
-      }),
-    });
+    const authResponse = await fetch(
+      `${import.meta.env.VITE_CTP_AUTH_URL}/oauth/${import.meta.env.VITE_CTP_PROJECT_KEY}/customers/token`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Basic ${btoa(`${import.meta.env.VITE_CTP_CLIENT_ID}:${import.meta.env.VITE_CTP_CLIENT_SECRET}`)}`,
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+          grant_type: "password",
+          username: email,
+          password: password,
+          scope: import.meta.env.VITE_CTP_CUSTOMER_SCOPES,
+        }),
+      }
+    );
 
     if (!authResponse.ok) {
       const errorText = await authResponse.text();
