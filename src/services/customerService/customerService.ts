@@ -2,7 +2,6 @@ import { getState, setCustomer } from "../../state/state";
 import { Customer } from "../../interfaces/dataInterfaces";
 
 // Add this import at the top:
-import { getAccessTokenData } from "../auth/getAccessTokenData";
 import { getLoginInfo } from "../localStorage/localStorage";
 
 // Update customer information
