@@ -1,6 +1,5 @@
 import { TeamMember } from "../../interfaces/interfaces";
 import schoolLogo from "../images/school-logo.png";
-import redPandaImage from "../images/red-panda.png";
 import pandaIlona from "../images/panda-Ilona.png";
 import pandaAnastasia from "../images/panda-Anastasia.png";
 import pandaBeqa from "../images/panda-Beqa.png";
