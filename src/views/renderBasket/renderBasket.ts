@@ -11,7 +11,7 @@ export async function renderBasket(parent: HTMLElement): Promise<void> {
   const customer = getState("customer");
   const header = createHeader(isAuth, customer);
   const section = createElement("div", { class: "basket-page__section" }, [
-    createElement("div", { class: "basket-page-placeholder" }, [
+    createElement("div", { class: "basket-page__placeholder" }, [
       "No treats in your basket yet! Start shopping and fill your basket!",
     ]),
   ]);
