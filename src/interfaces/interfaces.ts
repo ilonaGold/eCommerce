@@ -63,4 +63,5 @@ export interface TeamMember {
   description: string;
   githubUrl: string;
   contributions?: string[];
+  bioHtml?: string;
 }

@@ -1,0 +1,794 @@
+body,
+html {
+  overflow-x: hidden;
+}
+
+/* About container */
+.about-container {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.about-main {
+  position: relative;
+  min-height: calc(100vh - 133px); /* Account for header/footer */
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  overflow-x: hidden;
+}
+
+.about-image-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.about-panda-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+/* Dark overlay for better readability */
+.about-image-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+}
+
+/* Content area */
+.about-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 15px 20px;
+}
+
+/* Cards container */
+.cards-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* Base card styling */
+.about-card {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  margin-bottom: 2rem;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Card faces common styling */
+.card-face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  transition:
+    transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    opacity 0.4s ease;
+  border-radius: 12px;
+}
+
+/* Front face - maintain original layout */
+.card-front {
+  transform: rotateY(0deg);
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+}
+
+/* Maroon cards - slide in from left */
+.about-card:nth-child(odd) .card-front {
+  background-color: #800000;
+  color: white;
+  animation: slide-in-left 3s;
+}
+
+/* Yellow cards - slide in from right */
+.about-card:nth-child(even) .card-front {
+  background-color: #e5994e;
+  color: #333;
+  animation: slide-in-right 3s;
+}
+
+.about-card:last-child {
+  margin-bottom: 0;
+}
+
+/* Horizontal animation keyframes */
+@keyframes slide-in-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(50%);
+  }
+  75% {
+    opacity: 1;
+    transform: translateX(-50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-right {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%);
+  }
+  75% {
+    opacity: 1;
+    transform: translateX(50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* School/team card layout */
+.school-card-left,
+.school-card-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  justify-content: center;
+}
+
+/* Consistent vertical spacing */
+.about-card[data-index="0"] .about-card-name {
+  margin-bottom: 0.5rem;
+}
+
+.about-card[data-index="0"] .about-card-role {
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.about-card[data-index="0"] .about-card-description {
+  margin-bottom: 1.5rem;
+}
+
+.school-card-left {
+  border-right: 1px solid rgba(229, 153, 78, 0.3);
+}
+
+/* School logo */
+.school-image {
+  align-self: center;
+  margin-bottom: 1rem;
+}
+
+.school-image img {
+  width: 100px !important;
+  height: 100px !important;
+  object-fit: contain;
+  border-radius: 50%;
+  border: 3px solid #e5994e;
+}
+
+/* Team logo */
+.team-logo-container {
+  display: flex;
+  justify-content: flex-start; /* Left align logo */
+  align-self: center;
+  margin: 1rem 0;
+}
+
+.team-logo {
+  width: 95px;
+  height: 95px;
+  font-size: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e5994e;
+  border: 3px solid white;
+  border-radius: 50%;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #800000;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Team name and role styling */
+.school-card-right .about-card-name,
+.school-card-right .about-card-role {
+  text-align: left;
+  margin-bottom: 0.75rem;
+}
+
+/* Align team description to left */
+.team-description {
+  color: white;
+  font-size: 1.2rem;
+  line-height: 1.4;
+  text-align: left;
+  margin-bottom: 0.5rem;
+}
+
+/* Button consistency */
+.about-card[data-index="0"] .card-buttons {
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.about-card[data-index="0"] .card-btn {
+  min-width: 150px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+}
+
+/* Modal styling for team comprehensive description */
+.team-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+}
+
+.team-modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.team-modal {
+  background-color: #111;
+  border: 2px solid #800000;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 700px;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 2rem;
+  position: relative;
+  transform: translateY(-50px);
+  transition: transform 0.3s ease;
+}
+
+.team-modal-overlay.active .team-modal {
+  transform: translateY(0);
+}
+
+.team-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #e5994e;
+  padding-bottom: 1rem;
+}
+
+.team-modal-title {
+  font-size: 1.75rem;
+  color: #e5994e;
+  margin: 0;
+}
+
+.team-modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #e5994e;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.team-modal-close:hover {
+  color: #fff;
+}
+
+.team-modal-content {
+  color: #e5e5e5;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.team-modal-content p {
+  margin-bottom: 1rem;
+}
+
+/* Image container on front */
+.about-card-image {
+  flex: 0 0 30%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.about-card-image img {
+  width: 90%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 50%;
+  border: 3px solid;
+}
+
+/* Border color for images */
+.about-card:nth-child(odd) .about-card-image img {
+  border-color: #e5994e;
+}
+
+.about-card:nth-child(even) .about-card-image img {
+  border-color: #800000;
+}
+
+/* Content container on front */
+.about-card-content {
+  flex: 1;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.about-card-name {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.about-card-role {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+/* Front card description */
+.card-front .about-card-description {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+/* Contributions list */
+.contributions-title {
+  margin-top: 0.625rem;
+  margin-bottom: 0.5rem;
+}
+
+.contributions-list {
+  margin-bottom: 1.6rem;
+  padding-left: 1.25rem;
+  column-count: 2;
+  column-gap: 1.25rem;
+}
+
+.contributions-list li {
+  margin-bottom: 5px;
+  break-inside: avoid;
+}
+
+/* Back face styling */
+.card-back {
+  transform: rotateY(180deg);
+  padding: 2rem;
+  overflow: auto;
+}
+
+/* Card colors for back face */
+.about-card:nth-child(odd) .card-back {
+  background: linear-gradient(145deg, #e5994e, #f5b971);
+}
+
+.about-card:nth-child(even) .card-back {
+  background: linear-gradient(145deg, #800000, #9a3324);
+}
+
+/* Back content layout */
+.back-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-align: left; /* Left align all content except heading */
+}
+
+/* Back card name/heading */
+.card-back .about-card-name {
+  font-size: 2rem;
+  text-align: center; /* Center only the heading */
+  margin-bottom: 1.25rem;
+}
+
+.about-card:nth-child(odd) .card-back .about-card-name {
+  color: #800000;
+}
+
+.about-card:nth-child(even) .card-back .about-card-name {
+  color: #e5994e;
+}
+
+/* Back card description text */
+.card-back .about-card-description {
+  font-size: 1.05rem; /* Bigger font */
+  line-height: 1.6; /* Increased line height */
+  margin-bottom: 1.25rem;
+  flex-grow: 1;
+}
+
+.about-card:nth-child(odd) .card-back .about-card-description {
+  color: #222222;
+}
+
+.about-card:nth-child(even) .card-back .about-card-description {
+  color: #f5f5f5;
+}
+
+.about-card-description p {
+  margin-bottom: 0.75rem;
+}
+
+/* Button container */
+.card-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+}
+
+/* Button styles */
+.card-btn,
+.check-github-btn,
+.learn-more-btn,
+.website-btn,
+.go-back-btn {
+  display: inline-block;
+  padding: 0.625rem 1.25rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 500;
+  text-align: center;
+  background-color: transparent;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-family: inherit;
+  border: 2px solid;
+}
+
+/* Odd-numbered cards button styling */
+.about-card:nth-child(odd) .card-btn,
+.about-card:nth-child(odd) .check-github-btn,
+.about-card:nth-child(odd) .learn-more-btn,
+.about-card:nth-child(odd) .website-btn {
+  border-color: #e5994e;
+  color: #e5994e;
+}
+
+.about-card:nth-child(odd) .go-back-btn {
+  border-color: #800000;
+  color: #800000;
+}
+
+/* Even-numbered cards button styling */
+.about-card:nth-child(even) .card-btn,
+.about-card:nth-child(even) .check-github-btn,
+.about-card:nth-child(even) .learn-more-btn,
+.about-card:nth-child(even) .website-btn {
+  border-color: #800000;
+  color: #800000;
+}
+
+.about-card:nth-child(even) .go-back-btn {
+  border-color: #e5994e;
+  color: #e5994e;
+}
+
+/* Hover effects for buttons */
+.about-card:nth-child(odd) .card-btn:hover,
+.about-card:nth-child(odd) .check-github-btn:hover,
+.about-card:nth-child(odd) .learn-more-btn:hover,
+.about-card:nth-child(odd) .website-btn:hover {
+  background-color: #e5994e;
+  color: #800000;
+}
+
+.about-card:nth-child(odd) .go-back-btn:hover {
+  background-color: #800000;
+  color: #e5994e;
+}
+
+.about-card:nth-child(even) .card-btn:hover,
+.about-card:nth-child(even) .check-github-btn:hover,
+.about-card:nth-child(even) .learn-more-btn:hover,
+.about-card:nth-child(even) .website-btn:hover {
+  background-color: #800000;
+  color: #e5994e;
+}
+
+.about-card:nth-child(even) .go-back-btn:hover {
+  background-color: #e5994e;
+  color: #800000;
+}
+
+/* Go Back button */
+.go-back-btn {
+  align-self: center;
+  margin-top: 1.25rem;
+  display: inline-block;
+}
+
+/* Flip animation */
+.about-card.flipped .card-front {
+  transform: rotateY(180deg);
+}
+
+.about-card.flipped .card-back {
+  transform: rotateY(0deg);
+}
+
+/* Responsive styling */
+@media (max-width: 865px) {
+  .about-card {
+    height: auto;
+    min-height: 600px;
+    margin-bottom: 1.5rem;
+  }
+
+  .card-face {
+    position: relative;
+    height: auto;
+    min-height: 600px;
+  }
+
+  .card-front,
+  .card-back {
+    position: absolute;
+    height: 100%;
+    min-height: 600px;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-card-image {
+    flex: 0 0 40%;
+    padding-right: 0;
+  }
+
+  .contributions-list {
+    column-count: 1;
+    padding-left: 0;
+  }
+
+  .card-btn {
+    display: block;
+    width: 60%;
+    margin: 0 auto 0.5rem auto !important;
+  }
+
+  .card-back .about-card-description {
+    font-size: 1rem;
+    padding: 1rem;
+  }
+
+  .about-card .go-back-btn {
+    width: 30%;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-card {
+    height: auto;
+    min-height: 750px;
+  }
+
+  .card-front {
+    flex-direction: column;
+  }
+
+  .about-card-image {
+    flex: 0 0 auto;
+    width: 100%;
+    padding: 1rem 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .about-card-image img {
+    width: 7rem;
+    height: 7rem;
+  }
+
+  .about-card-content {
+    padding: 0.75rem 2.5rem 1.5rem;
+    text-align: left;
+  }
+
+  .about-card-name,
+  .about-card-role {
+    text-align: center;
+  }
+
+  .card-buttons {
+    justify-content: center;
+    margin-top: 1.25rem;
+  }
+
+  .about-card .go-back-btn {
+    width: 50%;
+  }
+}
+
+@media (max-width: 360px) {
+  .about-card {
+    min-height: 900px !important;
+  }
+
+  .card-btn {
+    width: 80%;
+  }
+
+  .about-card-image {
+    padding: 1.5rem 1rem 0.5rem !important;
+  }
+
+  .about-card-name {
+    margin-bottom: 0.5rem !important;
+  }
+
+  .about-card-role {
+    margin-bottom: 0.75rem !important;
+  }
+
+  .card-back {
+    padding: 1.75rem 1rem !important;
+  }
+
+  .card-back .about-card-description {
+    padding-left: 0.25rem !important;
+    padding-right: 0.25rem !important;
+  }
+}
+
+/* Responsive adjustments for school/team card */
+@media (max-width: 768px) {
+  .school-card-left,
+  .school-card-right {
+    padding: 1rem;
+  }
+
+  .school-card-right .about-card-name,
+  .school-card-right .about-card-role {
+    text-align: center;
+  }
+
+  .team-logo-container {
+    justify-content: center;
+  }
+
+  .team-logo {
+    width: 70px;
+    height: 70px;
+    font-size: 1.75rem;
+  }
+
+  .school-card-right .card-buttons {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-card[data-index="0"] .card-front {
+    flex-direction: column !important;
+  }
+
+  .school-card-left {
+    border-right: none;
+    border-bottom: 1px solid rgba(229, 153, 78, 0.3);
+    padding-bottom: 1.5rem;
+  }
+
+  .school-card-right {
+    padding-top: 1.5rem;
+  }
+}
+
+/* TO DO: MAKE CODE MODULAR - DISTRIBUTE STYLES TO COMPONENTS */
+/* Horizontal header layout for school/team card */
+.card-header-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.name-role-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 1rem;
+}
+
+.card-header-container .about-card-image,
+.card-header-container .team-logo-wrapper {
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0.5rem;
+}
+
+.card-header-container .about-card-name {
+  margin-bottom: 0.25rem;
+  text-align: left;
+}
+
+.card-header-container .about-card-role {
+  margin-bottom: 0;
+  text-align: left;
+}
+
+/* Team side adjustments */
+.team-logo-wrapper {
+  padding: 0.5rem;
+}
+
+.team-logo {
+  margin: 0;
+}
+
+/* Description container */
+.description-container {
+  margin-bottom: 1.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .card-header-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .name-role-container {
+    margin-left: 0;
+    margin-top: 0.75rem;
+    text-align: center;
+  }
+
+  .card-header-container .about-card-name,
+  .card-header-container .about-card-role {
+    text-align: center;
+  }
+}
