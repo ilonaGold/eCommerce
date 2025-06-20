@@ -46,7 +46,7 @@ export function renderAbout(parent: HTMLElement): void {
   const main = createElement("main", { class: "about-main" }, [imageContainer, contentContainer]);
 
   // Container with header and footer
-  const container = createElement("main", { class: "about-container" }, [
+  const container = createElement("div", { class: "about-container" }, [
     createHeader(isAuth, customer),
     main,
     createFooter(),
