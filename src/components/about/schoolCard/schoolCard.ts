@@ -117,7 +117,7 @@ export function createSchoolCard(): HTMLElement {
 
   function createResponsiveLayoutHandler(): void {
     // Monitor window width and add appropriate class
-    const handleResize = () => {
+    const handleResize = (): void => {
       const card = document.querySelector('.about-card[data-index="0"]');
       if (!card) return;
 
