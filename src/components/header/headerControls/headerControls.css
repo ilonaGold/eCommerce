@@ -51,6 +51,54 @@
   bottom: 0;
 }
 
+/* Basket icon styling */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.basket-icon-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-right: 1rem;
+}
+
+.basket-icon-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.basket-icon {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.2s ease;
+}
+
+.basket-icon-link:hover .basket-icon {
+  transform: scale(1.1);
+}
+
+.basket-count {
+  position: absolute;
+  top: -5px;
+  right: -25px;
+  background-color: #e5994e;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 0.2rem 0.4rem;
+  border-radius: 50%;
+  min-width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* --- Hide content below when menu is open --- */
 body.menu-open .welcome-text,
 body.menu-open .page-text,
@@ -95,5 +143,9 @@ body.menu-open .footer {
   .hamburger-menu.active .hamburger-icon:focus {
     background-color: #e5994e;
     transform: scale(1.2);
+  }
+
+  .basket-icon-container {
+    margin-right: 2rem;
   }
 }

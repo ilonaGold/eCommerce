@@ -6,12 +6,14 @@ export interface AppState {
   userAuth: boolean;
   customer: Customer | null;
   productsData: PagedSearchResponse;
-  subscribersMap: { [K in keyof AppState]?: Set<SubscriberFunction> };
   searchFormData: SearchFormData;
+  basket: unknown[];
+  subscribersMap: { [key: string]: Set<SubscriberFunction> | undefined };
   setAuth: (isAuth: boolean) => void;
   setCustomer: (customer: Customer | null) => void;
   setProductsData: (productsData: PagedSearchResponse) => void;
   setSearchFormData: (searchFormData: SearchFormData) => void;
+  setBasket(basket: unknown[]): void;
   subscribe: (keys: (keyof AppState)[], callback: SubscriberFunction) => () => void;
   getState: <K extends keyof Omit<AppState, "getState">>(property: K) => AppState[K];
 }
