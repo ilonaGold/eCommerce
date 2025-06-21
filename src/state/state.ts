@@ -18,6 +18,7 @@ const state: AppState = {
     minPrice: "",
     maxPrice: "",
   },
+  basket: [],
   subscribersMap: {},
   setAuth(isAuth: boolean) {
     this.userAuth = isAuth;
@@ -33,7 +34,10 @@ const state: AppState = {
     this.searchFormData = searchFormData;
     this.subscribersMap["searchFormData"]?.forEach((cb) => cb(this));
   },
-
+  setBasket(basket: unknown[]) {
+    this.basket = basket;
+    this.subscribersMap["basket"]?.forEach((cb) => cb(this));
+  },
   getState(property) {
     return this[property];
   },
@@ -58,3 +62,4 @@ export const setProductsData = state.setProductsData.bind(state);
 export const getState = state.getState.bind(state);
 export const subscribe = state.subscribe.bind(state);
 export const setSearchFormData = state.setSearchFormData.bind(state);
+export const setBasket = state.setBasket.bind(state);
