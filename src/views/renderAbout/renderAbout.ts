@@ -6,6 +6,7 @@ import { TEAM_MEMBERS } from "../../assets/data/teamMembers";
 import { createAboutBanner } from "../../components/about/aboutBanner/aboutBanner";
 import { createSchoolCard } from "../../components/about/schoolCard/schoolCard";
 import { createTeamMemberCard } from "../../components/about/teamMemberCard/teamMemberCard";
+import { mainComponent } from "../../components/main/main";
 
 import "./renderAbout.css";
 
@@ -42,15 +43,20 @@ export function renderAbout(parent: HTMLElement): void {
   // Add cards container to content
   contentContainer.append(cardsContainer);
 
-  // Main element
-  const main = createElement("main", { class: "about-main" }, [imageContainer, contentContainer]);
+  // Create a content wrapper
+  const aboutContent = createElement("div", { class: "about-page-content" }, [
+    imageContainer,
+    contentContainer,
+  ]);
 
+  // Main element
+  const main = mainComponent(aboutContent);
   // Container with header and footer
-  const container = createElement("div", { class: "about-container" }, [
+  const viewContainer = createElement("div", { class: "view-container" }, [
     createHeader(isAuth, customer),
     main,
     createFooter(),
   ]);
 
-  parent.append(container);
+  parent.append(viewContainer);
 }

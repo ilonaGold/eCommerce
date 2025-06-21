@@ -4,23 +4,19 @@
 @import "../../components/about/teamMemberCard/teamMemberCard.css";
 @import "../../components/about/teamModal/teamModal.css";
 
-body,
-html {
-  overflow-x: hidden; /* Safeguard against overflow */
-}
-
 /* About container */
-.about-container {
-  width: 100%;
+.view-container {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
+  width: 100%;
 }
 
 .about-main {
   position: relative;
   min-height: calc(100vh - 133px); /* Account for header/footer */
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
 }
 
 /* Content area */
@@ -31,7 +27,7 @@ html {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: 15px 20px;
+  padding: 2rem 1rem;
 }
 
 /* Cards container */
