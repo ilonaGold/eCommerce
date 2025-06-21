@@ -57,7 +57,8 @@ Global Classes
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 12px; /* Vertical scrollbar */
+  height: 12px; /* Horizontal scrollbar */
 }
 
 ::-webkit-scrollbar-track {
@@ -66,16 +67,16 @@ Global Classes
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #4caf50;
+  background: #4caf50; /* Green thumb */
   border-radius: 10px;
   border: 3px solid #f1f1f1;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3d9c40;
+  background: #3d9c40; /* Darker green on hover */
 }
 
-/* Firefox scrollbar */
+/* Firefox */
 * {
   scrollbar-width: thin;
   scrollbar-color: #4caf50 #f1f1f1;
