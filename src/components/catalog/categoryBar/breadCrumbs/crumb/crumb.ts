@@ -18,7 +18,7 @@ export const crumb = (categoryWithChildren: CategoryWithChildren): HTMLElement =
           minPrice: "",
           maxPrice: "",
         });
-        await crumbSearchHandler(e);
+        await crumbSearchHandler();
       },
     },
   });
@@ -26,7 +26,7 @@ export const crumb = (categoryWithChildren: CategoryWithChildren): HTMLElement =
 
 export const homeCrumb = (): HTMLElement => {
   return createElement("a", { href: "" }, ["Home"], {
-    classes: ["breadcrumb-link"],
+    classes: ["breadcrumb-link", "breadcrumb-home"],
     events: {
       click: (e) => {
         e.preventDefault();
