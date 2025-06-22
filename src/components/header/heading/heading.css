@@ -11,22 +11,48 @@
   text-align: center;
 }
 
+/* Image logo styles */
+.logo-image {
+  display: none;
+  height: 40px;
+  width: auto;
+  border: none;
+  padding: 0.25rem;
+}
+
+/* Show text logo by default, hide image logo */
+.logo-text {
+  display: block;
+}
+
 @media (max-width: 860px) {
   .logo {
     font-size: 0.95rem;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
+  /* Hide text logo and show image logo on mobile */
+  .logo-text {
+    display: none;
+  }
+
+  .logo-image {
+    display: block;
+    width: 70px;
+    height: 70px;
+  }
+
   .logo {
-    min-width: 150px;
-    font-size: 0.9rem;
+    min-width: auto;
+    width: auto;
+    border: none;
+    padding: 0.25rem;
   }
 }
 
 @media (max-width: 480px) {
   .logo {
-    min-width: 120px;
     font-size: 0.8rem;
   }
 }
