@@ -80,7 +80,7 @@ export function getBasketItemsCount(): number {
  * Increments the quantity of a product in the basket
  * @param productId - ID of the product to increment
  */
-function incrementBasketItemQuantity(productId: string): void {
+export function incrementBasketItemQuantity(productId: string): void {
   const currentBasket = (getState("basket") as BasketItem[]) || [];
   const updatedBasket = currentBasket.map((item) => {
     if (item.id === productId) {
