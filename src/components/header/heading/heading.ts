@@ -1,5 +1,6 @@
 import { goToView } from "../../../routing/router";
 import { createElement } from "../../../utils/dom/createElement";
+import RedPandaLogoImg from "../../../assets/images/red-panda-logo.png";
 
 import "./heading.css";
 
@@ -8,7 +9,7 @@ export const createHeading = (): HTMLElement => {
 
   const logoImage = createElement("img", {
     class: "logo logo-image",
-    src: "../../assets/images/red-panda-logo.png",
+    src: RedPandaLogoImg,
     alt: "Red Panda Squad",
   });
 
