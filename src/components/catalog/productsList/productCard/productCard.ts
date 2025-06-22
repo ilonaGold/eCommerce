@@ -2,11 +2,16 @@ import "./productCard.css";
 import tempPlaceholderImg from "../../../../assets/images/red-panda.png";
 import { Price, ProductProjection } from "../../../../interfaces/products/ProductProjection";
 import { goToView } from "../../../../routing/router";
+import { addToBasket, isInBasket } from "../../../../utils/dom/basket/basketOperations";
+import { subscribe } from "../../../../state/state";
 
 export class ProductCard {
   private element: HTMLElement;
+  private product: ProductProjection;
+  private buyButton: HTMLButtonElement | null = null;
 
   constructor(product: ProductProjection) {
+    this.product = product;
     this.element = document.createElement("div");
     this.element.classList.add("product-card");
     this.element.dataset.productId = product.id;
@@ -56,18 +61,60 @@ export class ProductCard {
   <button class="product-card__buy-button">Add to Cart</button>
     `;
 
+    // Set up event listeners
+    this.setupEventListeners();
+
+    // Check if product is already in basket and update button
+    this.updateButtonState();
+
+    // Subscribe to basket changes to update button state
+    subscribe(["basket"], () => this.updateButtonState());
+  }
+
+  private setupEventListeners(): void {
     this.element.addEventListener("click", (e) => {
       // Don't navigate if clicking the buy button
       if ((e.target as HTMLElement).classList.contains("product-card__buy-button")) {
         e.stopPropagation();
-        // Add to cart logic here
-        console.log(`Adding product ${product.id} to cart`);
+        this.handleAddToCart();
         return;
       }
 
       // Navigate to product detail page
-      goToView(`products/${product.slug?.["en-US"]}`);
+      goToView(`products/${this.product.slug?.["en-US"]}`);
     });
+  }
+
+  private handleAddToCart(): void {
+    if (!isInBasket(this.product.id)) {
+      // Add to cart logic
+      addToBasket(this.product);
+
+      // Update button state
+      this.updateButtonState();
+
+      // Add animation for visual feedback
+      const button = this.element.querySelector(".product-card__buy-button");
+      button?.classList.add("product-card__buy-button--added");
+      setTimeout(() => {
+        button?.classList.remove("product-card__buy-button--added");
+      }, 1000);
+    }
+  }
+
+  private updateButtonState(): void {
+    const button = this.element.querySelector(".product-card__buy-button") as HTMLButtonElement;
+    if (!button) return;
+
+    if (isInBasket(this.product.id)) {
+      button.textContent = "In Cart";
+      button.disabled = true;
+      button.classList.add("product-card__buy-button--in-cart");
+    } else {
+      button.textContent = "Add to Cart";
+      button.disabled = false;
+      button.classList.remove("product-card__buy-button--in-cart");
+    }
   }
 
   private formatPrice(price?: Price): string {

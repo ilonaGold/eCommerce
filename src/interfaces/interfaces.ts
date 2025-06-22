@@ -7,13 +7,13 @@ export interface AppState {
   customer: Customer | null;
   productsData: PagedSearchResponse;
   searchFormData: SearchFormData;
-  basket: unknown[];
+  basket: BasketItem[];
   subscribersMap: { [key: string]: Set<SubscriberFunction> | undefined };
   setAuth: (isAuth: boolean) => void;
   setCustomer: (customer: Customer | null) => void;
   setProductsData: (productsData: PagedSearchResponse) => void;
   setSearchFormData: (searchFormData: SearchFormData) => void;
-  setBasket(basket: unknown[]): void;
+  setBasket(basket: BasketItem[]): void;
   subscribe: (keys: (keyof AppState)[], callback: SubscriberFunction) => () => void;
   getState: <K extends keyof Omit<AppState, "getState">>(property: K) => AppState[K];
 }
@@ -66,4 +66,16 @@ export interface TeamMember {
   githubUrl: string;
   contributions?: string[];
   bioHtml?: string;
+}
+
+export interface BasketItem {
+  id: string;
+  name: string;
+  price: number;
+  originalPrice?: number;
+  discountPercentage?: number;
+  imageUrl: string;
+  quantity: number;
+  slug: string;
+  sku?: string;
 }

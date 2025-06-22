@@ -1,24 +1,31 @@
 import { Customer } from "../../../interfaces/dataInterfaces";
 import { createElement } from "../../../utils/dom/createElement";
 import { createUserActions } from "./userActions/userActions";
-import { getState } from "../../../state/state";
+import { getState, subscribe } from "../../../state/state";
 import basketIcon from "../../../assets/images/basket.png";
-
 import "./headerControls.css";
 
 export const createHeaderControls = (
   isLoggedIn: boolean,
   customer: Customer | null
 ): HTMLElement => {
-  // Create basket icon
-  // Better event listener placement
+  // Create a reference to the count element to get its value later
+  const basketCountElement = createElement("span", { class: "basket-count" }, [
+    getBasketItemCount(),
+  ]);
+  // Subscribe to basket changes
+  subscribe(["basket"], () => {
+    // Update the count when basket changes
+    basketCountElement.textContent = getBasketItemCount();
+  });
+  // Create basket icon with count element
   const basketLink = createElement("a", { href: "/my-basket", class: "basket-icon-link" }, [
     createElement("img", {
       src: "../../../assets/images/basket.png",
       alt: "Shopping Basket",
       class: "basket-icon",
     }),
-    createElement("span", { class: "basket-count" }, [getBasketItemCount()]),
+    basketCountElement,
   ]);
 
   // Add event listener to the link
