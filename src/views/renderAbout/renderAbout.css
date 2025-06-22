@@ -12,6 +12,12 @@
   width: 100%;
 }
 
+/* Ensure header stays above about content */
+.view-container > .header {
+  position: relative;
+  z-index: 10000;
+}
+
 .about-main {
   position: relative;
   min-height: calc(100vh - 133px); /* Account for header/footer */
