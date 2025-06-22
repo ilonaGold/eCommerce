@@ -1,4 +1,7 @@
-import { productProjectionSearch } from "../../../../../../services/API/products/productProjectionSearch";
+import {
+  productProjectionSearch,
+  productProjectionSearchLegacy,
+} from "../../../../../../services/API/products/productProjectionSearch";
 import { getState, setProductsData } from "../../../../../../state/state";
 import { queryBuilder } from "../../../../searchPanel/helpers/queryBuilder";
 
@@ -22,10 +25,9 @@ export const crumbSearchHandler = async (): Promise<void> => {
   const qs = params.toString();
   const newUrl = `${location.pathname}${qs ? "?" + qs : ""}`;
   history.pushState({}, "", newUrl);
-
   // real query
   const query = queryBuilder(fields);
 
-  const products = await productProjectionSearch(query);
+  const products = await productProjectionSearchLegacy(query);
   setProductsData(products);
 };

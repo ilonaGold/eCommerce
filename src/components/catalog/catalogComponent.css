@@ -1,0 +1,43 @@
+/* Catalog Section */
+.catalog-section {
+  padding: 2rem 0;
+  min-height: 60vh;
+}
+
+.catalog-center {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Loading states */
+.category-loading {
+  padding: 0.5rem 1rem;
+  text-align: left;
+  color: #666;
+  font-style: italic;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+/* Smooth transitions between catalog states */
+.catalog-section {
+  transition: opacity 0.3s ease;
+}
+
+.catalog-section.loading {
+  opacity: 0.7;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .catalog-section {
+    padding: 1rem 0;
+  }
+
+  .catalog-center {
+    padding: 0 0.5rem;
+  }
+}

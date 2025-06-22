@@ -1,4 +1,7 @@
-import { productProjectionSearch } from "../../../../services/API/products/productProjectionSearch";
+import {
+  productProjectionSearch,
+  productProjectionSearchLegacy,
+} from "../../../../services/API/products/productProjectionSearch";
 import { setProductsData, setSearchFormData } from "../../../../state/state";
 import { queryBuilder } from "./queryBuilder";
 
@@ -30,10 +33,9 @@ export const searchHandler = async (e: Event): Promise<void> => {
   const qs = params.toString();
   const newUrl = `${location.pathname}${qs ? "?" + qs : ""}`;
   history.pushState({}, "", newUrl);
-
   // real query
   const query = queryBuilder(fields);
 
-  const products = await productProjectionSearch(query);
+  const products = await productProjectionSearchLegacy(query);
   setProductsData(products);
 };
