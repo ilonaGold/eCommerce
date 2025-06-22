@@ -78,4 +78,5 @@ export interface BasketItem {
   quantity: number;
   slug: string;
   sku?: string;
+  lineItemId?: string; // Add line item ID for commercetools integration
 }
