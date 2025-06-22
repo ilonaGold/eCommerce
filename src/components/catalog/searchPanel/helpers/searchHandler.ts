@@ -1,7 +1,4 @@
-import {
-  productProjectionSearch,
-  productProjectionSearchLegacy,
-} from "../../../../services/API/products/productProjectionSearch";
+import { productProjectionSearchLegacy } from "../../../../services/API/products/productProjectionSearch";
 import { setProductsData, setSearchFormData } from "../../../../state/state";
 import { queryBuilder } from "./queryBuilder";
 

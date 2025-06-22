@@ -1,7 +1,7 @@
 import { createElement } from "../../../utils/dom/createElement";
 import { productProjectionSearch } from "../../../services/API/products/productProjectionSearch";
 import { productList } from "../../catalog/productsList/productList";
-import { queryBuilder } from "../../catalog/searchPanel/helpers/queryBuilder";
+//import { queryBuilder } from "../../catalog/searchPanel/helpers/queryBuilder";
 
 import "./newArrivals.css";
 import "../../../components/catalog/productsList/productList.css";

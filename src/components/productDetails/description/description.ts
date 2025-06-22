@@ -2,7 +2,12 @@ import { ProductProjection } from "../../../interfaces/products/ProductProjectio
 import { createElement } from "../../../utils/dom/createElement";
 import { imageSlider } from "../slider/slider";
 import { modalWithSlider } from "../productDetailsModal/productDetailsModal";
-import { addToBasket, isInBasketSync } from "../../../utils/dom/basket/basketOperations";
+import {
+  addToBasket,
+  isInBasketSync,
+  removeLineItemFromBasket,
+} from "../../../utils/dom/basket/basketOperations";
+import { CartService } from "../../../services/API/cart/cartService";
 
 import "./description.css";
 import "../../catalog/productsList/productCard/productCard.css";
@@ -96,6 +101,41 @@ export const description = (product: ProductProjection): HTMLElement => {
     ["Add to Cart"]
   );
 
+  const removeFromCartButton = createElement(
+    "button",
+    {
+      type: "submit",
+      class: "product-details__remove-from-cart-btn",
+      "data-line-item-id": product.id,
+    },
+    ["Remove"]
+  );
+
+  removeFromCartButton.disabled = true;
+
+  removeFromCartButton.addEventListener("click", async (e) => {
+    e.stopPropagation();
+    const lineItem = await CartService.getLineItemByProduct(product.id, product.masterVariant.id);
+    if (lineItem) await handleRemoveItem(lineItem.id);
+  });
+
+  async function handleRemoveItem(lineItemId: string): Promise<void> {
+    try {
+      removeFromCartButton.disabled = true;
+      removeFromCartButton.textContent = "Removing...";
+      await removeLineItemFromBasket(lineItemId);
+
+      // Refresh the page to show updated cart
+      window.location.reload();
+    } catch (error) {
+      console.error("Failed to remove item:", error);
+
+      // Reset button on error
+      removeFromCartButton.disabled = false;
+      removeFromCartButton.textContent = "Remove";
+    }
+  }
+
   addToCartButton.addEventListener("click", async (e) => {
     e.stopPropagation();
     await handleAddToCart();
@@ -114,20 +154,12 @@ export const description = (product: ProductProjection): HTMLElement => {
       await addToBasket(product);
 
       // Update button state
-      if (isInBasketSync(product.id)) {
-        addToCartButton.textContent = "In Cart";
-        addToCartButton.disabled = true;
-        addToCartButton.classList.add("product-card__buy-button--in-cart");
-      } else {
-        addToCartButton.textContent = "Add to Cart";
-        addToCartButton.disabled = false;
-        addToCartButton.classList.remove("product-card__buy-button--in-cart");
-      }
+      updateAddButtonState(product.id);
 
       // Add animation for visual feedback
-      addToCartButton.classList.add("product-card__buy-button--added");
+      addToCartButton.classList.add("product-details__buy-button--added");
       setTimeout(() => {
-        addToCartButton.classList.remove("product-card__buy-button--added");
+        addToCartButton.classList.remove("product-details__buy-button--added");
       }, 1000);
     } catch (error) {
       console.error("Failed to add product to cart:", error);
@@ -135,7 +167,7 @@ export const description = (product: ProductProjection): HTMLElement => {
       // Reset button on error
       addToCartButton.disabled = false;
       addToCartButton.textContent = "Add to Cart";
-      addToCartButton.classList.remove("product-card__buy-button--in-cart");
+      addToCartButton.classList.remove("product-details__buy-button--in-cart");
     }
   }
 
@@ -145,13 +177,39 @@ export const description = (product: ProductProjection): HTMLElement => {
     productDescription,
     productAttributes,
     stockAvailability,
-    addToCartButton
+    addToCartButton,
+    removeFromCartButton
   );
 
   const container = createElement("section", { class: "product-details" }, [
     productImageSlider,
     productInfo,
   ]);
+
+  function updateAddButtonState(id: string): void {
+    if (isInBasketSync(id)) {
+      addToCartButton.textContent = "In Cart";
+      addToCartButton.disabled = true;
+      addToCartButton.classList.add("product-details__buy-button--in-cart");
+      removeFromCartButton.disabled = false;
+    } else {
+      addToCartButton.textContent = "Add to Cart";
+      addToCartButton.disabled = false;
+      addToCartButton.classList.remove("product-details__buy-button--in-cart");
+      removeFromCartButton.disabled = true;
+    }
+  }
+
+  function updateRemoveButtonState(id: string): void {
+    if (isInBasketSync(id)) {
+      removeFromCartButton.disabled = false;
+    } else {
+      removeFromCartButton.disabled = true;
+    }
+  }
+
+  updateAddButtonState(product.id);
+  updateRemoveButtonState(product.id);
 
   return container;
 };

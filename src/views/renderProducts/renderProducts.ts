@@ -14,7 +14,6 @@ import {
 } from "../../services/API/products/productProjectionSearch";
 import { loadingAnimation } from "../../components/loadingAnimation/loadingAnimation";
 
-import { queryBuilder } from "../../components/catalog/searchPanel/helpers/queryBuilder";
 import { readFiltersFromUrl } from "./helpers/readFiltersFromUrl";
 import "./renderProducts.css";
 
@@ -37,7 +36,7 @@ export async function renderProducts(parent: HTMLElement): Promise<void> {
   const urlParams = new URLSearchParams(location.search);
   const currentPage = parseInt(urlParams.get("page") || "1");
   // Prepare search parameters
-  let searchParams: ProductSearchParams = {
+  const searchParams: ProductSearchParams = {
     page: currentPage,
     limit: 12, // Better for responsive design (4x3 grid)
     sort: "createdAt desc",
@@ -59,7 +58,7 @@ export async function renderProducts(parent: HTMLElement): Promise<void> {
   }
 
   // Page change handler
-  const handlePageChange = async (newPage: number) => {
+  const handlePageChange = async (newPage: number): Promise<void> => {
     // Show loading state
     const loadingCatalog = catalogComponentLoading();
     main.replaceChildren(loadingCatalog);
@@ -82,7 +81,8 @@ export async function renderProducts(parent: HTMLElement): Promise<void> {
   // Fetching & Appending
   let productsData;
   try {
-    productsData = await productProjectionSearch(searchParams);  } catch (error) {
+    productsData = await productProjectionSearch(searchParams);
+  } catch (error) {
     console.error("Error fetching products:", error);
     // Fallback to basic search
     productsData = await productProjectionSearch({ limit: 12 });
