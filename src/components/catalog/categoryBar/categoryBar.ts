@@ -11,19 +11,9 @@ export const categorySidebar = (
   categoriesData: CategoryPagedQueryResponse
 ): HTMLElement => {
   const { categoryMap } = categoryMapCreator(productsData, categoriesData);
-  // console.log(categoryMap, rootCategories);
-
   const breadCrumbsComponent = breadCrumbs(categoryMap);
 
-  const listingQuantity = createElement("div", {}, [`Listings: ${productsData.total}`], {
-    styles: {
-      border: "1px solid #990000",
-      borderRadius: "0.3rem",
-      padding: "0.3rem 0.5rem",
-    },
-  });
-
-  const categoryNavbar = createElement("div", {}, [breadCrumbsComponent, listingQuantity], {
+  const categoryNavbar = createElement("div", {}, [breadCrumbsComponent], {
     classes: ["category-navbar"],
   });
 
