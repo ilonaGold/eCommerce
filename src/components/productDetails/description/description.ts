@@ -7,6 +7,7 @@ import {
   isInBasketSync,
   removeLineItemFromBasket,
 } from "../../../utils/dom/basket/basketOperations";
+import { CartService } from "../../../services/API/cart/cartService";
 
 import "./description.css";
 import "../../catalog/productsList/productCard/productCard.css";
@@ -114,14 +115,15 @@ export const description = (product: ProductProjection): HTMLElement => {
 
   removeFromCartButton.addEventListener("click", async (e) => {
     e.stopPropagation();
-    await handleRemoveItem(product.id);
+    const lineItem = await CartService.getLineItemByProduct(product.id, product.masterVariant.id);
+    if (lineItem) await handleRemoveItem(lineItem.id);
   });
 
-  async function handleRemoveItem(productId: string): Promise<void> {
+  async function handleRemoveItem(lineItemId: string): Promise<void> {
     try {
       removeFromCartButton.disabled = true;
       removeFromCartButton.textContent = "Removing...";
-      await removeLineItemFromBasket(productId);
+      await removeLineItemFromBasket(lineItemId);
 
       // Refresh the page to show updated cart
       window.location.reload();
