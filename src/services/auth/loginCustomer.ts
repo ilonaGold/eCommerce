@@ -1,4 +1,5 @@
 import { LoginInfo } from "../../interfaces/dataInterfaces";
+import { CartService } from "../API/cart/cartService";
 
 export async function loginCustomer(email: string, password: string): Promise<LoginInfo> {
   const authUrl = `${import.meta.env.VITE_CTP_AUTH_URL}/oauth/${import.meta.env.VITE_CTP_PROJECT_KEY}/customers/token`;
@@ -44,7 +45,6 @@ export async function loginCustomer(email: string, password: string): Promise<Lo
   }
   // Customer Data:
   const customerData = await loginResponse.json();
-
   // save token & customer-data
   const loginInfo = {
     accessToken: authData.access_token,
@@ -52,5 +52,14 @@ export async function loginCustomer(email: string, password: string): Promise<Lo
     expiresAt: Date.now() + authData.expires_in * 1000,
     customer: customerData.customer,
   };
+
+  // Transfer any anonymous cart data to the logged-in user
+  try {
+    await CartService.transferAnonymousCart();
+  } catch (error) {
+    console.error("Error transferring anonymous cart:", error);
+    // Don't fail login if cart transfer fails
+  }
+
   return loginInfo;
 }

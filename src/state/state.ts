@@ -1,4 +1,4 @@
-import { SubscriberFunction } from "./../interfaces/interfaces";
+import { SubscriberFunction, BasketItem } from "./../interfaces/interfaces";
 import { AppState } from "../interfaces/interfaces";
 
 const state: AppState = {
@@ -29,12 +29,11 @@ const state: AppState = {
   setProductsData(productsData) {
     this.productsData = productsData;
     this.subscribersMap["productsData"]?.forEach((cb) => cb(this));
-  },
-  setSearchFormData(searchFormData) {
+  },  setSearchFormData(searchFormData) {
     this.searchFormData = searchFormData;
     this.subscribersMap["searchFormData"]?.forEach((cb) => cb(this));
   },
-  setBasket(basket: unknown[]) {
+  setBasket(basket: BasketItem[]) {
     this.basket = basket;
     this.subscribersMap["basket"]?.forEach((cb) => cb(this));
   },

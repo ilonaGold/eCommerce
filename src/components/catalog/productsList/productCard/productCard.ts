@@ -2,7 +2,7 @@ import "./productCard.css";
 import tempPlaceholderImg from "../../../../assets/images/red-panda.png";
 import { Price, ProductProjection } from "../../../../interfaces/products/ProductProjection";
 import { goToView } from "../../../../routing/router";
-import { addToBasket, isInBasket } from "../../../../utils/dom/basket/basketOperations";
+import { addToBasket, isInBasketSync } from "../../../../utils/dom/basket/basketOperations";
 import { subscribe } from "../../../../state/state";
 
 export class ProductCard {
@@ -85,20 +85,41 @@ export class ProductCard {
     });
   }
 
-  private handleAddToCart(): void {
-    if (!isInBasket(this.product.id)) {
-      // Add to cart logic
-      addToBasket(this.product);
+  private async handleAddToCart(): Promise<void> {
+    const button = this.element.querySelector(".product-card__buy-button") as HTMLButtonElement;
+
+    if (!button || button.disabled) {
+      return;
+    }
+
+    // Check if product is already in cart using sync method for immediate UI feedback
+    if (isInBasketSync(this.product.id)) {
+      return;
+    }
+
+    // Disable button and show loading state
+    button.disabled = true;
+    button.textContent = "Adding...";
+
+    try {
+      // Add to cart via API
+      await addToBasket(this.product);
 
       // Update button state
       this.updateButtonState();
 
       // Add animation for visual feedback
-      const button = this.element.querySelector(".product-card__buy-button");
-      button?.classList.add("product-card__buy-button--added");
+      button.classList.add("product-card__buy-button--added");
       setTimeout(() => {
-        button?.classList.remove("product-card__buy-button--added");
+        button.classList.remove("product-card__buy-button--added");
       }, 1000);
+    } catch (error) {
+      console.error("Failed to add product to cart:", error);
+
+      // Reset button on error
+      button.disabled = false;
+      button.textContent = "Add to Cart";
+      button.classList.remove("product-card__buy-button--in-cart");
     }
   }
 
@@ -106,7 +127,8 @@ export class ProductCard {
     const button = this.element.querySelector(".product-card__buy-button") as HTMLButtonElement;
     if (!button) return;
 
-    if (isInBasket(this.product.id)) {
+    // Use sync method for immediate UI updates
+    if (isInBasketSync(this.product.id)) {
       button.textContent = "In Cart";
       button.disabled = true;
       button.classList.add("product-card__buy-button--in-cart");

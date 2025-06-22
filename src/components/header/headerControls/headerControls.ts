@@ -1,4 +1,5 @@
 import { Customer } from "../../../interfaces/dataInterfaces";
+import { BasketItem } from "../../../interfaces/interfaces";
 import { createElement } from "../../../utils/dom/createElement";
 import { createUserActions } from "./userActions/userActions";
 import { getState, subscribe } from "../../../state/state";
@@ -52,10 +53,12 @@ export const createHeaderControls = (
   return controls;
 };
 
-// Function to get basket item count from state
+// Function to get basket item count from state (synchronous for immediate UI updates)
 function getBasketItemCount(): string {
-  const basket = (getState("basket") as unknown[]) || [];
-  const itemCount = Array.isArray(basket) ? basket.length : 0;
+  const basket = (getState("basket") as BasketItem[]) || [];
+  const itemCount = Array.isArray(basket)
+    ? basket.reduce((total: number, item: BasketItem) => total + (item.quantity || 1), 0)
+    : 0;
 
   return itemCount > 0 ? itemCount.toString() : "0";
 }

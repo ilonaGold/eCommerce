@@ -1,6 +1,7 @@
 import { Customer } from "../../../../../interfaces/dataInterfaces";
 import { goToView } from "../../../../../routing/router";
 import { clearLoginData } from "../../../../../services/localStorage/localStorage";
+import { CartService } from "../../../../../services/API/cart/cartService";
 import { setAuth, setCustomer } from "../../../../../state/state";
 import { createElement } from "../../../../../utils/dom/createElement";
 import { initiateDropDown } from "./helpers/initiateDropDown";
@@ -16,6 +17,8 @@ export const createUserAccountComponent = (customer: Customer | null): HTMLEleme
         setAuth(false);
         setCustomer(null);
         clearLoginData();
+        // Clear any anonymous cart data when logging out
+        CartService.clearAnonymousData();
         goToView("");
       },
     },
