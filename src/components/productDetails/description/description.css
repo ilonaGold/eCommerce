@@ -103,7 +103,7 @@
   border-radius: 4px;
   cursor: pointer;
   flex-grow: 1;
-  max-width: 120px;
+  width: 100%;
   box-sizing: border-box;
   display: flex;
   align-items: center;
