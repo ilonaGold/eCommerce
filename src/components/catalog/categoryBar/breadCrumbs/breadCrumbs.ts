@@ -3,6 +3,7 @@ import { getState } from "../../../../state/state";
 import { createElement } from "../../../../utils/dom/createElement";
 import { getBreadCrumbTrail } from "./helpers/getBreadCrumbTrail";
 import { crumb, homeCrumb } from "./crumb/crumb";
+import "./breadCrumbs.css";
 
 export const breadCrumbs = (categoryMap: { [id: string]: CategoryWithChildren }): HTMLElement => {
   // Get categoryId from State or URL
@@ -13,13 +14,13 @@ export const breadCrumbs = (categoryMap: { [id: string]: CategoryWithChildren })
   // Get categoryId from State or URL
 
   const breadCrumbTrail = getBreadCrumbTrail(categoryMap, choosenCategory);
-  console.log(breadCrumbTrail);
 
   // HTML part
 
   const breadCrumbElements: (HTMLElement | string)[] = [];
 
   // ----------------------------------------------------------------------
+
   breadCrumbElements.push(homeCrumb());
 
   if (breadCrumbTrail.length > 0) {
@@ -35,7 +36,17 @@ export const breadCrumbs = (categoryMap: { [id: string]: CategoryWithChildren })
 
     if (!isLast) breadCrumbElements.push(" > ");
   });
+
+  // Add product count
+  const productsData = getState("productsData");
+  const total = productsData?.total || 0;
+
+  if (total > 0) {
+    breadCrumbElements.push(
+      createElement("span", { class: "product-count" }, [`Listings: ${total}`])
+    );
+  }
   // ----------------------------------------------------------------------
 
-  return createElement("div", { class: "breadcrumbs" }, breadCrumbElements);
+  return createElement("div", { class: "breadcrumbs catalog-breadcrumbs" }, breadCrumbElements);
 };
