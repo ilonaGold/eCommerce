@@ -2,7 +2,7 @@ import { Customer } from "../../../interfaces/dataInterfaces";
 import { createElement } from "../../../utils/dom/createElement";
 import { createUserActions } from "./userActions/userActions";
 import { getState, subscribe } from "../../../state/state";
-import basketIcon from "../../../assets/images/basket.png";
+import basketIconImg from "../../../assets/images/basket.png";
 import "./headerControls.css";
 
 export const createHeaderControls = (
@@ -21,7 +21,7 @@ export const createHeaderControls = (
   // Create basket icon with count element
   const basketLink = createElement("a", { href: "/my-basket", class: "basket-icon-link" }, [
     createElement("img", {
-      src: "../../../assets/images/basket.png",
+      src: basketIconImg,
       alt: "Shopping Basket",
       class: "basket-icon",
     }),
