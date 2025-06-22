@@ -57,9 +57,9 @@ function createEmptyBasketContent(): HTMLElement {
 function createFilledBasketContent(cart: Cart): HTMLElement {
   const basketItems = cart.lineItems.map((lineItem) => createBasketItem(lineItem));
 
-  const subtotal = cart.totalPrice.centAmount / 100;
-  const discountAmount = cart.discountCodes.length > 0 ? calculateDiscountAmount(cart) : 0;
-  const total = subtotal - discountAmount;
+  const discountAmount = (cart.discountOnTotalPrice?.discountedAmount?.centAmount || 0) / 100;
+  const total = cart.totalPrice.centAmount / 100;
+  const subtotal = total + discountAmount;
 
   const basketList = createElement("div", { class: "basket-items-list" }, basketItems);
 
@@ -423,7 +423,7 @@ async function handleRemoveItem(e: Event, lineItemId: string): Promise<void> {
 /**
  * Calculates the total discount amount from applied discount codes
  */
-function calculateDiscountAmount(cart: Cart): number {
+/*function calculateDiscountAmount(cart: Cart): number {
   // This is a simplified calculation - in reality, you'd need to examine
   // the cart's discount information more carefully
   let discountAmount = 0;
@@ -438,3 +438,4 @@ function calculateDiscountAmount(cart: Cart): number {
 
   return discountAmount;
 }
+*/
