@@ -17,12 +17,17 @@ export const initiateDropDown = (userAccountComponent: HTMLElement): HTMLElement
   };
   document.addEventListener("click", outsideClickHandler);
 
-  userAccountComponent.addEventListener("DOMNodeRemoved", (event) => {
-    if (event.target === userAccountComponent) {
-      if (dropdownTrigger) {
-        dropdownTrigger.removeEventListener("click", triggerClickHandler);
-      }
-      document.removeEventListener("click", outsideClickHandler);
+  const observer = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      mutation.removedNodes.forEach((node) => {
+        if (node === userAccountComponent) {
+          if (dropdownTrigger) {
+            dropdownTrigger.removeEventListener("click", triggerClickHandler);
+          }
+          document.removeEventListener("click", outsideClickHandler);
+          observer.disconnect(); // Stop observing
+        }
+      });
     }
   });
 
