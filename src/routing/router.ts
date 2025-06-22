@@ -7,7 +7,7 @@ import { renderProducts } from "../views/renderProducts/renderProducts";
 import { renderError } from "../views/renderError/renderError";
 import { renderHome } from "../views/renderHome/renderHome";
 import { renderAbout } from "../views/renderAbout/renderAbout";
-import { renderContacts } from "../views/renderContacts/renderContacts";
+import { renderBasket } from "../views/renderBasket/renderBasket";
 import { handleProductDetails } from "../utils/dom/product/productHandler";
 import { renderUserProfile } from "../views/renderUserProfile/renderUserProfile";
 
@@ -49,9 +49,9 @@ const routes: Routes[] = [
     },
   },
   {
-    path: "contacts",
+    path: "my-basket",
     handle: (): void => {
-      renderContacts(getRoot());
+      renderBasket(getRoot());
     },
   },
   {

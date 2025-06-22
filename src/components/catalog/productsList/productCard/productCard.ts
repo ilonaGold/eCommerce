@@ -2,11 +2,16 @@ import "./productCard.css";
 import tempPlaceholderImg from "../../../../assets/images/red-panda.png";
 import { Price, ProductProjection } from "../../../../interfaces/products/ProductProjection";
 import { goToView } from "../../../../routing/router";
+import { addToBasket, isInBasketSync } from "../../../../utils/dom/basket/basketOperations";
+import { subscribe } from "../../../../state/state";
 
 export class ProductCard {
   private element: HTMLElement;
+  private product: ProductProjection;
+  private buyButton: HTMLButtonElement | null = null;
 
   constructor(product: ProductProjection) {
+    this.product = product;
     this.element = document.createElement("div");
     this.element.classList.add("product-card");
     this.element.dataset.productId = product.id;
@@ -56,18 +61,82 @@ export class ProductCard {
   <button class="product-card__buy-button">Add to Cart</button>
     `;
 
+    // Set up event listeners
+    this.setupEventListeners();
+
+    // Check if product is already in basket and update button
+    this.updateButtonState();
+
+    // Subscribe to basket changes to update button state
+    subscribe(["basket"], () => this.updateButtonState());
+  }
+
+  private setupEventListeners(): void {
     this.element.addEventListener("click", (e) => {
       // Don't navigate if clicking the buy button
       if ((e.target as HTMLElement).classList.contains("product-card__buy-button")) {
         e.stopPropagation();
-        // Add to cart logic here
-        console.log(`Adding product ${product.id} to cart`);
+        this.handleAddToCart();
         return;
       }
 
       // Navigate to product detail page
-      goToView(`products/${product.slug?.["en-US"]}`);
+      goToView(`products/${this.product.slug?.["en-US"]}`);
     });
+  }
+
+  private async handleAddToCart(): Promise<void> {
+    const button = this.element.querySelector(".product-card__buy-button") as HTMLButtonElement;
+
+    if (!button || button.disabled) {
+      return;
+    }
+
+    // Check if product is already in cart using sync method for immediate UI feedback
+    if (isInBasketSync(this.product.id)) {
+      return;
+    }
+
+    // Disable button and show loading state
+    button.disabled = true;
+    button.textContent = "Adding...";
+
+    try {
+      // Add to cart via API
+      await addToBasket(this.product);
+
+      // Update button state
+      this.updateButtonState();
+
+      // Add animation for visual feedback
+      button.classList.add("product-card__buy-button--added");
+      setTimeout(() => {
+        button.classList.remove("product-card__buy-button--added");
+      }, 1000);
+    } catch (error) {
+      console.error("Failed to add product to cart:", error);
+
+      // Reset button on error
+      button.disabled = false;
+      button.textContent = "Add to Cart";
+      button.classList.remove("product-card__buy-button--in-cart");
+    }
+  }
+
+  private updateButtonState(): void {
+    const button = this.element.querySelector(".product-card__buy-button") as HTMLButtonElement;
+    if (!button) return;
+
+    // Use sync method for immediate UI updates
+    if (isInBasketSync(this.product.id)) {
+      button.textContent = "In Cart";
+      button.disabled = true;
+      button.classList.add("product-card__buy-button--in-cart");
+    } else {
+      button.textContent = "Add to Cart";
+      button.disabled = false;
+      button.classList.remove("product-card__buy-button--in-cart");
+    }
   }
 
   private formatPrice(price?: Price): string {

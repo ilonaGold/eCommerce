@@ -2,26 +2,31 @@ import { createElement } from "../../utils/dom/createElement";
 import { getState } from "../../state/state";
 import { createHeader } from "../../components/header/header";
 import { createFooter } from "../../components/footer/footer";
+import { mainBanner } from "../../components/home/mainBanner/mainBanner";
+import { discounts } from "../../components/home/discounts/discounts";
+import { promoCode } from "../../components/home/promoCode/promoCode";
+import { newArrivals } from "../../components/home/newArrivals/newArrivals";
+import { mainComponent } from "../../components/main/main";
 
-import homePanda from "../../assets/images/sleeping-panda.png";
 import "./renderHome.css";
 
-export function renderHome(parent: HTMLElement): void {
+export async function renderHome(parent: HTMLElement): Promise<void> {
   const isAuth = getState("userAuth");
   const customer = getState("customer");
-  const imageContainer = createElement("div", { class: "home-image-container" }, [
-    createElement("img", {
-      src: homePanda,
-      alt: "Home panda",
-      class: "home-panda-image",
-    }),
-    createElement("p", { class: "page-text" }, ["Relax while we're building this page for you"]),
+  const header = createHeader(isAuth, customer);
+  const sectionWithBanner = mainBanner();
+  const sectionWithDiscounts = await discounts();
+  const sectionWithPromoCode = await promoCode();
+  const sectionWithNewArrivals = await newArrivals();
+  const sections = createElement("div", { class: "home-page__all-sections" }, [
+    sectionWithBanner,
+    sectionWithDiscounts,
+    sectionWithPromoCode,
+    sectionWithNewArrivals,
   ]);
-  const main = createElement("main", { class: "home-main" }, [imageContainer]);
-  const container = createElement("main", { class: "home-container" }, [
-    createHeader(isAuth, customer),
-    main,
-    createFooter(),
-  ]);
-  parent.append(container);
+
+  const main = mainComponent(sections);
+  const footer = createFooter();
+  const viewContainer = createElement("div", { class: "view-container" }, [header, main, footer]);
+  parent.append(viewContainer);
 }

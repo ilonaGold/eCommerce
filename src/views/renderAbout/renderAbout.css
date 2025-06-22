@@ -1,81 +1,47 @@
-/* Home container */
-.about-container {
+/* Import component styles */
+@import "../../components/about/aboutBanner/aboutBanner.css";
+@import "../../components/about/schoolCard/schoolCard.css";
+@import "../../components/about/teamMemberCard/teamMemberCard.css";
+@import "../../components/about/teamModal/teamModal.css";
+
+/* About container */
+.view-container {
   display: flex;
   flex-direction: column;
-  justify-items: center;
-  align-content: center;
-  width: 100vw;
-  height: 100vh;
-}
-
-/* Home main */
-.about-main {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
+  min-height: 100vh;
   width: 100%;
-  height: calc(100vh - 56px - 77px);
 }
 
-.about-image-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+/* Ensure header stays above about content */
+.view-container > .header {
   position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+  z-index: 10000;
 }
 
-.about-panda-image {
-  position: absolute;
+.about-main {
+  position: relative;
+  min-height: calc(100vh - 133px); /* Account for header/footer */
   width: 100%;
-  height: 100%;
-  object-fit: cover; /* or try contain */
-  z-index: -1;
+  max-width: 100%;
 }
 
-.page-text {
-  color: white;
-  text-shadow:
-    2px 2px 4px rgba(0, 0, 0, 0.5),
-    -1px -1px 0 rgba(0, 0, 0, 0.3);
-  font-size: 4rem;
-  text-align: center;
-  max-width: 90%;
-  margin-bottom: 2rem;
-  line-height: 1.2;
+/* Content area */
+.about-content {
   position: relative;
   z-index: 2;
-  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 2rem 1rem;
 }
 
-.page-text.open {
-  transform: translateY(300px);
-}
-
-/* Background Overlay */
-.about-main::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 1;
-}
-
-/* Media Queries */
-@media (max-width: 1400px) {
-  .page-text {
-    font-size: 3rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .page-text {
-    font-size: 2rem;
-  }
+/* Cards container */
+.cards-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 0;
 }

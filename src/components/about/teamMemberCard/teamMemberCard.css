@@ -1,0 +1,461 @@
+/* Base card styling */
+.about-card {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  margin-bottom: 2rem;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Card face styling */
+.card-face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  transition:
+    transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    opacity 0.4s ease;
+  border-radius: 12px;
+}
+
+/* Front and back face styling */
+.card-front {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  transform: rotateY(0deg);
+}
+
+.card-back {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem;
+  transform: rotateY(180deg);
+}
+
+/* Card flip effect */
+.about-card.flipped .card-front {
+  transform: rotateY(180deg);
+}
+
+.about-card.flipped .card-back {
+  transform: rotateY(0);
+}
+
+/* Transparency during flip */
+.flipping .card-face {
+  opacity: 0.8;
+}
+
+/* Alternating card colors */
+.about-card:nth-child(odd) .card-front {
+  background-color: #800000;
+  color: white;
+  animation: slide-in-left 3s;
+}
+
+.about-card:nth-child(even) .card-front {
+  background-color: #e5994e;
+  color: #333;
+  animation: slide-in-right 3s;
+}
+
+.about-card:last-child {
+  margin-bottom: 0;
+}
+
+/* Card colors for back face */
+.about-card:nth-child(odd) .card-back {
+  background: linear-gradient(145deg, #e5994e, #f5b971);
+}
+
+.about-card:nth-child(even) .card-back {
+  background: linear-gradient(145deg, #800000, #9a3324);
+}
+
+/* Image styling */
+.about-card-image {
+  flex: 0 0 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.about-card-image img {
+  width: 90%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 50%;
+  border: 3px solid;
+}
+
+/* Border color for images */
+.about-card:nth-child(odd) .about-card-image img {
+  border-color: #e5994e;
+}
+
+.about-card:nth-child(even) .about-card-image img {
+  border-color: #800000;
+}
+
+/* Content styling */
+.about-card-content {
+  flex: 1;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.about-card-name {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.about-card-role {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.card-front .about-card-description {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.card-back .about-card-description {
+  padding-left: 0.25rem !important;
+  padding-right: 0.25rem !important;
+}
+
+/* Contributions section */
+.contributions-title {
+  /* font-size: 1.3rem; */
+  margin-top: 0.625rem;
+  margin-bottom: 0.5rem;
+}
+
+.contributions-list {
+  column-count: 2;
+  column-gap: 1.25rem;
+  margin-bottom: 1.5rem;
+  padding-left: 1.25rem;
+}
+
+.contributions-list li {
+  margin-bottom: 5px;
+  break-inside: avoid;
+}
+
+/* Back card name/heading */
+.card-back .about-card-name {
+  font-size: 2rem;
+  text-align: center; /* Center only the heading */
+  margin-bottom: 1.25rem;
+}
+
+.about-card:nth-child(odd) .card-back .about-card-name {
+  color: #800000;
+}
+
+.about-card:nth-child(even) .card-back .about-card-name {
+  color: #e5994e;
+}
+
+/* Back card description text */
+.card-back .about-card-description {
+  font-size: 1.05rem; /* Bigger font */
+  line-height: 1.6; /* Increased line height */
+  margin-bottom: 1.25rem;
+  flex-grow: 1;
+}
+
+.about-card:nth-child(odd) .card-back .about-card-description {
+  color: #222222;
+}
+
+.about-card:nth-child(even) .card-back .about-card-description {
+  color: #f5f5f5;
+}
+
+.about-card-description p {
+  margin-bottom: 0.75rem;
+}
+
+/* Button styling */
+.card-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Create two columns */
+  gap: 1rem;
+  margin-top: 1.25rem;
+  width: 100%;
+}
+
+.card-btn,
+.check-github-btn,
+.learn-more-btn,
+.website-btn,
+.go-back-btn {
+  display: inline-block;
+  padding: 0.625rem 1.25rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 500;
+  text-align: center;
+  background-color: transparent;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-family: inherit;
+  border: 2px solid;
+}
+
+/* Button positioning */
+.about-card .check-github-btn,
+.about-card .learn-more-btn {
+  justify-self: start;
+  width: 100%;
+  max-width: 170px;
+}
+
+/* Odd-numbered cards button styling */
+.about-card:nth-child(odd) .card-btn,
+.about-card:nth-child(odd) .check-github-btn,
+.about-card:nth-child(odd) .learn-more-btn,
+.about-card:nth-child(odd) .website-btn {
+  border-color: #e5994e;
+  color: #e5994e;
+}
+
+.about-card:nth-child(odd) .go-back-btn {
+  border-color: #800000;
+  color: #800000;
+}
+
+/* Even-numbered cards button styling */
+.about-card:nth-child(even) .card-btn,
+.about-card:nth-child(even) .check-github-btn,
+.about-card:nth-child(even) .learn-more-btn,
+.about-card:nth-child(even) .website-btn {
+  border-color: #800000;
+  color: #800000;
+}
+
+.about-card:nth-child(even) .go-back-btn {
+  border-color: #e5994e;
+  color: #e5994e;
+}
+
+/* Hover effects for buttons */
+.about-card:nth-child(odd) .card-btn:hover,
+.about-card:nth-child(odd) .check-github-btn:hover,
+.about-card:nth-child(odd) .learn-more-btn:hover,
+.about-card:nth-child(odd) .website-btn:hover {
+  background-color: #e5994e;
+  color: #800000;
+}
+
+.about-card:nth-child(odd) .go-back-btn:hover {
+  background-color: #800000;
+  color: #e5994e;
+}
+
+.about-card:nth-child(even) .card-btn:hover,
+.about-card:nth-child(even) .check-github-btn:hover,
+.about-card:nth-child(even) .learn-more-btn:hover,
+.about-card:nth-child(even) .website-btn:hover {
+  background-color: #800000;
+  color: #e5994e;
+}
+
+.about-card:nth-child(even) .go-back-btn:hover {
+  background-color: #e5994e;
+  color: #800000;
+}
+
+/* Go Back button */
+.go-back-btn {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  margin-top: 3rem;
+}
+
+/* Horizontal animation keyframes */
+@keyframes slide-in-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(50%);
+  }
+  75% {
+    opacity: 1;
+    transform: translateX(-50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-right {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%);
+  }
+  75% {
+    opacity: 1;
+    transform: translateX(50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsive styles */
+@media (max-width: 865px) {
+  .about-card {
+    height: auto;
+    min-height: 600px;
+    margin-bottom: 1.5rem;
+  }
+
+  .card-face {
+    position: relative;
+    height: 100%;
+    min-height: 600px;
+  }
+
+  .card-front,
+  .card-back {
+    position: absolute;
+    height: 100%;
+    min-height: 600px;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-card-image {
+    flex: 0 0 40%;
+    padding-right: 0;
+  }
+
+  .contributions-list {
+    column-count: 1;
+    padding-left: 0;
+  }
+
+  .card-btn {
+    display: block;
+    width: 60%;
+    margin: 0 auto 0.5rem auto !important;
+  }
+
+  .card-back .about-card-description {
+    font-size: 1rem;
+    padding: 1rem;
+  }
+
+  .about-card .go-back-btn {
+    width: 30%;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-card {
+    height: auto;
+    min-height: 750px;
+  }
+
+  .card-front {
+    flex-direction: column;
+  }
+
+  .about-card-image {
+    flex: 0 0 auto;
+    width: 100%;
+    padding: 1rem 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .about-card-image img {
+    width: 7rem;
+    height: 7rem;
+  }
+
+  .about-card-content {
+    padding: 0.75rem 2.5rem 1.5rem;
+    text-align: left;
+  }
+
+  .about-card-name,
+  .about-card-role {
+    text-align: center;
+  }
+
+  .card-buttons {
+    grid-template-columns: 1fr; /* Single column on mobile */
+    justify-items: center;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .about-card .check-github-btn,
+  .about-card .learn-more-btn {
+    grid-column: auto; /* Let grid decide */
+    justify-self: center;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 360px) {
+  .about-card {
+    min-height: 900px !important;
+  }
+
+  .card-btn {
+    width: 80%;
+  }
+
+  .about-card-image {
+    padding: 1.5rem 1rem 0.5rem !important;
+  }
+
+  .about-card-name {
+    margin-bottom: 0.5rem !important;
+  }
+
+  .about-card-role {
+    margin-bottom: 0.75rem !important;
+  }
+
+  .card-back {
+    padding: 1.75rem 1rem !important;
+  }
+
+  .card-back .about-card-description {
+    padding-left: 0.25rem !important;
+    padding-right: 0.25rem !important;
+  }
+}

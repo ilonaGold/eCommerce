@@ -137,6 +137,35 @@
   background-color: #4caf50;
 }
 
+.product-card__buy-button:active {
+  transform: scale(0.98);
+}
+
+/* Disabled/In Cart button style */
+.product-card__buy-button--in-cart,
+.product-card__buy-button--in-cart:hover {
+  background-color: #808080;
+  cursor: not-allowed;
+}
+
+/* Animation for when product is added to cart */
+.product-card__buy-button--added {
+  animation: buttonPulse 0.5s ease;
+}
+
+@keyframes buttonPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+    background-color: #4caf50;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 /* Media queries */
 @media (max-width: 768px) {
   .product-card {

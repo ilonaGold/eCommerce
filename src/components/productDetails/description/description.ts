@@ -1,8 +1,13 @@
 import { ProductProjection } from "../../../interfaces/products/ProductProjection";
 import { createElement } from "../../../utils/dom/createElement";
-import { createInputGroup } from "../../../utils/dom/form/createInputGroup";
 import { imageSlider } from "../slider/slider";
 import { modalWithSlider } from "../productDetailsModal/productDetailsModal";
+import {
+  addToBasket,
+  isInBasketSync,
+  removeLineItemFromBasket,
+} from "../../../utils/dom/basket/basketOperations";
+import { CartService } from "../../../services/API/cart/cartService";
 
 import "./description.css";
 import "../../catalog/productsList/productCard/productCard.css";
@@ -90,15 +95,81 @@ export const description = (product: ProductProjection): HTMLElement => {
     }
   }
 
-  const input = createInputGroup("", "number", "quantity");
-  const quantity = input.querySelector("#quantity");
-  quantity?.setAttribute("value", "1");
-  const button = createElement(
+  const addToCartButton = createElement(
     "button",
     { type: "submit", class: "product-details__add-to-cart-btn" },
     ["Add to Cart"]
   );
-  const addToCartForm = createElement("form", { class: "product-details__cart" }, [input, button]);
+
+  const removeFromCartButton = createElement(
+    "button",
+    {
+      type: "submit",
+      class: "product-details__remove-from-cart-btn",
+      "data-line-item-id": product.id,
+    },
+    ["Remove"]
+  );
+
+  removeFromCartButton.disabled = true;
+
+  removeFromCartButton.addEventListener("click", async (e) => {
+    e.stopPropagation();
+    const lineItem = await CartService.getLineItemByProduct(product.id, product.masterVariant.id);
+    if (lineItem) await handleRemoveItem(lineItem.id);
+  });
+
+  async function handleRemoveItem(lineItemId: string): Promise<void> {
+    try {
+      removeFromCartButton.disabled = true;
+      removeFromCartButton.textContent = "Removing...";
+      await removeLineItemFromBasket(lineItemId);
+
+      // Refresh the page to show updated cart
+      window.location.reload();
+    } catch (error) {
+      console.error("Failed to remove item:", error);
+
+      // Reset button on error
+      removeFromCartButton.disabled = false;
+      removeFromCartButton.textContent = "Remove";
+    }
+  }
+
+  addToCartButton.addEventListener("click", async (e) => {
+    e.stopPropagation();
+    await handleAddToCart();
+  });
+
+  async function handleAddToCart(): Promise<void> {
+    if (addToCartButton.disabled) return;
+    // Check if product is already in cart using sync method for immediate UI feedback
+    if (isInBasketSync(product.id)) return;
+    // Disable button and show loading state
+    addToCartButton.disabled = true;
+    addToCartButton.textContent = "Adding...";
+
+    try {
+      // Add to cart via API
+      await addToBasket(product);
+
+      // Update button state
+      updateAddButtonState(product.id);
+
+      // Add animation for visual feedback
+      addToCartButton.classList.add("product-details__buy-button--added");
+      setTimeout(() => {
+        addToCartButton.classList.remove("product-details__buy-button--added");
+      }, 1000);
+    } catch (error) {
+      console.error("Failed to add product to cart:", error);
+
+      // Reset button on error
+      addToCartButton.disabled = false;
+      addToCartButton.textContent = "Add to Cart";
+      addToCartButton.classList.remove("product-details__buy-button--in-cart");
+    }
+  }
 
   productInfo.append(
     productName,
@@ -106,13 +177,39 @@ export const description = (product: ProductProjection): HTMLElement => {
     productDescription,
     productAttributes,
     stockAvailability,
-    addToCartForm
+    addToCartButton,
+    removeFromCartButton
   );
 
   const container = createElement("section", { class: "product-details" }, [
     productImageSlider,
     productInfo,
   ]);
+
+  function updateAddButtonState(id: string): void {
+    if (isInBasketSync(id)) {
+      addToCartButton.textContent = "In Cart";
+      addToCartButton.disabled = true;
+      addToCartButton.classList.add("product-details__buy-button--in-cart");
+      removeFromCartButton.disabled = false;
+    } else {
+      addToCartButton.textContent = "Add to Cart";
+      addToCartButton.disabled = false;
+      addToCartButton.classList.remove("product-details__buy-button--in-cart");
+      removeFromCartButton.disabled = true;
+    }
+  }
+
+  function updateRemoveButtonState(id: string): void {
+    if (isInBasketSync(id)) {
+      removeFromCartButton.disabled = false;
+    } else {
+      removeFromCartButton.disabled = true;
+    }
+  }
+
+  updateAddButtonState(product.id);
+  updateRemoveButtonState(product.id);
 
   return container;
 };

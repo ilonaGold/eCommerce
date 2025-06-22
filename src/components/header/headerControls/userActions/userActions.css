@@ -1,0 +1,67 @@
+.user-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-self: end;
+  grid-column: 3;
+  flex-shrink: 0;
+}
+
+.header-btn {
+  padding: 0.7rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
+
+.login-btn {
+  background: maroon;
+  color: white;
+}
+
+.login-btn:hover {
+  background: #8b0000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139, 0, 0, 0.2);
+}
+
+.register-btn {
+  background: #e5994e;
+  color: white;
+}
+
+.register-btn:hover {
+  background: #d38339;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(229, 153, 78, 0.2);
+}
+
+@media (max-width: 860px) {
+  .user-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .header-btn {
+    padding: 0.7rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-btn {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-btn {
+    font-size: 0.8rem;
+  }
+}

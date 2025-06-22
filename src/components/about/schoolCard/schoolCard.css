@@ -1,0 +1,357 @@
+/* --------------------------------------
+   1. Base Card Structure
+-------------------------------------- */
+.about-card[data-index="0"] {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  min-height: auto;
+  overflow: visible;
+}
+
+.about-card[data-index="0"] .card-front {
+  position: relative;
+  height: auto;
+  overflow: visible;
+}
+
+.school-card-left,
+.school-card-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+  height: 100%;
+  min-height: 350px;
+  box-sizing: border-box;
+}
+
+.school-card-left {
+  border-right: 1px solid rgba(229, 153, 78, 0.3);
+}
+
+/* --------------------------------------
+   2. Component-specific Styles
+-------------------------------------- */
+/* 2.1 Header Layout */
+.card-header-container {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  min-height: 120px;
+}
+
+.name-role-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 1rem;
+}
+
+.card-header-container .about-card-name {
+  font-size: 2rem;
+  margin-bottom: 0.25rem;
+  text-align: left;
+}
+
+.card-header-container .about-card-role {
+  margin-bottom: 0;
+  text-align: left;
+}
+
+/* 2.2 Logos & Images */
+.school-image,
+.team-logo-wrapper {
+  align-self: center;
+  margin-bottom: 0;
+  flex: 0 0 auto;
+  padding: 0.5rem;
+}
+
+.school-image img {
+  width: 100px !important;
+  height: 100px !important;
+  object-fit: contain;
+  border-radius: 50%;
+  border: 3px solid #e5994e;
+}
+
+.team-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e5994e;
+  border: 3px solid white;
+  border-radius: 50%;
+  width: 95px;
+  height: 95px;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #800000;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* 2.3 Description Area */
+.description-container {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: auto;
+  color: #e5e5e5;
+  line-height: 1.4;
+  text-align: left;
+  margin-bottom: 1.5rem;
+  min-height: 120px;
+  max-width: none;
+}
+
+.about-card-description {
+  margin: 0;
+  padding: 0;
+}
+
+.school-description,
+.team-description {
+  font-size: 1rem;
+  color: #e5e5e5;
+}
+
+/* 2.4 Buttons */
+.school-card-left .card-buttons,
+.school-card-right .card-buttons {
+  margin-top: 2rem;
+  padding-top: 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.about-card[data-index="0"] .card-btn {
+  min-width: 150px;
+  max-width: 200px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  text-align: center;
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 4%;
+}
+
+/* --------------------------------------
+   3. Stacked Layout Class (for JS control)
+-------------------------------------- */
+.about-card[data-index="0"].stacked-layout .card-front {
+  flex-direction: column;
+}
+
+.about-card[data-index="0"].stacked-layout .school-card-left {
+  border-right: none;
+  border-bottom: none;
+}
+
+.about-card[data-index="0"].stacked-layout .school-card-right {
+  border-top: 1px solid rgba(229, 153, 78, 0.3);
+}
+
+/* --------------------------------------
+   4. Responsive Styles
+-------------------------------------- */
+
+@media (max-width: 900px) and (min-width: 769px) {
+  .school-card-left,
+  .school-card-right {
+    min-height: 600px;
+  }
+  .card-header-container {
+    min-height: 150px;
+    margin-bottom: 1rem;
+  }
+
+  .team-logo {
+    width: 90px;
+    height: 90px;
+    font-size: 2.2rem;
+  }
+
+  .school-image img {
+    width: 90px;
+    height: 90px;
+  }
+
+  .description-container {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 768px) and (min-width: 601px) {
+  /* Switch to column layout */
+  .about-card[data-index="0"] .card-front {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    overflow: hidden;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  /* Stack vertically */
+  .school-card-left,
+  .school-card-right {
+    width: 100%;
+    flex: none;
+    min-height: auto;
+    padding: 1rem;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 1rem 2.5rem;
+  }
+
+  /* Left section no longer needs border */
+  .school-card-left {
+    border-right: none;
+  }
+
+  /* Add border to separate sections */
+  .school-card-right {
+    border-top: 1px solid rgba(229, 153, 78, 0.3);
+  }
+
+  /* Vertical header layout */
+  .card-header-container {
+    flex-direction: column;
+    align-items: center;
+    min-height: auto;
+    height: auto;
+    width: 100%;
+    margin: 0 0 1rem 0;
+    padding: 0;
+  }
+
+  .name-role-container {
+    margin: 0.75rem 0 0 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .card-header-container .about-card-name,
+  .card-header-container .about-card-role {
+    text-align: center;
+    width: 100%;
+  }
+
+  /* Reset description height */
+  .description-container {
+    min-height: auto;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 0.9rem;
+    line-height: 1.3;
+  }
+
+  /* Fix button sizing */
+  .about-card[data-index="0"] .card-btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+    max-width: 200px;
+    display: block;
+    position: relative;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-card[data-index="0"] .card-front {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    overflow: hidden;
+    max-width: 100%;
+  }
+
+  .school-card-left,
+  .school-card-right {
+    width: 100%;
+    flex: none;
+    min-height: auto;
+    padding: 1rem 2rem;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .school-card-right {
+    border-top: 1px solid rgba(229, 153, 78, 0.3);
+  }
+
+  .card-header-container {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    min-height: auto;
+    margin-bottom: 1rem;
+  }
+
+  .card-header-container .about-card-name,
+  .card-header-container .about-card-role {
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .name-role-container {
+    width: 100%;
+    margin: 0.75rem 0 0 0;
+    text-align: center;
+    overflow: hidden; /* Prevent text overflow */
+  }
+
+  .card-header-container .about-card-name,
+  .card-header-container .about-card-role {
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .about-card[data-index="0"] .card-btn {
+    position: relative;
+  }
+}
+
+@media (max-width: 360px) {
+  .school-card-left,
+  .school-card-right {
+    padding: 1.5rem;
+  }
+
+  .school-card-right {
+    border-top: 1px solid rgba(229, 153, 78, 0.3);
+  }
+
+  .team-logo {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+    border-width: 2px;
+  }
+
+  .school-image img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .card-header-container .about-card-name {
+    font-size: 1.5rem;
+  }
+
+  .card-header-container .about-card-role {
+    font-size: 1rem;
+  }
+
+  .description-container {
+    font-size: 0.95rem;
+    line-height: 1.3;
+  }
+}
