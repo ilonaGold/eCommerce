@@ -10,11 +10,14 @@ export const newArrivals = async (): Promise<HTMLElement> => {
   const container = createElement("section", { class: "home-page__new-items-section" }, [
     createElement("h2", { class: "home-page__header" }, ["Explore our new items"]),
   ]);
-  const field = {
-    category: "8b5c1dae-7d50-48ea-921d-9a90dcc387cf",
-  };
-  const query = queryBuilder(field);
-  const newArrivals = await productProjectionSearch(query);
+
+  // Search for new arrivals in a specific category
+  const newArrivals = await productProjectionSearch({
+    categoryId: "8b5c1dae-7d50-48ea-921d-9a90dcc387cf",
+    limit: 8,
+    sort: "createdAt desc",
+  });
+
   const newArrivalsList = productList(newArrivals.results);
   container.append(newArrivalsList);
   return container;
