@@ -15,6 +15,7 @@ export interface Cart {
   paymentInfo?: PaymentInfo;
   shippingInfo?: ShippingInfo;
   discountCodes: DiscountCodeInfo[];
+  discountOnTotalPrice?: DiscountOnTotalPrice;
   custom?: CustomFields;
   shippingAddress?: Address;
   billingAddress?: Address;
@@ -30,6 +31,18 @@ export interface Cart {
   locale?: string;
   country?: string;
   totalLineItemQuantity?: number;
+}
+
+interface DiscountOnTotalPrice {
+  discountedAmount: TypedMoney;
+  includedDiscounts: DiscountedTotalPricePortion[];
+  discountedNetAmount?: TypedMoney;
+  discountedGrossAmount?: TypedMoney;
+}
+
+interface DiscountedTotalPricePortion {
+  discount: Reference;
+  discountedAmount: TypedMoney;
 }
 
 export interface LineItem {
