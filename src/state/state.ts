@@ -29,7 +29,8 @@ const state: AppState = {
   setProductsData(productsData) {
     this.productsData = productsData;
     this.subscribersMap["productsData"]?.forEach((cb) => cb(this));
-  },  setSearchFormData(searchFormData) {
+  },
+  setSearchFormData(searchFormData) {
     this.searchFormData = searchFormData;
     this.subscribersMap["searchFormData"]?.forEach((cb) => cb(this));
   },

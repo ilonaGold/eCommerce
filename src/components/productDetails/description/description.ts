@@ -1,8 +1,8 @@
 import { ProductProjection } from "../../../interfaces/products/ProductProjection";
 import { createElement } from "../../../utils/dom/createElement";
-import { createInputGroup } from "../../../utils/dom/form/createInputGroup";
 import { imageSlider } from "../slider/slider";
 import { modalWithSlider } from "../productDetailsModal/productDetailsModal";
+import { addToBasket, isInBasketSync } from "../../../utils/dom/basket/basketOperations";
 
 import "./description.css";
 import "../../catalog/productsList/productCard/productCard.css";
@@ -90,15 +90,54 @@ export const description = (product: ProductProjection): HTMLElement => {
     }
   }
 
-  const input = createInputGroup("", "number", "quantity");
-  const quantity = input.querySelector("#quantity");
-  quantity?.setAttribute("value", "1");
-  const button = createElement(
+  const addToCartButton = createElement(
     "button",
     { type: "submit", class: "product-details__add-to-cart-btn" },
     ["Add to Cart"]
   );
-  const addToCartForm = createElement("form", { class: "product-details__cart" }, [input, button]);
+
+  addToCartButton.addEventListener("click", async (e) => {
+    e.stopPropagation();
+    await handleAddToCart();
+  });
+
+  async function handleAddToCart(): Promise<void> {
+    if (addToCartButton.disabled) return;
+    // Check if product is already in cart using sync method for immediate UI feedback
+    if (isInBasketSync(product.id)) return;
+    // Disable button and show loading state
+    addToCartButton.disabled = true;
+    addToCartButton.textContent = "Adding...";
+
+    try {
+      // Add to cart via API
+      await addToBasket(product);
+
+      // Update button state
+      if (isInBasketSync(product.id)) {
+        addToCartButton.textContent = "In Cart";
+        addToCartButton.disabled = true;
+        addToCartButton.classList.add("product-card__buy-button--in-cart");
+      } else {
+        addToCartButton.textContent = "Add to Cart";
+        addToCartButton.disabled = false;
+        addToCartButton.classList.remove("product-card__buy-button--in-cart");
+      }
+
+      // Add animation for visual feedback
+      addToCartButton.classList.add("product-card__buy-button--added");
+      setTimeout(() => {
+        addToCartButton.classList.remove("product-card__buy-button--added");
+      }, 1000);
+    } catch (error) {
+      console.error("Failed to add product to cart:", error);
+
+      // Reset button on error
+      addToCartButton.disabled = false;
+      addToCartButton.textContent = "Add to Cart";
+      addToCartButton.classList.remove("product-card__buy-button--in-cart");
+    }
+  }
 
   productInfo.append(
     productName,
@@ -106,7 +145,7 @@ export const description = (product: ProductProjection): HTMLElement => {
     productDescription,
     productAttributes,
     stockAvailability,
-    addToCartForm
+    addToCartButton
   );
 
   const container = createElement("section", { class: "product-details" }, [

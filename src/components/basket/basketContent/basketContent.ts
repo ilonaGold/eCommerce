@@ -1,5 +1,5 @@
 import { Cart, LineItem } from "../../../interfaces/cart/cartInterfaces";
-import { BasketItem } from "../../../interfaces/interfaces";
+//import { BasketItem } from "../../../interfaces/interfaces";
 import { createElement } from "../../../utils/dom/createElement";
 import {
   removeLineItemFromBasket,
