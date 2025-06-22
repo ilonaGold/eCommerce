@@ -18,7 +18,6 @@ export const productProjectionSearch = async (
     query = "",
     page = 1,
     limit = 12, // Better for responsive design (4x3 grid)
-    sort = "createdAt desc",
     filter = [],
     categoryId,
     facet = [],
@@ -28,19 +27,12 @@ export const productProjectionSearch = async (
   const offset = (page - 1) * limit;
 
   // Build query parameters
-  const queryParams = new URLSearchParams();
+  const queryParams = new URLSearchParams(query);
 
   // Add pagination parameters
   queryParams.append("limit", limit.toString());
   queryParams.append("offset", offset.toString());
 
-  // Add sorting for consistent results
-  queryParams.append("sort", sort);
-
-  // Add text search if provided
-  if (query.trim()) {
-    queryParams.append("text.en", query.trim());
-  }
   // Add category filter if provided
   if (categoryId) {
     queryParams.append("filter", `categories.id:"${categoryId}"`);
