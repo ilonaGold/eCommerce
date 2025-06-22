@@ -24,18 +24,18 @@ export class CartService {
    * Get access token for API requests
    * For logged-in users, gets customer token from localStorage
    * For anonymous users, uses client credentials token
-   */
-  private static async getAuthHeaders(): Promise<{ Authorization: string }> {
-    const isLoggedIn = getState("userAuth") as boolean;
-
-    if (isLoggedIn) {
+   */  private static async getAuthHeaders(): Promise<{ Authorization: string }> {
+    const isLoggedIn = getState("userAuth") as boolean;    if (isLoggedIn) {
       // Use stored customer token for logged-in users
-      const loginInfo = localStorage.getItem("loginInfo");
+      const loginInfo = localStorage.getItem("redpandaUser");
       if (loginInfo) {
         const { accessToken } = JSON.parse(loginInfo);
         return {
           Authorization: `Bearer ${accessToken}`,
         };
+      } else {
+        // If user is logged in but no token found, this is an error state
+        throw new Error("User is logged in but no access token found. Please log in again.");
       }
     }
 
