@@ -10,6 +10,7 @@ import {
   LineItem,
 } from "../../../interfaces/cart/cartInterfaces";
 import { getAccessTokenData } from "../../auth/getAccessTokenData";
+import { getCustomerAccessToken } from "../../auth/getCustomerAccessToken";
 import { getState } from "../../../state/state";
 
 /**
@@ -19,23 +20,25 @@ import { getState } from "../../../state/state";
  */
 export class CartService {
   private static apiUrl = `${import.meta.env.VITE_CTP_API_URL}/${import.meta.env.VITE_CTP_PROJECT_KEY}`;
-
   /**
    * Get access token for API requests
-   * For logged-in users, gets customer token from localStorage
+   * For logged-in users, gets customer token via getCustomerAccessToken (with auto-refresh)
    * For anonymous users, uses client credentials token
-   */  private static async getAuthHeaders(): Promise<{ Authorization: string }> {
-    const isLoggedIn = getState("userAuth") as boolean;    if (isLoggedIn) {
-      // Use stored customer token for logged-in users
-      const loginInfo = localStorage.getItem("redpandaUser");
-      if (loginInfo) {
-        const { accessToken } = JSON.parse(loginInfo);
+   */
+  private static async getAuthHeaders(): Promise<{ Authorization: string }> {
+    const isLoggedIn = getState("userAuth") as boolean;
+
+    if (isLoggedIn) {
+      // Use dedicated customer token service for logged-in users
+      try {
+        const accessToken = await getCustomerAccessToken();
         return {
           Authorization: `Bearer ${accessToken}`,
         };
-      } else {
-        // If user is logged in but no token found, this is an error state
-        throw new Error("User is logged in but no access token found. Please log in again.");
+      } catch (error) {
+        throw new Error(
+          `Failed to get customer access token: ${error instanceof Error ? error.message : String(error)}`
+        );
       }
     }
 
