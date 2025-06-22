@@ -105,10 +105,37 @@ body.menu-open .page-text,
 body.menu-open .main-content,
 body.menu-open .registration-container,
 body.menu-open form,
-body.menu-open .footer {
+body.menu-open .footer,
+body.menu-open .catalog-section,
+body.menu-open .products-grid,
+body.menu-open .search-panel,
+body.menu-open .category-navbar,
+body.menu-open .product-list,
+body.menu-open .view-container > .main,
+body.menu-open .about-container,
+body.menu-open .team-section,
+body.menu-open .school-section {
   opacity: 0.4;
   pointer-events: none;
   z-index: 1;
+}
+
+/* Create full overlay for menu-open state */
+body.menu-open::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 9998;
+  pointer-events: none;
+}
+
+/* Ensure hamburger menu stays on top */
+.hamburger-menu {
+  z-index: 10001;
 }
 
 /* --- Responsive Styles --- */

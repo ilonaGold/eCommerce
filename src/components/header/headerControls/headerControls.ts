@@ -3,6 +3,7 @@ import { createElement } from "../../../utils/dom/createElement";
 import { createUserActions } from "./userActions/userActions";
 import { getState, subscribe } from "../../../state/state";
 import basketIconImg from "../../../assets/images/basket.png";
+
 import "./headerControls.css";
 
 export const createHeaderControls = (
