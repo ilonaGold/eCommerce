@@ -2,6 +2,8 @@ import { goToView } from "../../../routing/router";
 import { createElement } from "../../../utils/dom/createElement";
 import { getPromoCodes } from "../../../services/API/promo/getPromoCodes";
 
+import redPandaImg from "../../../assets/images/panda-promo10.png";
+
 import "./promoCode.css";
 
 export const promoCode = async (): Promise<HTMLElement> => {
@@ -13,7 +15,7 @@ export const promoCode = async (): Promise<HTMLElement> => {
   // Create panda image container
   const pandaPromoContainer = createElement("div", { class: "home-page__panda-promo" });
   const pandaImage = createElement("img", {
-    src: "../../../assets/images/panda-promo10.png",
+    src: redPandaImg,
     alt: "Red panda holding bamboo",
     class: "home-page__panda-image",
   });
