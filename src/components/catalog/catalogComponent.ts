@@ -30,7 +30,7 @@ export const catalogComponent = async (
     totalPages,
     totalItems: productsData.total || 0,
     itemsPerPage: productsData.limit || 16,
-    onPageChange: onPageChange || (() => {}),
+    onPageChange: onPageChange || ((): void => {}),
   }).render();
 
   const catalog = createElement("section", { class: "catalog-section" }, [
