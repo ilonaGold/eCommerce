@@ -1,8 +1,8 @@
 import { renderProducts } from "../../../views/renderProducts/renderProducts";
 
 describe("renderProducts", () => {
-  it("should render without crashing", () => {
+  it("should render without crashing", async () => {
     const parent = document.createElement("div");
-    expect(() => renderProducts(parent)).not.toThrow();
+    await expect(renderProducts(parent)).resolves.not.toThrow();
   });
 });
