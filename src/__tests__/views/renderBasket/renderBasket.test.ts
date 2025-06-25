@@ -7,13 +7,13 @@ vi.mock("../../../utils/dom/createElement", () => ({
     const element = document.createElement(tag);
     if (attrs) {
       Object.entries(attrs).forEach(([key, value]) => {
-        if (key === 'class') element.className = value as string;
+        if (key === "class") element.className = value as string;
         else element.setAttribute(key, value as string);
       });
     }
     if (children) {
       children.forEach((child: any) => {
-        if (typeof child === 'string') {
+        if (typeof child === "string") {
           element.appendChild(document.createTextNode(child));
         } else {
           element.appendChild(child);
@@ -29,16 +29,16 @@ vi.mock("../../../state/state", () => ({
 }));
 
 vi.mock("../../../components/header/header", () => ({
-  createHeader: vi.fn(() => document.createElement('header')),
+  createHeader: vi.fn(() => document.createElement("header")),
 }));
 
 vi.mock("../../../components/footer/footer", () => ({
-  createFooter: vi.fn(() => document.createElement('footer')),
+  createFooter: vi.fn(() => document.createElement("footer")),
 }));
 
 vi.mock("../../../components/main/main", () => ({
   mainComponent: vi.fn((content) => {
-    const main = document.createElement('main');
+    const main = document.createElement("main");
     main.appendChild(content);
     return main;
   }),
@@ -49,7 +49,7 @@ vi.mock("../../../utils/dom/basket/basketOperations", () => ({
 }));
 
 vi.mock("../../../components/basket/basketContent/basketContent", () => ({
-  createBasketContent: vi.fn(() => Promise.resolve(document.createElement('div'))),
+  createBasketContent: vi.fn(() => Promise.resolve(document.createElement("div"))),
 }));
 
 import { getState } from "../../../state/state";
@@ -61,20 +61,20 @@ describe("renderBasket", () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    mockParent = document.createElement('div');
-    document.body.innerHTML = '';
+    mockParent = document.createElement("div");
+    document.body.innerHTML = "";
   });
 
   it("should render basket successfully", async () => {
     (getState as any).mockReturnValue(false); // not authenticated
     (loadCartFromAPI as any).mockResolvedValue(undefined);
-    (createBasketContent as any).mockResolvedValue(document.createElement('div'));
+    (createBasketContent as any).mockResolvedValue(document.createElement("div"));
 
     await renderBasket(mockParent);
 
     expect(loadCartFromAPI).toHaveBeenCalled();
     expect(mockParent.children.length).toBeGreaterThan(0);
-    expect(mockParent.querySelector('.view-container')).toBeTruthy();
+    expect(mockParent.querySelector(".view-container")).toBeTruthy();
   });
 
   it("should handle API errors gracefully", async () => {
@@ -93,10 +93,14 @@ describe("renderBasket", () => {
       .mockReturnValueOnce(true) // userAuth
       .mockReturnValueOnce({ id: "user-1", name: "Test User" }); // customer
     (loadCartFromAPI as any).mockResolvedValue(undefined);
-    (createBasketContent as any).mockResolvedValue(document.createElement('div'));
+    (createBasketContent as any).mockResolvedValue(document.createElement("div"));
 
     await renderBasket(mockParent);
 
-    expect(mockParent.querySelector('.view-container')).toBeTruthy();
+    expect(mockParent.querySelector(".view-container")).toBeTruthy();
   });
+});
+
+beforeEach(() => {
+  vi.spyOn(console, "error").mockImplementation(() => {});
 });
