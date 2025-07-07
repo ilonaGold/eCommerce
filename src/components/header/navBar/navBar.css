@@ -13,6 +13,7 @@ Navbar
   padding: 0;
   font-size: 1.35rem;
   grid-column: 2;
+  margin-left: 6rem;
 }
 
 .nav-link {
@@ -60,6 +61,7 @@ Navbar
   pointer-events: auto;
   text-transform: uppercase;
   padding-left: 3rem;
+  margin-left: 0;
 }
 
 .nav-links.active::before {
